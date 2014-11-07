@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qr1-Hu-H06">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="testing" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="235" y="-625"/>
-        </scene>
-        <!--History-->
+        <!--History View Controller-->
         <scene sceneID="VIg-fK-aLL">
             <objects>
-                <viewController id="Ie6-Jo-9CH" sceneMemberID="viewController">
+                <viewController id="Ie6-Jo-9CH" customClass="HistoryViewController" customModule="testing" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fAZ-aa-hMu"/>
                         <viewControllerLayoutGuide type="bottom" id="5Od-pg-n1L"/>
@@ -23,9 +15,21 @@
                     <view key="view" contentMode="scaleToFill" id="PXB-ja-z69">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="add segmented control..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Le-v0-fuR">
+                                <rect key="frame" x="204" y="40" width="193" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5Le-v0-fuR" firstAttribute="top" secondItem="fAZ-aa-hMu" secondAttribute="bottom" constant="20" id="Kdq-Oa-jAN"/>
+                            <constraint firstAttribute="centerX" secondItem="5Le-v0-fuR" secondAttribute="centerX" id="rS1-Ep-ofz"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="History" id="tHp-00-PvW"/>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="tHp-00-PvW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLp-nZ-Kx0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -34,7 +38,7 @@
         <!--Today-->
         <scene sceneID="im8-Kl-DzQ">
             <objects>
-                <viewController id="VsP-gJ-Q7u" sceneMemberID="viewController">
+                <viewController id="VsP-gJ-Q7u" customClass="TodayViewController" customModule="testing" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gKp-AQ-5tR"/>
                         <viewControllerLayoutGuide type="bottom" id="2PE-hP-H8v"/>
@@ -43,13 +47,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="k2d-x8-GJK">
-                                <rect key="frame" x="253" y="238" width="94" height="29"/>
-                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQ7-qI-sIE">
+                                <rect key="frame" x="206" y="70" width="189" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sP-d2-kO5">
+                                <rect key="frame" x="289" y="126" width="22" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJF-YP-9Jv">
+                                <rect key="frame" x="271" y="223" width="59" height="132"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                                <state key="normal" title="+">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addToCounter:" destination="VsP-gJ-Q7u" eventType="touchUpInside" id="ZLs-2p-wKs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="LJF-YP-9Jv" secondAttribute="centerX" id="C0r-BU-R3w"/>
+                            <constraint firstAttribute="centerX" secondItem="zQ7-qI-sIE" secondAttribute="centerX" id="H3o-Pe-6ul"/>
+                            <constraint firstAttribute="centerX" secondItem="3sP-d2-kO5" secondAttribute="centerX" id="P5P-RK-gDi"/>
+                            <constraint firstItem="3sP-d2-kO5" firstAttribute="top" secondItem="zQ7-qI-sIE" secondAttribute="bottom" constant="20" id="VpH-ta-cMF"/>
+                            <constraint firstItem="LJF-YP-9Jv" firstAttribute="top" secondItem="3sP-d2-kO5" secondAttribute="bottom" constant="50" id="ho5-jG-hx1"/>
+                            <constraint firstItem="zQ7-qI-sIE" firstAttribute="top" secondItem="gKp-AQ-5tR" secondAttribute="bottom" constant="50" id="jJ3-ox-Q9c"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Today" id="rTq-oF-5N3"/>
+                    <connections>
+                        <outlet property="add" destination="LJF-YP-9Jv" id="QDR-EX-OSF"/>
+                        <outlet property="count" destination="3sP-d2-kO5" id="TuU-Tx-F4Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FAa-89-nt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
