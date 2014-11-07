@@ -10,6 +10,69 @@
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="testing" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="235" y="-625"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="VIg-fK-aLL">
+            <objects>
+                <viewController id="Ie6-Jo-9CH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fAZ-aa-hMu"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Od-pg-n1L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PXB-ja-z69">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="History" id="tHp-00-PvW"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pLp-nZ-Kx0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1050" y="421"/>
+        </scene>
+        <!--Today-->
+        <scene sceneID="im8-Kl-DzQ">
+            <objects>
+                <viewController id="VsP-gJ-Q7u" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gKp-AQ-5tR"/>
+                        <viewControllerLayoutGuide type="bottom" id="2PE-hP-H8v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SpQ-kw-G6O">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="k2d-x8-GJK">
+                                <rect key="frame" x="253" y="238" width="94" height="29"/>
+                            </stepper>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Today" id="rTq-oF-5N3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FAa-89-nt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1050" y="-241"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="L3u-ZF-ySP">
+            <objects>
+                <tabBarController id="Qr1-Hu-H06" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Onz-Y3-8gl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="VsP-gJ-Q7u" kind="relationship" relationship="viewControllers" id="JCP-ZQ-J1r"/>
+                        <segue destination="Ie6-Jo-9CH" kind="relationship" relationship="viewControllers" id="vou-20-esL"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ezn-8A-O1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="230" y="90"/>
         </scene>
     </scenes>
 </document>
