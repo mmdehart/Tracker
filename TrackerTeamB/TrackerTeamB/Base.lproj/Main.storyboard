@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ozI-DP-zbd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--History View Controller-->
@@ -13,7 +14,7 @@
                         <viewControllerLayoutGuide type="bottom" id="VEs-sS-gXD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="b5k-GD-Bt9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -21,7 +22,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RJO-h1-HN3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="603" y="572"/>
+            <point key="canvasLocation" x="321.60000000000002" y="541.49333333333334"/>
         </scene>
         <!--Today-->
         <scene sceneID="UbF-Em-KII">
@@ -32,15 +33,67 @@
                         <viewControllerLayoutGuide type="bottom" id="nIf-km-38w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vHo-tq-FY5" customClass="TodayView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pM-AR-fN5">
+                                <rect key="frame" x="66" y="70" width="188" height="63"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="52"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrk-wF-6Yj">
+                                <rect key="frame" x="66" y="143" width="188" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time since last cigarette" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKS-pL-FPx">
+                                <rect key="frame" x="66" y="319" width="188" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94V-DJ-VOE">
+                                <rect key="frame" x="66" y="239" width="188" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="TMH-dW-S9G">
+                                <rect key="frame" x="253" y="394" width="94" height="29"/>
+                                <connections>
+                                    <action selector="stepperValueChanged:" destination="ozI-DP-zbd" eventType="valueChanged" id="kOw-Fs-gfl"/>
+                                </connections>
+                            </stepper>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EKS-pL-FPx" firstAttribute="leading" secondItem="vHo-tq-FY5" secondAttribute="leadingMargin" constant="50" id="20V-kR-HWu"/>
+                            <constraint firstItem="94V-DJ-VOE" firstAttribute="leading" secondItem="vHo-tq-FY5" secondAttribute="leadingMargin" constant="50" id="4jB-EG-ZMt"/>
+                            <constraint firstItem="TMH-dW-S9G" firstAttribute="top" secondItem="EKS-pL-FPx" secondAttribute="bottom" constant="50" id="Adz-7e-l0q"/>
+                            <constraint firstItem="nrk-wF-6Yj" firstAttribute="leading" secondItem="vHo-tq-FY5" secondAttribute="leadingMargin" constant="50" id="Apa-d7-l4Y"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nrk-wF-6Yj" secondAttribute="trailing" constant="50" id="B81-Sg-EaZ"/>
+                            <constraint firstAttribute="centerX" secondItem="TMH-dW-S9G" secondAttribute="centerX" id="BQb-2b-a2S"/>
+                            <constraint firstItem="nrk-wF-6Yj" firstAttribute="top" secondItem="0pM-AR-fN5" secondAttribute="bottom" constant="10" id="H1f-xf-5IF"/>
+                            <constraint firstItem="0pM-AR-fN5" firstAttribute="leading" secondItem="vHo-tq-FY5" secondAttribute="leadingMargin" constant="50" id="KjB-pg-jHp"/>
+                            <constraint firstItem="EKS-pL-FPx" firstAttribute="top" secondItem="94V-DJ-VOE" secondAttribute="bottom" constant="20" id="L7F-pq-H5d"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0pM-AR-fN5" secondAttribute="trailing" constant="50" id="V8H-px-6wm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="94V-DJ-VOE" secondAttribute="trailing" constant="50" id="cya-pz-Ogi"/>
+                            <constraint firstItem="0pM-AR-fN5" firstAttribute="top" secondItem="fNd-cm-qO6" secondAttribute="bottom" constant="50" id="eih-8t-LPk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EKS-pL-FPx" secondAttribute="trailing" constant="50" id="ogt-bG-Li7"/>
+                            <constraint firstItem="94V-DJ-VOE" firstAttribute="top" secondItem="nrk-wF-6Yj" secondAttribute="bottom" constant="75" id="s76-Tc-gHO"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Today" id="wBU-fW-HZ1"/>
+                    <connections>
+                        <outlet property="countLabel" destination="0pM-AR-fN5" id="uqW-Gw-k7S"/>
+                        <outlet property="stepper" destination="TMH-dW-S9G" id="i1w-4f-bMc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bMT-kq-7G1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="603" y="-90"/>
+            <point key="canvasLocation" x="321.60000000000002" y="-85.200000000000003"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="wsx-PO-kdc">
@@ -59,7 +112,12 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBW-WP-TJC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-217" y="241"/>
+            <point key="canvasLocation" x="-115.73333333333333" y="228.14666666666668"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>
