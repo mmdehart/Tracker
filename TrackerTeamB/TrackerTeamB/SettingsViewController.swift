@@ -10,9 +10,19 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var maxNumber: UILabel!
+    @IBOutlet weak var maxSlider: UISlider!
+    @IBOutlet weak var weeklyEst: UILabel!
+    @IBOutlet weak var yearlyEst: UILabel!
+    @IBOutlet weak var monthlyEst: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        var intValue:Int = Int(maxSlider.value)
+        maxNumber.text = "\(intValue)"
+        weeklyEst.text = "\(intValue*7)"
+        monthlyEst.text = "\(intValue*30)"
+        yearlyEst.text = "\(intValue*365)"
         // Do any additional setup after loading the view.
     }
 
@@ -21,6 +31,13 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func numberChanged(sender: UISlider) {
+        var intValue:Int = Int(maxSlider.value)
+        maxNumber.text = "\(intValue)"
+        weeklyEst.text = "\(intValue*7)"
+        monthlyEst.text = "\(intValue*30)"
+        yearlyEst.text = "\(intValue*365)"
+    }
 
     /*
     // MARK: - Navigation

@@ -10,8 +10,12 @@ import UIKit
 
 class HistoryViewController: UIViewController {
 
+    @IBOutlet weak var segControl: UISegmentedControl!
+    @IBOutlet weak var textLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        textLabel.text = "Daily Statistics"
 
         // Do any additional setup after loading the view.
     }
@@ -21,6 +25,21 @@ class HistoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func indexChanged(sender: UISegmentedControl) {
+        switch segControl.selectedSegmentIndex {
+        case 0:
+            textLabel.text = "Daily Statistics"
+        case 1:
+            textLabel.text = "Weekly Statistics"
+        case 2:
+            textLabel.text = "Monthly Statistics"
+        case 3:
+            textLabel.text = "Yearly Statistics"
+        default:
+            break;
+        }
+        
+    }
 
     /*
     // MARK: - Navigation

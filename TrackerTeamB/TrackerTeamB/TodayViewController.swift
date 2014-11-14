@@ -11,12 +11,19 @@ import UIKit
 class TodayViewController: UIViewController {
 
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var todayDate: UILabel!
 
     @IBOutlet weak var stepper: UIStepper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let today = NSDate()
+        let dateFormatter = NSDateFormatter()
+        
+        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        
+        
+        todayDate.text = dateFormatter.stringFromDate(today)
         
     }
 
