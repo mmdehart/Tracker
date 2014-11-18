@@ -20,7 +20,7 @@ class TodayViewController: UIViewController {
         let today = NSDate()
         let dateFormatter = NSDateFormatter()
         
-        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         
         
         todayDate.text = dateFormatter.stringFromDate(today)
