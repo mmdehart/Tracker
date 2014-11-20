@@ -67,20 +67,20 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time since last cigarette" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKS-pL-FPx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="time since last cigarette" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKS-pL-FPx">
                                 <rect key="frame" x="66" y="319" width="188" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94V-DJ-VOE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="000000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94V-DJ-VOE">
                                 <rect key="frame" x="66" y="239" width="188" height="60"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="TMH-dW-S9G">
-                                <rect key="frame" x="253" y="394" width="94" height="29"/>
+                                <rect key="frame" x="113" y="396" width="94" height="29"/>
                                 <connections>
                                     <action selector="stepperValueChanged:" destination="ozI-DP-zbd" eventType="valueChanged" id="kOw-Fs-gfl"/>
                                 </connections>
@@ -107,6 +107,8 @@
                     <tabBarItem key="tabBarItem" title="Today" id="wBU-fW-HZ1"/>
                     <connections>
                         <outlet property="countLabel" destination="0pM-AR-fN5" id="uqW-Gw-k7S"/>
+                        <outlet property="date" destination="nrk-wF-6Yj" id="PU5-xi-I8Q"/>
+                        <outlet property="dateSinceLast" destination="94V-DJ-VOE" id="WXL-H0-j48"/>
                         <outlet property="stepper" destination="TMH-dW-S9G" id="i1w-4f-bMc"/>
                     </connections>
                 </viewController>

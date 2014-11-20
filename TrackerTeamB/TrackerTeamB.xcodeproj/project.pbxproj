@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1012ABD11A1BDECF0040BD99 /* testDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1012ABD01A1BDECF0040BD99 /* testDatabase.swift */; };
 		5C247E121A0C823D008DA2BF /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E111A0C823D008DA2BF /* TodayViewController.swift */; };
 		5C247E141A0C8256008DA2BF /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E131A0C8256008DA2BF /* HistoryViewController.swift */; };
 		5C64EBCB1A130D8E00E123D0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1012ABD01A1BDECF0040BD99 /* testDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testDatabase.swift; sourceTree = "<group>"; };
 		5C247E111A0C823D008DA2BF /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5C247E131A0C8256008DA2BF /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		100B84451A1A60CA0089D9FE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		5C8907711A0C6B4F00CAFECB = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89079F1A0C6BC700CAFECB /* TrackerTeamB.entitlements */,
+				1012ABD01A1BDECF0040BD99 /* testDatabase.swift */,
 				5C247E111A0C823D008DA2BF /* TodayViewController.swift */,
 				5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */,
 				5C247E131A0C8256008DA2BF /* HistoryViewController.swift */,
@@ -94,6 +104,7 @@
 				5C8907831A0C6B5000CAFECB /* Main.storyboard */,
 				5C8907861A0C6B5000CAFECB /* Images.xcassets */,
 				5C8907881A0C6B5000CAFECB /* LaunchScreen.xib */,
+				100B84451A1A60CA0089D9FE /* Models */,
 				5C89077D1A0C6B5000CAFECB /* Supporting Files */,
 			);
 			path = TrackerTeamB;
@@ -234,6 +245,7 @@
 				5C247E121A0C823D008DA2BF /* TodayViewController.swift in Sources */,
 				5C247E141A0C8256008DA2BF /* HistoryViewController.swift in Sources */,
 				5C64EBCB1A130D8E00E123D0 /* SettingsViewController.swift in Sources */,
+				1012ABD11A1BDECF0040BD99 /* testDatabase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +368,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TrackerTeamB/TrackerTeamB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -363,6 +376,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -370,6 +384,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TrackerTeamB/TrackerTeamB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
