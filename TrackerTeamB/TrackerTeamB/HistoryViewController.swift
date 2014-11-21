@@ -15,7 +15,7 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textLabel.text = "Daily Statistics"
+        textLabel.text = "Today's Total"
 
         // Do any additional setup after loading the view.
     }
@@ -28,13 +28,13 @@ class HistoryViewController: UIViewController {
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch segControl.selectedSegmentIndex {
         case 0:
-            textLabel.text = "Daily Statistics"
+            textLabel.text = "Today's Total"
         case 1:
-            textLabel.text = "Weekly Statistics"
+            textLabel.text = "This Week's Total"
         case 2:
-            textLabel.text = "Monthly Statistics"
+            textLabel.text = "This Month's Total"
         case 3:
-            textLabel.text = "Yearly Statistics"
+            textLabel.text = "This Year's Total"
         default:
             break;
         }

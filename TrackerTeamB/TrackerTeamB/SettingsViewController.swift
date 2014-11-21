@@ -20,9 +20,9 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         var intValue:Int = Int(maxSlider.value)
         maxNumber.text = "\(intValue)"
-        weeklyEst.text = "\(intValue*7)"
-        monthlyEst.text = "\(intValue*30)"
-        yearlyEst.text = "\(intValue*365)"
+        weeklyEst.text = "\(intValue*7) cigarettes"
+        monthlyEst.text = "\(intValue*30) cigarettes"
+        yearlyEst.text = "\(intValue*365) cigarettes"
         // Do any additional setup after loading the view.
     }
 
@@ -34,9 +34,9 @@ class SettingsViewController: UIViewController {
     @IBAction func numberChanged(sender: UISlider) {
         var intValue:Int = Int(maxSlider.value)
         maxNumber.text = "\(intValue)"
-        weeklyEst.text = "\(intValue*7)"
-        monthlyEst.text = "\(intValue*30)"
-        yearlyEst.text = "\(intValue*365)"
+        weeklyEst.text = "\(intValue*7) cigarettes"
+        monthlyEst.text = "\(intValue*30) cigarettes"
+        yearlyEst.text = "\(intValue*365) cigarettes"
     }
 
     /*

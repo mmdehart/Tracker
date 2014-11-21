@@ -16,6 +16,10 @@
 		5C89078A1A0C6B5000CAFECB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C8907881A0C6B5000CAFECB /* LaunchScreen.xib */; };
 		5C8907961A0C6B5000CAFECB /* TrackerTeamBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8907951A0C6B5000CAFECB /* TrackerTeamBTests.swift */; };
 		5C8907A11A0C6BC900CAFECB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C8907A01A0C6BC900CAFECB /* CloudKit.framework */; };
+		5CBAAD8B1A1E7A5A00CDDBE9 /* TrackerDataX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAAD8A1A1E7A5A00CDDBE9 /* TrackerDataX.swift */; };
+		5CBAAD8D1A1EAB0B00CDDBE9 /* plusbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CBAAD8C1A1EAB0B00CDDBE9 /* plusbutton.png */; };
+		5CD279FD1A1EB9DF002D862F /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD279FC1A1EB9DF002D862F /* EditTableViewController.swift */; };
+		5CD27A031A1ECF86002D862F /* TrackerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD27A021A1ECF86002D862F /* TrackerData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,10 @@
 		5C8907951A0C6B5000CAFECB /* TrackerTeamBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTeamBTests.swift; sourceTree = "<group>"; };
 		5C89079F1A0C6BC700CAFECB /* TrackerTeamB.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TrackerTeamB.entitlements; sourceTree = "<group>"; };
 		5C8907A01A0C6BC900CAFECB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		5CBAAD8A1A1E7A5A00CDDBE9 /* TrackerDataX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackerDataX.swift; sourceTree = "<group>"; };
+		5CBAAD8C1A1EAB0B00CDDBE9 /* plusbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plusbutton.png; path = ../../../../plusbutton.png; sourceTree = "<group>"; };
+		5CD279FC1A1EB9DF002D862F /* EditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
+		5CD27A021A1ECF86002D862F /* TrackerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackerData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,10 +94,12 @@
 		5C89077C1A0C6B5000CAFECB /* TrackerTeamB */ = {
 			isa = PBXGroup;
 			children = (
+				5CBAAD871A1E78A600CDDBE9 /* Model */,
 				5C89079F1A0C6BC700CAFECB /* TrackerTeamB.entitlements */,
 				5C247E111A0C823D008DA2BF /* TodayViewController.swift */,
 				5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */,
 				5C247E131A0C8256008DA2BF /* HistoryViewController.swift */,
+				5CD279FC1A1EB9DF002D862F /* EditTableViewController.swift */,
 				5C89077F1A0C6B5000CAFECB /* AppDelegate.swift */,
 				5C8907831A0C6B5000CAFECB /* Main.storyboard */,
 				5C8907861A0C6B5000CAFECB /* Images.xcassets */,
@@ -102,6 +112,7 @@
 		5C89077D1A0C6B5000CAFECB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5CBAAD8C1A1EAB0B00CDDBE9 /* plusbutton.png */,
 				5C89077E1A0C6B5000CAFECB /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -122,6 +133,15 @@
 				5C8907941A0C6B5000CAFECB /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5CBAAD871A1E78A600CDDBE9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5CBAAD8A1A1E7A5A00CDDBE9 /* TrackerDataX.swift */,
+				5CD27A021A1ECF86002D862F /* TrackerData.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C8907851A0C6B5000CAFECB /* Main.storyboard in Resources */,
+				5CBAAD8D1A1EAB0B00CDDBE9 /* plusbutton.png in Resources */,
 				5C89078A1A0C6B5000CAFECB /* LaunchScreen.xib in Resources */,
 				5C8907871A0C6B5000CAFECB /* Images.xcassets in Resources */,
 			);
@@ -231,9 +252,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C8907801A0C6B5000CAFECB /* AppDelegate.swift in Sources */,
+				5CD279FD1A1EB9DF002D862F /* EditTableViewController.swift in Sources */,
 				5C247E121A0C823D008DA2BF /* TodayViewController.swift in Sources */,
 				5C247E141A0C8256008DA2BF /* HistoryViewController.swift in Sources */,
 				5C64EBCB1A130D8E00E123D0 /* SettingsViewController.swift in Sources */,
+				5CBAAD8B1A1E7A5A00CDDBE9 /* TrackerDataX.swift in Sources */,
+				5CD27A031A1ECF86002D862F /* TrackerData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

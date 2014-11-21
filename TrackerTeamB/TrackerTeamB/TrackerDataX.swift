@@ -1,4 +1,12 @@
 //
+//  TrackerData.swift
+//  TrackerTeamB
+//
+//  Created by Madison DeHart on 11/20/14.
+//  Copyright (c) 2014 Madison DeHart. All rights reserved.
+//
+
+//
 //  Tracker Data.swift
 //  TrackerTeamB
 //
@@ -10,7 +18,7 @@ import UIKit
 
 //model attempt for backend
 
-class TrackerData: NSObject {//house data for week, month, year
+class TrackerDataX: NSObject {//house data for week, month, year
     //start
     var TrackOfDay:DayInfo = DayInfo(amount:0, clock:"NOW", lastClock:"then", when:"Today")
     var TrackOfWeek:WeekInfo = WeekInfo(weekAmount:0, weekStart:"Sunday", dayNumber:1, weekNumber: 1)
@@ -18,10 +26,10 @@ class TrackerData: NSObject {//house data for week, month, year
     var TrackOfYear:YearInfo = YearInfo(currentYear:"2014", yearAmount:0)
     
     //array with all info
-        var myDataDay:[DayInfo]
-        var myDataWeek:[WeekInfo]
-        var myDataYear:[YearInfo]
-        var myDataMonth:[MonthInfo]
+    var myDataDay:[DayInfo]
+    var myDataWeek:[WeekInfo]
+    var myDataYear:[YearInfo]
+    var myDataMonth:[MonthInfo]
     
     
     //initialized
@@ -33,7 +41,7 @@ class TrackerData: NSObject {//house data for week, month, year
         myDataYear = [TrackOfYear]
         
     }
-
+    
 }
 
 
@@ -42,7 +50,7 @@ class DayInfo: NSObject {
     var amount: Int //today's total
     var when: String
     var clock: String //time when button clicked
-     //today's date
+    //today's date
     var lastClock: String // last time button was clicked
     //whats being passed init
     init(amount: Int, clock: String, lastClock:String, when: String ){
