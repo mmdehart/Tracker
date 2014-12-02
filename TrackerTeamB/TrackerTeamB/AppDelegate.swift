@@ -13,6 +13,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    
+    var cigData:[CigaretteData] = []
+    
+    // created this method to return the mapdata
+    func getCigData() ->[CigaretteData] {
+        return cigData
+    }
+    
+    var settingsData:SettingsData = SettingsData()
+    
+    func getSetData() -> SettingsData {
+        return settingsData
+    }
+
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

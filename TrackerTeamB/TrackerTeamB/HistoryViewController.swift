@@ -12,11 +12,16 @@ class HistoryViewController: UIViewController {
 
     @IBOutlet weak var segControl: UISegmentedControl!
     @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var maxLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        // get the mapdata
+        let settings = appDelegate.getSetData()
         
         textLabel.text = "Today's Total"
-
+        maxLabel.text = "\(settings.dailyMax)"
         // Do any additional setup after loading the view.
     }
 
@@ -26,15 +31,23 @@ class HistoryViewController: UIViewController {
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        // get the mapdata
+        let settings = appDelegate.getSetData()
         switch segControl.selectedSegmentIndex {
         case 0:
             textLabel.text = "Today's Total"
+            maxLabel.text = "\(settings.getDailyMax())"
         case 1:
             textLabel.text = "This Week's Total"
+            maxLabel.text = "\(settings.getWeeklyMax())"
         case 2:
             textLabel.text = "This Month's Total"
+            maxLabel.text = "\(settings.getMonthlyMax())"
         case 3:
             textLabel.text = "This Year's Total"
+            maxLabel.text = "\(settings.getYearlyMax())"
         default:
             break;
         }

@@ -16,7 +16,11 @@ class TodayViewController: UIViewController {
     @IBOutlet weak var plusBtn: UIButton!
     @IBOutlet weak var timeSince: UILabel!
     
-    var cigarettes:[TrackerData] = []
+    var appDelegate:AppDelegate!
+    
+    var cigarettes:[CigaretteData] = []
+    
+//    var cigarettes:[TrackerData] = []
     
     let dateFormatter = NSDateFormatter()
     //let timeFormatter = NSDateFormatter()
@@ -25,16 +29,27 @@ class TodayViewController: UIViewController {
         super.viewDidLoad()
         let today = NSDate()
         
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        // get the mapdata
+        cigarettes = appDelegate.getCigData()
+        
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         //timeFormatter.timeStyle =
         todayDate.text = dateFormatter.stringFromDate(today)
 
-        countLabel.text = "\(self.cigarettes.count)"
+        countLabel.text = "\(cigarettes.count)"
         //let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         //let data = appDelegate.getTrackerData()
         
-        timeSince.text = "0"
-        
+        if cigarettes.count != 0 {
+            var lastdate:NSDate! = cigarettes.last?.getCigDate()
+            var timesince = NSDate().timeIntervalSinceDate(lastdate)
+            timeSince.text = "\(timesince)"
+        }
+        else {
+            timeSince.text = "0"
+        }
         
     }
 
@@ -45,14 +60,18 @@ class TodayViewController: UIViewController {
     
 
     @IBAction func plusButtonPressed(sender: UIButton) {
+//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        // get the mapdata
+//        var cigarettes = appDelegate.getCigData()
         if cigarettes.count != 0 {
-            var lastdate:NSDate! = self.cigarettes.last?.cigDate()
+            var lastdate:NSDate! = cigarettes.last?.getCigDate()
             var timesince = NSDate().timeIntervalSinceDate(lastdate)
             timeSince.text = "\(timesince)"
         }
         
-        self.cigarettes.append(TrackerData(cig: NSDate()))
-        countLabel.text = "\(self.cigarettes.count)"
+        cigarettes.append(CigaretteData(cig: NSDate()))
+        countLabel.text = "\(cigarettes.count)"
         //let now = NSDate()
         
     }

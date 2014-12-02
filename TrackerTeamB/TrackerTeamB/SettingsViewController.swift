@@ -16,13 +16,24 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var yearlyEst: UILabel!
     @IBOutlet weak var monthlyEst: UILabel!
     
+    var appDelegate:AppDelegate!
+    var settings:SettingsData!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        // get the mapdata
+        settings = appDelegate.getSetData()
+        
+        
         var intValue:Int = Int(maxSlider.value)
         maxNumber.text = "\(intValue)"
         weeklyEst.text = "\(intValue*7) cigarettes"
         monthlyEst.text = "\(intValue*30) cigarettes"
         yearlyEst.text = "\(intValue*365) cigarettes"
+        
+        settings.dailyMax = intValue
         // Do any additional setup after loading the view.
     }
 
@@ -37,6 +48,13 @@ class SettingsViewController: UIViewController {
         weeklyEst.text = "\(intValue*7) cigarettes"
         monthlyEst.text = "\(intValue*30) cigarettes"
         yearlyEst.text = "\(intValue*365) cigarettes"
+        
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        // get the mapdata
+        settings = appDelegate.getSetData()
+        
+        settings.dailyMax = intValue
     }
 
     /*
