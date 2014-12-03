@@ -14,12 +14,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     
+    
     var cigData:[CigaretteData] = []
     
     // created this method to return the mapdata
     func getCigData() ->[CigaretteData] {
         return cigData
     }
+    
+    func getCigCount() -> Int {
+        return cigData.count
+    }
+    
+    func addCig() -> NSDate {
+        cigData.append(CigaretteData(cig:NSDate()))
+        return NSDate()
+    }
+    
+    func getTimeSinceLast() -> NSTimeInterval {
+        var lastdate:NSDate! = cigData.last?.getCigDate()
+        return NSDate().timeIntervalSinceDate(lastdate)
+    }
+    
+    
     
     var settingsData:SettingsData = SettingsData()
     

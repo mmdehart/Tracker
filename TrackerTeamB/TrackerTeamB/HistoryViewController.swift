@@ -13,15 +13,26 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var segControl: UISegmentedControl!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var maxLabel: UILabel!
+    @IBOutlet weak var histCount: UILabel!
+    
+    var appDelegate:AppDelegate!
+//    var cigarettes:[CigaretteData]!
+    var settings:SettingsData!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         
-        // get the mapdata
-        let settings = appDelegate.getSetData()
+        settings = appDelegate.getSetData()
+//        cigarettes = appDelegate.getCigData()
         
         textLabel.text = "Today's Total"
         maxLabel.text = "\(settings.dailyMax)"
+        histCount.text = "\(appDelegate.getCigCount())"
+        // the above line should eventually be changed to the next line
+        // histCount = "\(appDelegate.getTodayCount())"
+        
         // Do any additional setup after loading the view.
     }
 
@@ -31,23 +42,35 @@ class HistoryViewController: UIViewController {
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        settings = appDelegate.getSetData()
+//        cigarettes = appDelegate.getCigData()
         
-        // get the mapdata
-        let settings = appDelegate.getSetData()
         switch segControl.selectedSegmentIndex {
         case 0:
             textLabel.text = "Today's Total"
             maxLabel.text = "\(settings.getDailyMax())"
+            histCount.text = "\(appDelegate.getCigCount())"
+            // the above line should eventually be changed to the next line
+            // histCount = "\(appDelegate.getTodayCount())"
         case 1:
-            textLabel.text = "This Week's Total"
+            textLabel.text = "This Week"
             maxLabel.text = "\(settings.getWeeklyMax())"
+            histCount.text = "\(appDelegate.getCigCount())"
+            // the above line should eventually be changed to the next line
+            // histCount = "\(appDelegate.getWeeklyCount())"
         case 2:
-            textLabel.text = "This Month's Total"
+            textLabel.text = "This Month"
             maxLabel.text = "\(settings.getMonthlyMax())"
+            histCount.text = "\(appDelegate.getCigCount())"
+            // the above line should eventually be changed to the next line
+            // histCount = "\(appDelegate.getMonthlyCount())"
         case 3:
-            textLabel.text = "This Year's Total"
+            textLabel.text = "This Year"
             maxLabel.text = "\(settings.getYearlyMax())"
+            histCount.text = "\(appDelegate.getCigCount())"
+            // the above line should eventually be changed to the next line
+            // histCount = "\(appDelegate.getYearlyCount())"
         default:
             break;
         }

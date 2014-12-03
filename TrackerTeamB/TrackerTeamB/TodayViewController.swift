@@ -18,7 +18,7 @@ class TodayViewController: UIViewController {
     
     var appDelegate:AppDelegate!
     
-    var cigarettes:[CigaretteData] = []
+//    var cigarettes:[CigaretteData]!
     
 //    var cigarettes:[TrackerData] = []
     
@@ -32,19 +32,20 @@ class TodayViewController: UIViewController {
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         
         // get the mapdata
-        cigarettes = appDelegate.getCigData()
+//        cigarettes = appDelegate.getCigData()
         
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         //timeFormatter.timeStyle =
         todayDate.text = dateFormatter.stringFromDate(today)
 
-        countLabel.text = "\(cigarettes.count)"
+        countLabel.text = "\(appDelegate.getCigCount())"
         //let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         //let data = appDelegate.getTrackerData()
         
-        if cigarettes.count != 0 {
-            var lastdate:NSDate! = cigarettes.last?.getCigDate()
-            var timesince = NSDate().timeIntervalSinceDate(lastdate)
+        if appDelegate.getCigCount() != 0 {
+            //            var lastdate:NSDate! = cigarettes.last?.getCigDate()
+            //            var timesince = NSDate().timeIntervalSinceDate(lastdate)
+            var timesince = appDelegate.getTimeSinceLast()
             timeSince.text = "\(timesince)"
         }
         else {
@@ -64,14 +65,17 @@ class TodayViewController: UIViewController {
         
         // get the mapdata
 //        var cigarettes = appDelegate.getCigData()
-        if cigarettes.count != 0 {
-            var lastdate:NSDate! = cigarettes.last?.getCigDate()
-            var timesince = NSDate().timeIntervalSinceDate(lastdate)
+        if appDelegate.getCigCount() != 0 {
+//            var lastdate:NSDate! = cigarettes.last?.getCigDate()
+//            var timesince = NSDate().timeIntervalSinceDate(lastdate)
+            var timesince = appDelegate.getTimeSinceLast()
             timeSince.text = "\(timesince)"
         }
+        appDelegate.addCig()
         
-        cigarettes.append(CigaretteData(cig: NSDate()))
-        countLabel.text = "\(cigarettes.count)"
+//        cigarettes.append(CigaretteData(cig: NSDate()))
+//        countLabel.text = "\(cigarettes.count)"
+        countLabel.text = "\(appDelegate.getCigCount())"
         //let now = NSDate()
         
     }
