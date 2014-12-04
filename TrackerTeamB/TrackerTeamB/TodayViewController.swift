@@ -38,11 +38,11 @@ class TodayViewController: UIViewController {
         //timeFormatter.timeStyle =
         todayDate.text = dateFormatter.stringFromDate(today)
 
-        countLabel.text = "\(appDelegate.getCigCount())"
+        countLabel.text = "\(appDelegate.getTodayCount())"
         //let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         //let data = appDelegate.getTrackerData()
         
-        if appDelegate.getCigCount() != 0 {
+        if appDelegate.getTotalCigCount() != 0 {
             //            var lastdate:NSDate! = cigarettes.last?.getCigDate()
             //            var timesince = NSDate().timeIntervalSinceDate(lastdate)
             var timesince = appDelegate.getTimeSinceLast()
@@ -65,7 +65,7 @@ class TodayViewController: UIViewController {
         
         // get the mapdata
 //        var cigarettes = appDelegate.getCigData()
-        if appDelegate.getCigCount() != 0 {
+        if appDelegate.getTotalCigCount() != 0 {
 //            var lastdate:NSDate! = cigarettes.last?.getCigDate()
 //            var timesince = NSDate().timeIntervalSinceDate(lastdate)
             var timesince = appDelegate.getTimeSinceLast()
@@ -75,7 +75,7 @@ class TodayViewController: UIViewController {
         
 //        cigarettes.append(CigaretteData(cig: NSDate()))
 //        countLabel.text = "\(cigarettes.count)"
-        countLabel.text = "\(appDelegate.getCigCount())"
+        countLabel.text = "\(appDelegate.getTodayCount())"
         //let now = NSDate()
         
     }

@@ -20,21 +20,4 @@ class CigaretteData : NSObject {
         return cigDate!
     }
     
-//    
-//    func getDailyCount() -> Int {
-//        
-//    }
-//    
-//    func getWeeklyCount() -> Int {
-//        
-//    }
-//    
-//    
-//    func getMonthlyCount() ->Int {
-//        
-//    }
-//    
-//    func getYearlyCount() -> Int {
-//        
-//    }
 }

@@ -29,7 +29,7 @@ class HistoryViewController: UIViewController {
         
         textLabel.text = "Today's Total"
         maxLabel.text = "\(settings.dailyMax)"
-        histCount.text = "\(appDelegate.getCigCount())"
+        histCount.text = "\(appDelegate.getTodayCount())"
         // the above line should eventually be changed to the next line
         // histCount = "\(appDelegate.getTodayCount())"
         
@@ -50,27 +50,27 @@ class HistoryViewController: UIViewController {
         case 0:
             textLabel.text = "Today's Total"
             maxLabel.text = "\(settings.getDailyMax())"
-            histCount.text = "\(appDelegate.getCigCount())"
+            histCount.text = "\(appDelegate.getTodayCount())"
             // the above line should eventually be changed to the next line
             // histCount = "\(appDelegate.getTodayCount())"
         case 1:
             textLabel.text = "This Week"
             maxLabel.text = "\(settings.getWeeklyMax())"
-            histCount.text = "\(appDelegate.getCigCount())"
+//            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
-            // histCount = "\(appDelegate.getWeeklyCount())"
+             histCount.text = "\(appDelegate.getWeekCount())"
         case 2:
             textLabel.text = "This Month"
             maxLabel.text = "\(settings.getMonthlyMax())"
-            histCount.text = "\(appDelegate.getCigCount())"
+//            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
-            // histCount = "\(appDelegate.getMonthlyCount())"
+             histCount.text = "\(appDelegate.getMonthCount())"
         case 3:
             textLabel.text = "This Year"
             maxLabel.text = "\(settings.getYearlyMax())"
-            histCount.text = "\(appDelegate.getCigCount())"
+//            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
-            // histCount = "\(appDelegate.getYearlyCount())"
+             histCount.text = "\(appDelegate.getYearCount())"
         default:
             break;
         }
