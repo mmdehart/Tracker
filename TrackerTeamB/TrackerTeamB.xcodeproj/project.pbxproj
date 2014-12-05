@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		100CC4791A313C780079AD9B /* recordGrabbed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100CC4781A313C780079AD9B /* recordGrabbed.swift */; };
+		1039991E1A2E468F00669B76 /* TrackeriCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1039991D1A2E468F00669B76 /* TrackeriCloud.swift */; };
 		5C247E121A0C823D008DA2BF /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E111A0C823D008DA2BF /* TodayViewController.swift */; };
 		5C247E141A0C8256008DA2BF /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E131A0C8256008DA2BF /* HistoryViewController.swift */; };
 		5C64EBCB1A130D8E00E123D0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		100CC4781A313C780079AD9B /* recordGrabbed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recordGrabbed.swift; sourceTree = "<group>"; };
+		1039991D1A2E468F00669B76 /* TrackeriCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackeriCloud.swift; sourceTree = "<group>"; };
 		5C247E111A0C823D008DA2BF /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5C247E131A0C8256008DA2BF /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 				5C8907861A0C6B5000CAFECB /* Images.xcassets */,
 				5C8907881A0C6B5000CAFECB /* LaunchScreen.xib */,
 				5C89077D1A0C6B5000CAFECB /* Supporting Files */,
+				100CC4781A313C780079AD9B /* recordGrabbed.swift */,
 			);
 			path = TrackerTeamB;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			children = (
 				5CBAAD8A1A1E7A5A00CDDBE9 /* TrackerDataX.swift */,
 				5CD27A021A1ECF86002D862F /* TrackerData.swift */,
+				1039991D1A2E468F00669B76 /* TrackeriCloud.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -253,6 +259,8 @@
 			files = (
 				5C8907801A0C6B5000CAFECB /* AppDelegate.swift in Sources */,
 				5CD279FD1A1EB9DF002D862F /* EditTableViewController.swift in Sources */,
+				1039991E1A2E468F00669B76 /* TrackeriCloud.swift in Sources */,
+				100CC4791A313C780079AD9B /* recordGrabbed.swift in Sources */,
 				5C247E121A0C823D008DA2BF /* TodayViewController.swift in Sources */,
 				5C247E141A0C8256008DA2BF /* HistoryViewController.swift in Sources */,
 				5C64EBCB1A130D8E00E123D0 /* SettingsViewController.swift in Sources */,

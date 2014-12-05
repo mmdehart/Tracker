@@ -8,15 +8,20 @@
 
 import UIKit
 import Foundation
+import CloudKit
 
-class TodayViewController: UIViewController {
+
+class TodayViewController: UIViewController, CloudKitDelegate {
 
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var todayDate: UILabel!
     @IBOutlet weak var plusBtn: UIButton!
     @IBOutlet weak var timeSince: UILabel!
     
-    var cigarettes:[TrackerData] = []
+    var model: cigData!
+    
+    
+   // var cigarettes:[trackerData] = []
     
     let dateFormatter = NSDateFormatter()
     //let timeFormatter = NSDateFormatter()
@@ -25,15 +30,22 @@ class TodayViewController: UIViewController {
         super.viewDidLoad()
         let today = NSDate()
         
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        model = appDelegate.getCigData()
+        model.delegate = self
+   //     model.update_Records()
+        
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         //timeFormatter.timeStyle =
         todayDate.text = dateFormatter.stringFromDate(today)
 
-        countLabel.text = "\(self.cigarettes.count)"
+        countLabel.text = "\(0)"
         //let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         //let data = appDelegate.getTrackerData()
         
         timeSince.text = "0"
+        model.update_records()
+        
         
         
     }
@@ -45,17 +57,45 @@ class TodayViewController: UIViewController {
     
 
     @IBAction func plusButtonPressed(sender: UIButton) {
-        if cigarettes.count != 0 {
-            var lastdate:NSDate! = self.cigarettes.last?.cigDate()
+        
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        
+        model.save_Record()
+        
+        // timeSince.text = dateFormatter.stringFromDate(model.logRecords[0].cig)
+            
+        
+        
+        
+      /* if cigarettes.count != 0 {
+            var lastdate:NSDate! = self.cigarettes.last?.cig
             var timesince = NSDate().timeIntervalSinceDate(lastdate)
             timeSince.text = "\(timesince)"
         }
         
-        self.cigarettes.append(TrackerData(cig: NSDate()))
+        self.cigarettes.append(trackerData(cig: NSDate()))
         countLabel.text = "\(self.cigarettes.count)"
         //let now = NSDate()
+
+    */
+        
         
     }
+    
+    func errorUpdating(error: NSError) {
+        let message = error.localizedDescription
+        let alert = UIAlertView(title: "Error Loading Cloud Data. Please Check your Internet Connection",
+            message: message, delegate: nil, cancelButtonTitle: "OK")
+        alert.show()
+    }
+    
+    func countUpdated(timeOfLastCig: NSDate) {
+        countLabel.text = String(model.logRecords.count)
+        NSLog("Upon Load the 'Count' has been updated to: \(model.logRecords.count)")
+    }
+}
+
+
     
     // MARK: - Navigation
 
@@ -66,6 +106,3 @@ class TodayViewController: UIViewController {
 //        // Get the new view controller using segue.destinationViewController.
 //        // Pass the selected object to the new view controller.
 //    }
-    
-
-}

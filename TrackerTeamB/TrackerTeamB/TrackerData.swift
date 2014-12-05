@@ -9,15 +9,17 @@
 import UIKit
 import Foundation
 
-class TrackerData : NSObject {
+class trackerData : NSObject {
     var cig:NSDate?
     init(cig:NSDate) {
         self.cig = cig
     }
     
-    func cigDate() -> NSDate {
+/*    func cigDate() -> NSDate {
         return cig!
     }
+  */  
+    func cigDate() {}
     
     //var cigarettes = [NSDate]
     //var cigarettes = NSMutableArray()
