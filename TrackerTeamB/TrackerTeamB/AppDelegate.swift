@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var cigData:[CigaretteData] = []
     
+    
+    
     // created this method to return the mapdata
     func getCigData() ->[CigaretteData] {
         return cigData
@@ -35,6 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var lastdate:NSDate! = cigData.last?.getCigDate()
         return NSDate().timeIntervalSinceDate(lastdate)
     }
+    
+    
+    /*
+     *  CURRRENT COUNTS
+     */
     
     func getTodayCount() -> Int {
         var count = 0
@@ -59,11 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getWeekCount() -> Int {
         var count = 0
-//        let today = NSDate()
-//        var calendar = NSCalendar.currentCalendar()
-//        let flags:NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit | .WeekdayCalendarUnit
-        
-//        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
         
         for var i = cigData.count - 1 ; i >= 0; i-- {
             var thisDate:NSDate = cigData[i].getCigDate()
@@ -97,7 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         return count
-
     }
     
     func getYearCount() -> Int {
@@ -119,6 +120,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         return count
+    }
+    
+    
+    
+    
+    /*
+     *  CURRENT TIME SPENT
+     */
+    func getDayTimeSpent() -> Int {
+        var count = getTodayCount()
+        return count * 5
+    }
+    
+    func getWeekTimeSpent() -> Int {
+        var count = getWeekCount()
+        return count * 5
+    }
+    
+    func getMonthTimeSpent() -> Int {
+        var count = getMonthCount()
+        return count * 5
+    }
+    
+    func getYearTimeSpent() -> Int {
+        var count = getYearCount()
+        return count * 5
+    }
+    
+    
+    
+    /*
+     *  CURRENT AVG TIME BTW
+     */
+    
+    
+    
+    /*
+     *  CURRENT AVERAGES
+     */
+    func getDailyAverage() {
         
     }
     
@@ -129,6 +170,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getSetData() -> SettingsData {
         return settingsData
     }
+    
+    
+    
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -160,4 +204,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
 
