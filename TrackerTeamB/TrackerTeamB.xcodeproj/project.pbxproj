@@ -106,8 +106,8 @@
 				5C247E131A0C8256008DA2BF /* HistoryViewController.swift */,
 				5CD279FC1A1EB9DF002D862F /* EditTableViewController.swift */,
 				5C89077F1A0C6B5000CAFECB /* AppDelegate.swift */,
-				5C8907861A0C6B5000CAFECB /* Images.xcassets */,
 				5C9C70951A31522F00778036 /* Main.storyboard */,
+				5C8907861A0C6B5000CAFECB /* Images.xcassets */,
 				5C8907881A0C6B5000CAFECB /* LaunchScreen.xib */,
 				5C89077D1A0C6B5000CAFECB /* Supporting Files */,
 			);

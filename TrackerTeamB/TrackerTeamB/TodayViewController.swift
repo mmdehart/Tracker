@@ -72,5 +72,14 @@ class TodayViewController: UIViewController {
 //        // Pass the selected object to the new view controller.
 //    }
     
-
+//    - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.identifier isEqualToString:@"showRecipeDetail"]) {
+//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//    RecipeDetailViewController *destViewController = segue.destinationViewController;
+//    destViewController.recipeName = [recipes objectAtIndex:indexPath.row];
+//    
+//    // Hide bottom tab bar in the detail view
+//    destViewController.hidesBottomBarWhenPushed = YES;
+//    }
+//    }
 }

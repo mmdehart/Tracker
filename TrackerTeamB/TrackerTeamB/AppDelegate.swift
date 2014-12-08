@@ -14,9 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     
-    
     var cigData:[CigaretteData] = []
-    
     
     
     // created this method to return the mapdata
@@ -39,22 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+    
     /*
      *  CURRRENT COUNTS
      */
-    
     func getTodayCount() -> Int {
         var count = 0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
-        
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
         
         for var i = cigData.count - 1 ; i >= 0; i-- {
             var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            if(todayComp.day == otherComp.day && todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
+            if(NSDate().timeIntervalSinceDate(thisDate) <= 86400) {
                 count++
             }
             else {
@@ -63,14 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return count
     }
-    
+
     func getWeekCount() -> Int {
         var count = 0
         
         for var i = cigData.count - 1 ; i >= 0; i-- {
             var thisDate:NSDate = cigData[i].getCigDate()
-            if(NSDate().timeIntervalSinceDate(thisDate) <= 604800) {//yes, that is the number of seconds in a week...
-                //apparently all the week functions for NSDate/Calendar are depricated..
+            if(NSDate().timeIntervalSinceDate(thisDate) <= 604800) {
                 count++
             }
             else {
@@ -82,16 +73,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getMonthCount() -> Int {
         var count = 0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .MonthCalendarUnit | .YearCalendarUnit
-        
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
-        
+    
         for var i = cigData.count - 1 ; i >= 0; i-- {
             var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            if( todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
+            if(NSDate().timeIntervalSinceDate(thisDate) <= 2629740) {
                 count++
             }
             else {
@@ -103,16 +88,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getYearCount() -> Int {
         var count = 0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .YearCalendarUnit
-        
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
         
         for var i = cigData.count - 1 ; i >= 0; i-- {
             var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            if( todayComp.year == otherComp.year) {
+            if(NSDate().timeIntervalSinceDate(thisDate) <= 31556700) {
                 count++
             }
             else {
@@ -122,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return count
     }
     
-    
+  
     
     
     /*
@@ -205,4 +184,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//    func getTodayCount() -> Int {
+//        var count = 0
+//        let today = NSDate()
+//        var calendar = NSCalendar.currentCalendar()
+//        let flags:NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
+//
+//        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+//
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
+//            if(todayComp.day == otherComp.day && todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
 
+
+//    func getMonthCount() -> Int {
+//        var count = 0
+//        let today = NSDate()
+//        var calendar = NSCalendar.currentCalendar()
+//        let flags:NSCalendarUnit = .MonthCalendarUnit | .YearCalendarUnit
+//
+//        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+//
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
+//            if( todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
+
+//    func getYearCount() -> Int {
+//        var count = 0
+//        let today = NSDate()
+//        var calendar = NSCalendar.currentCalendar()
+//        let flags:NSCalendarUnit = .YearCalendarUnit
+//
+//        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+//
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
+//            if( todayComp.year == otherComp.year) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
+
+  
