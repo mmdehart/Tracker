@@ -23,22 +23,23 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var graphLabel: UILabel!
     var appDelegate:AppDelegate!
 //    var cigarettes:[CigaretteData]!
-    var settings:SettingsData!
+//    var settings:SettingsData!
+    var model : cloudKitData!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         
-        settings = appDelegate.getSetData()
+//        settings = appDelegate.getSetData()
 //        cigarettes = appDelegate.getCigData()
-        
+        model = appDelegate.getCloudData()
         textLabel.text = "Today's Total"
         graphLabel.text = "Hourly"
         averageLabel.text = "Daily Average"
-        maxLabel.text = "\(settings.dailyMax)"
-        histCount.text = "\(appDelegate.getTodayCount())"
-        timeSpentLabel.text = "\(appDelegate.getDayTimeSpent()) minutes"
+        maxLabel.text = "\(model.maxGoal)"
+//        histCount.text = "\(appDelegate.getTodayCount())"
+//        timeSpentLabel.text = "\(appDelegate.getDayTimeSpent()) minutes"
         // the above line should eventually be changed to the next line
         // histCount = "\(appDelegate.getTodayCount())"
         
@@ -52,7 +53,8 @@ class HistoryViewController: UIViewController {
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        settings = appDelegate.getSetData()
+        model = appDelegate.getCloudData()
+//        settings = appDelegate.getSetData()
 //        cigarettes = appDelegate.getCigData()
         
         switch segControl.selectedSegmentIndex {
@@ -60,40 +62,40 @@ class HistoryViewController: UIViewController {
             textLabel.text = "Today's Total"
             graphLabel.text = "Hourly"
             averageLabel.text = "Daily Average"
-            maxLabel.text = "\(settings.getDailyMax())"
-            histCount.text = "\(appDelegate.getTodayCount())"
-            timeSpentLabel.text = "\(appDelegate.getDayTimeSpent()) minutes"
+            maxLabel.text = "\(model.maxGoal)"
+//            histCount.text = "\(appDelegate.getTodayCount())"
+//            timeSpentLabel.text = "\(appDelegate.getDayTimeSpent()) minutes"
             // the above line should eventually be changed to the next line
             // histCount = "\(appDelegate.getTodayCount())"
         case 1:
             textLabel.text = "This Week"
             graphLabel.text = "Daily"
             averageLabel.text = "Weekly Average"
-            maxLabel.text = "\(settings.getWeeklyMax())"
+            maxLabel.text = "\(model.maxGoal * 7)"
 //            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
-             histCount.text = "\(appDelegate.getWeekCount())"
-            timeSpentLabel.text = "\(appDelegate.getWeekTimeSpent()) minutes"
+//             histCount.text = "\(appDelegate.getWeekCount())"
+//            timeSpentLabel.text = "\(appDelegate.getWeekTimeSpent()) minutes"
 
         case 2:
             textLabel.text = "This Month"
             graphLabel.text = "Weekly"
             averageLabel.text = "Monthly Average"
-            maxLabel.text = "\(settings.getMonthlyMax())"
+            maxLabel.text = "\(model.maxGoal * 30)"
 //            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
-             histCount.text = "\(appDelegate.getMonthCount())"
-            timeSpentLabel.text = "\(appDelegate.getMonthTimeSpent()) minutes"
+//             histCount.text = "\(appDelegate.getMonthCount())"
+//            timeSpentLabel.text = "\(appDelegate.getMonthTimeSpent()) minutes"
 
         case 3:
             textLabel.text = "This Year"
             graphLabel.text = "Monthly"
             averageLabel.text = "Yearly Average"
-            maxLabel.text = "\(settings.getYearlyMax())"
+            maxLabel.text = "\(model.maxGoal * 365)"
 //            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
-             histCount.text = "\(appDelegate.getYearCount())"
-            timeSpentLabel.text = "\(appDelegate.getYearTimeSpent()) minutes"
+//             histCount.text = "\(appDelegate.getYearCount())"
+//            timeSpentLabel.text = "\(appDelegate.getYearTimeSpent()) minutes"
 
         default:
             break;

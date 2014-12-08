@@ -17,23 +17,25 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var monthlyEst: UILabel!
     
     var appDelegate:AppDelegate!
-    var settings:SettingsData!
+//    var settings:SettingsData!
+    var model : cloudKitData!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        
+        model = appDelegate.getCloudData()
         // get the mapdata
-        settings = appDelegate.getSetData()
-        
-        
-        var intValue:Int = Int(maxSlider.value)
-        maxNumber.text = "\(intValue)"
-        weeklyEst.text = "\(intValue*7) cigarettes"
-        monthlyEst.text = "\(intValue*30) cigarettes"
-        yearlyEst.text = "\(intValue*365) cigarettes"
-        
-        settings.dailyMax = intValue
+//        settings = appDelegate.getSetData()
+
+        if(model.maxGoal > 0) {
+            maxSlider.value = Float(model.maxGoal)
+            maxNumber.text = "\(model.maxGoal)"
+            weeklyEst.text = "\(model.maxGoal * 7) cigarettes"
+            monthlyEst.text = "\(model.maxGoal * 30) cigarettes"
+            yearlyEst.text = "\(model.maxGoal * 365) cigarettes"
+        }
+//        settings.dailyMax = intValue
         // Do any additional setup after loading the view.
     }
 
@@ -52,11 +54,14 @@ class SettingsViewController: UIViewController {
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         
         // get the mapdata
-        settings = appDelegate.getSetData()
+//        settings = appDelegate.getSetData()
         
-        settings.dailyMax = intValue
+//        settings.dailyMax = intValue
     }
 
+    @IBAction func sliderStopped(sender: UISlider) {
+        model.saveGoal(Int(sender.value))
+    }
     /*
     // MARK: - Navigation
 
