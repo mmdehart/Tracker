@@ -16,6 +16,8 @@ class CigaretteData : NSObject {
         self.cigDate = cig
     }
     
+    
+    
     func getCigDate() ->NSDate {
         return cigDate!
     }

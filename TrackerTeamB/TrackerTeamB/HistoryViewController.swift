@@ -38,6 +38,7 @@ class HistoryViewController: UIViewController {
         averageLabel.text = "Daily Average"
         maxLabel.text = "\(settings.dailyMax)"
         histCount.text = "\(appDelegate.getTodayCount())"
+        
         timeSpentLabel.text = "\(appDelegate.getDayTimeSpent()) minutes"
         // the above line should eventually be changed to the next line
         // histCount = "\(appDelegate.getTodayCount())"
@@ -62,6 +63,7 @@ class HistoryViewController: UIViewController {
             averageLabel.text = "Daily Average"
             maxLabel.text = "\(settings.getDailyMax())"
             histCount.text = "\(appDelegate.getTodayCount())"
+            avgAmtLabel.text = "\(appDelegate.getTodayAverage())"
             timeSpentLabel.text = "\(appDelegate.getDayTimeSpent()) minutes"
             // the above line should eventually be changed to the next line
             // histCount = "\(appDelegate.getTodayCount())"
@@ -73,6 +75,7 @@ class HistoryViewController: UIViewController {
 //            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
              histCount.text = "\(appDelegate.getWeekCount())"
+            avgAmtLabel.text = "\(appDelegate.getWeeklyAverage())"
             timeSpentLabel.text = "\(appDelegate.getWeekTimeSpent()) minutes"
 
         case 2:
@@ -83,6 +86,7 @@ class HistoryViewController: UIViewController {
 //            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
              histCount.text = "\(appDelegate.getMonthCount())"
+            avgAmtLabel.text = "\(appDelegate.getMonthlyAverage())"
             timeSpentLabel.text = "\(appDelegate.getMonthTimeSpent()) minutes"
 
         case 3:
@@ -93,6 +97,7 @@ class HistoryViewController: UIViewController {
 //            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
              histCount.text = "\(appDelegate.getYearCount())"
+            avgAmtLabel.text = "\(appDelegate.getYearlyAverage())"
             timeSpentLabel.text = "\(appDelegate.getYearTimeSpent()) minutes"
 
         default:
