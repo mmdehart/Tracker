@@ -13,149 +13,149 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var cData:cloudKitData = cloudKitData()
+//    var cData:cloudKitData = cloudKitData()
+//    
+//    func getCloudData() -> cloudKitData {
+//        return cData
+//    }
     
-    func getCloudData() -> cloudKitData {
-        return cData
+    
+    var cigData:[CigaretteData] = []
+    
+    
+    // created this method to return the mapdata
+    func getCigData() ->[CigaretteData] {
+        return cigData
+    }
+    
+    func getTotalCigCount() -> Int {
+        return cigData.count
+    }
+    
+    func addCig() -> NSDate {
+        cigData.append(CigaretteData(cig:NSDate()))
+        return NSDate()
+    }
+    
+    func getTimeSinceLast() -> NSTimeInterval {
+        var lastdate:NSDate! = cigData.last?.getCigDate()
+        return NSDate().timeIntervalSinceDate(lastdate)
     }
     
     
-//    var cigData:[CigaretteData] = []
-//    
-//    
-//    // created this method to return the mapdata
-//    func getCigData() ->[CigaretteData] {
-//        return cigData
-//    }
-//    
-//    func getTotalCigCount() -> Int {
-//        return cigData.count
-//    }
-//    
-//    func addCig() -> NSDate {
-//        cigData.append(CigaretteData(cig:NSDate()))
-//        return NSDate()
-//    }
-//    
-//    func getTimeSinceLast() -> NSTimeInterval {
-//        var lastdate:NSDate! = cigData.last?.getCigDate()
-//        return NSDate().timeIntervalSinceDate(lastdate)
-//    }
-//    
-//    
-//    
-//    /*
-//     *  CURRRENT COUNTS
-//     */
-//    func getTodayCount() -> Int {
-//        var count = 0
-//        
-//        for var i = cigData.count - 1 ; i >= 0; i-- {
-//            var thisDate:NSDate = cigData[i].getCigDate()
-//            if(NSDate().timeIntervalSinceDate(thisDate) <= 86400) {
-//                count++
-//            }
-//            else {
-//                return count
-//            }
-//        }
-//        return count
-//    }
-//
-//    func getWeekCount() -> Int {
-//        var count = 0
-//        
-//        for var i = cigData.count - 1 ; i >= 0; i-- {
-//            var thisDate:NSDate = cigData[i].getCigDate()
-//            if(NSDate().timeIntervalSinceDate(thisDate) <= 604800) {
-//                count++
-//            }
-//            else {
-//                return count
-//            }
-//        }
-//        return count
-//    }
-//    
-//    func getMonthCount() -> Int {
-//        var count = 0
-//    
-//        for var i = cigData.count - 1 ; i >= 0; i-- {
-//            var thisDate:NSDate = cigData[i].getCigDate()
-//            if(NSDate().timeIntervalSinceDate(thisDate) <= 2629740) {
-//                count++
-//            }
-//            else {
-//                return count
-//            }
-//        }
-//        return count
-//    }
-//    
-//    func getYearCount() -> Int {
-//        var count = 0
-//        
-//        for var i = cigData.count - 1 ; i >= 0; i-- {
-//            var thisDate:NSDate = cigData[i].getCigDate()
-//            if(NSDate().timeIntervalSinceDate(thisDate) <= 31556700) {
-//                count++
-//            }
-//            else {
-//                return count
-//            }
-//        }
-//        return count
-//    }
-//    
-//  
-//    
-//    
-//    /*
-//     *  CURRENT TIME SPENT
-//     */
-//    func getDayTimeSpent() -> Int {
-//        var count = getTodayCount()
-//        return count * 5
-//    }
-//    
-//    func getWeekTimeSpent() -> Int {
-//        var count = getWeekCount()
-//        return count * 5
-//    }
-//    
-//    func getMonthTimeSpent() -> Int {
-//        var count = getMonthCount()
-//        return count * 5
-//    }
-//    
-//    func getYearTimeSpent() -> Int {
-//        var count = getYearCount()
-//        return count * 5
-//    }
-//    
-//    
-//    
-//    /*
-//     *  CURRENT AVG TIME BTW
-//     */
-//    
-//    
-//    
-//    /*
-//     *  CURRENT AVERAGES
-//     */
-//    func getDailyAverage() {
-//        
-//    }
-//    
-//    
-//    
-//    var settingsData:SettingsData = SettingsData()
-//    
-//    func getSetData() -> SettingsData {
-//        return settingsData
-//    }
-//    
+    
+    /*
+     *  CURRRENT COUNTS
+     */
+    func getTodayCount() -> Int {
+        var count = 0
+        
+        for var i = cigData.count - 1 ; i >= 0; i-- {
+            var thisDate:NSDate = cigData[i].getCigDate()
+            if(NSDate().timeIntervalSinceDate(thisDate) <= 86400) {
+                count++
+            }
+            else {
+                return count
+            }
+        }
+        return count
+    }
+
+    func getWeekCount() -> Int {
+        var count = 0
+        
+        for var i = cigData.count - 1 ; i >= 0; i-- {
+            var thisDate:NSDate = cigData[i].getCigDate()
+            if(NSDate().timeIntervalSinceDate(thisDate) <= 604800) {
+                count++
+            }
+            else {
+                return count
+            }
+        }
+        return count
+    }
+    
+    func getMonthCount() -> Int {
+        var count = 0
+    
+        for var i = cigData.count - 1 ; i >= 0; i-- {
+            var thisDate:NSDate = cigData[i].getCigDate()
+            if(NSDate().timeIntervalSinceDate(thisDate) <= 2629740) {
+                count++
+            }
+            else {
+                return count
+            }
+        }
+        return count
+    }
+    
+    func getYearCount() -> Int {
+        var count = 0
+        
+        for var i = cigData.count - 1 ; i >= 0; i-- {
+            var thisDate:NSDate = cigData[i].getCigDate()
+            if(NSDate().timeIntervalSinceDate(thisDate) <= 31556700) {
+                count++
+            }
+            else {
+                return count
+            }
+        }
+        return count
+    }
+    
+  
+    
+    
+    /*
+     *  CURRENT TIME SPENT
+     */
+    func getDayTimeSpent() -> Int {
+        var count = getTodayCount()
+        return count * 5
+    }
+    
+    func getWeekTimeSpent() -> Int {
+        var count = getWeekCount()
+        return count * 5
+    }
+    
+    func getMonthTimeSpent() -> Int {
+        var count = getMonthCount()
+        return count * 5
+    }
+    
+    func getYearTimeSpent() -> Int {
+        var count = getYearCount()
+        return count * 5
+    }
+    
+    
+    
+    /*
+     *  CURRENT AVG TIME BTW
+     */
+    
+    
+    
+    /*
+     *  CURRENT AVERAGES
+     */
+    func getDailyAverage() {
+        
+    }
+    
+    
+    
+    var settingsData:SettingsData = SettingsData()
+    
+    func getSetData() -> SettingsData {
+        return settingsData
+    }
+    
     
     
 
