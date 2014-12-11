@@ -13,139 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    var cData:cloudKitData = cloudKitData()
     
-    
-    var cigData:[CigaretteData] = []
-    
-    
-    
-    // created this method to return the mapdata
-    func getCigData() ->[CigaretteData] {
-        return cigData
-    }
-    
-    func getTotalCigCount() -> Int {
-        return cigData.count
-    }
-    
-    func addCig() -> NSDate {
-        cigData.append(CigaretteData(cig:NSDate()))
-        return NSDate()
-    }
-    
-    func getTimeSinceLast() -> NSTimeInterval {
-        var lastdate:NSDate! = cigData.last?.getCigDate()
-        return NSDate().timeIntervalSinceDate(lastdate)
-    }
-    
-    
-    /*
-     *  CURRRENT COUNTS
-     */
-    
-    func getTodayCount() -> Int {
-        var count = 0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
-        
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
-        
-        for var i = cigData.count - 1 ; i >= 0; i-- {
-            var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            if(todayComp.day == otherComp.day && todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
-                count++
-            }
-            else {
-                return count
-            }
-        }
-        return count
-    }
-    
-    func getWeekCount() -> Int {
-        var count = 0
-        
-        for var i = cigData.count - 1 ; i >= 0; i-- {
-            var thisDate:NSDate = cigData[i].getCigDate()
-            if(NSDate().timeIntervalSinceDate(thisDate) <= 604800) {//yes, that is the number of seconds in a week...
-                //apparently all the week functions for NSDate/Calendar are depricated..
-                count++
-            }
-            else {
-                return count
-            }
-        }
-        return count
-    }
-    
-    func getMonthCount() -> Int {
-        var count = 0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .MonthCalendarUnit | .YearCalendarUnit
-        
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
-        
-        for var i = cigData.count - 1 ; i >= 0; i-- {
-            var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            if( todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
-                count++
-            }
-            else {
-                return count
-            }
-        }
-        return count
-    }
-    
-    func getYearCount() -> Int {
-        var count = 0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .YearCalendarUnit
-        
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
-        
-        for var i = cigData.count - 1 ; i >= 0; i-- {
-            var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            if( todayComp.year == otherComp.year) {
-                count++
-            }
-            else {
-                return count
-            }
-        }
-        return count
-    }
-    
-    
-    
-    
-    /*
-     *  CURRENT TIME SPENT
-     */
-    func getDayTimeSpent() -> Int {
-        var count = getTodayCount()
-        return count * 5
-    }
-    
-    func getWeekTimeSpent() -> Int {
-        var count = getWeekCount()
-        return count * 5
-    }
-    
-    func getMonthTimeSpent() -> Int {
-        var count = getMonthCount()
-        return count * 5
+    func getCloudData() -> cloudKitData {
+        return cData
     }
     
     func getYearTimeSpent() -> Int {
-        var count = getYearCount()
-        return count * 5
+        var count = 0
+        return count
     }
     
     
@@ -160,64 +36,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      *  CURRENT AVERAGES
      */
     func getTodayAverage() -> Double {
+        
+        println("Start the Daily Average Function")
+        
         //Need to get the count of cigs in a each hour and divide it by the amount of hours where cigarettes have been smoked (JK)
-        var count:Int = 0
+        var count:Int = cData.dailyRecords.count
         var average:Double = 0.0
-        var hourCount:Double = 0.0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .HourCalendarUnit | .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
-        var hourLimit:Int = 0
+        var hourCount:Array = [Double]()
+        var inHourCount:Double = 0.0
+        var i:Int = 0
+        var endHour:NSTimeInterval = 7200
+        var beginHour:NSTimeInterval = 3600
         
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+        if (count == 0) {
+            println("There are no data elements in the database")
+        }
         
-        for var i = cigData.count - 1 ; i >= 0; i-- {
-            var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            hourLimit = 1
-            if(todayComp.day == otherComp.day && todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
-                if (todayComp.hour == otherComp.hour) {
-                    count++
-                    println("The Count is:")
-                    println(count)
-                        //if this hour has been indexed, wait to index until the  next hour. (JK)
-                    if (hourCount < Double(hourLimit)) {
-                        hourCount++
-                        println("The hour Count is:")
-                        println(hourCount)
-                        
-                    }
-                    if (hourLimit != Int(hourCount)) {
-                        hourLimit++
-                        println("The hour Limit is:")
-                        println(hourLimit)
-                    }
-                    //This will reset the hour counter when we go past a single day
-                    if (hourLimit > 24) {
-                        hourLimit = 0
-                    }
+        while (endHour <= 86400) {
+            for (i=0;i<=count;i++) {
+                //Get hour Count
+                if (cData.dailyRecords[i].date_NS.timeIntervalSinceNow > beginHour && cData.dailyRecords[i].date_NS.timeIntervalSinceNow < endHour) {
+                    inHourCount++
                 }
-            
-                 //This is the count per hour? Need to see data from more than one hour span. (JK)
-          //      println(hourCount)
-                
             }
-            else {
-                return hourCount
-            }
+            inHourCount = inHourCount/inHourCount
+            hourCount.append(inHourCount)
+            endHour += beginHour
+            beginHour += beginHour
         }
         
-        if (count != 0) {
-            var average = (Double(count)/(hourCount))
-            
-            return average
-        }
+        average = Double(count)/Double(hourCount.count)
+        
+        println("Ending the Daily Average Function")
+        
         return average
     }
     
     func getWeeklyAverage() ->Double {
         //Get the number cigs smoked within a week period, counting the number of days within the week that a cigg has been smoked.
-        var count:Int = 0
+   /*     var count:Int = 0
         var average:Double = 0.0
         var dayCount:Double = 0.0
         let today = NSDate()
@@ -257,12 +114,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return average
         }
-        return average
+        return average */
+        return 0.0
     }
   
     func getMonthlyAverage() ->Double {
         //Get the number cigs smoked within a month period, counting the number of weeks within the month that a cigg has been smoked.
-        var count:Int = 0
+    /*    var count:Int = 0
         var average:Double = 0.0
         var weekCount:Double = 0.0
         let today = NSDate()
@@ -305,12 +163,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return average
         }
-        return average
+        return average*/
+        return 0.0
     }
     
     func getYearlyAverage() ->Double {
         //Need to grab the amount of months cigs have been smoked and the amount of cigs
-        var count:Int = 0
+     /*   var count:Int = 0
         var average:Double = 0.0
         var monthCount:Double = 0.0
         let today = NSDate()
@@ -359,7 +218,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return average
         }
-        return average
+        return average */
+        return 0.0
     }
     
     
@@ -368,7 +228,144 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getSetData() -> SettingsData {
         return settingsData
     }
+
     
+//    var cigData:[CigaretteData] = []
+//    
+//    
+//    // created this method to return the mapdata
+//    func getCigData() ->[CigaretteData] {
+//        return cigData
+//    }
+//    
+//    func getTotalCigCount() -> Int {
+//        return cigData.count
+//    }
+//    
+//    func addCig() -> NSDate {
+//        cigData.append(CigaretteData(cig:NSDate()))
+//        return NSDate()
+//    }
+//    
+//    func getTimeSinceLast() -> NSTimeInterval {
+//        var lastdate:NSDate! = cigData.last?.getCigDate()
+//        return NSDate().timeIntervalSinceDate(lastdate)
+//    }
+//    
+//    
+//    
+//    /*
+//     *  CURRRENT COUNTS
+//     */
+//    func getTodayCount() -> Int {
+//        var count = 0
+//        
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            if(NSDate().timeIntervalSinceDate(thisDate) <= 86400) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
+//
+//    func getWeekCount() -> Int {
+//        var count = 0
+//        
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            if(NSDate().timeIntervalSinceDate(thisDate) <= 604800) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
+//    
+//    func getMonthCount() -> Int {
+//        var count = 0
+//    
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            if(NSDate().timeIntervalSinceDate(thisDate) <= 2629740) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
+//    
+//    func getYearCount() -> Int {
+//        var count = 0
+//        
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            if(NSDate().timeIntervalSinceDate(thisDate) <= 31556700) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
+//    
+//  
+//    
+//    
+//    /*
+//     *  CURRENT TIME SPENT
+//     */
+//    func getDayTimeSpent() -> Int {
+//        var count = getTodayCount()
+//        return count * 5
+//    }
+//    
+//    func getWeekTimeSpent() -> Int {
+//        var count = getWeekCount()
+//        return count * 5
+//    }
+//    
+//    func getMonthTimeSpent() -> Int {
+//        var count = getMonthCount()
+//        return count * 5
+//    }
+//    
+//    func getYearTimeSpent() -> Int {
+//        var count = getYearCount()
+//        return count * 5
+//    }
+//    
+//    
+//    
+//    /*
+//     *  CURRENT AVG TIME BTW
+//     */
+//    
+//    
+//    
+//    /*
+//     *  CURRENT AVERAGES
+//     */
+//    func getDailyAverage() {
+//        
+//    }
+//    
+//    
+//    
+//    var settingsData:SettingsData = SettingsData()
+//    
+//    func getSetData() -> SettingsData {
+//        return settingsData
+//    }
+//    
     
     
 
@@ -400,5 +397,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
+
+//    func getTodayCount() -> Int {
+//        var count = 0
+//        let today = NSDate()
+//        var calendar = NSCalendar.currentCalendar()
+//        let flags:NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
+//
+//        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+//
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
+//            if(todayComp.day == otherComp.day && todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
+
+
+//    func getMonthCount() -> Int {
+//        var count = 0
+//        let today = NSDate()
+//        var calendar = NSCalendar.currentCalendar()
+//        let flags:NSCalendarUnit = .MonthCalendarUnit | .YearCalendarUnit
+//
+//        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+//
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
+//            if( todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
+
+//    func getYearCount() -> Int {
+//        var count = 0
+//        let today = NSDate()
+//        var calendar = NSCalendar.currentCalendar()
+//        let flags:NSCalendarUnit = .YearCalendarUnit
+//
+//        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+//
+//        for var i = cigData.count - 1 ; i >= 0; i-- {
+//            var thisDate:NSDate = cigData[i].getCigDate()
+//            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
+//            if( todayComp.year == otherComp.year) {
+//                count++
+//            }
+//            else {
+//                return count
+//            }
+//        }
+//        return count
+//    }
+
+  

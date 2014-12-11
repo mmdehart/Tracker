@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fIC-n4-rLx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fIC-n4-rLx">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -223,6 +223,9 @@
                                 <rect key="frame" x="40" y="105" width="219" height="31"/>
                                 <connections>
                                     <action selector="numberChanged:" destination="GAt-Jt-HT5" eventType="valueChanged" id="jZj-Pl-hfy"/>
+                                    <action selector="sliderStopped:" destination="GAt-Jt-HT5" eventType="touchUpOutside" id="LIj-0A-KgI"/>
+                                    <action selector="sliderStopped:" destination="GAt-Jt-HT5" eventType="editingDidEnd" id="dzx-im-5em"/>
+                                    <action selector="sliderStopped:" destination="GAt-Jt-HT5" eventType="touchUpInside" id="ubZ-WD-p3X"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icn-1u-bQa">
@@ -353,7 +356,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:32:51" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94V-DJ-VOE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94V-DJ-VOE">
                                 <rect key="frame" x="66" y="250" width="188" height="69"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="58"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -370,9 +373,6 @@
                                 <state key="normal" title="edit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="MzN-xf-2uj" kind="push" id="zMw-p2-lhl"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVu-ur-pEu">
                                 <rect key="frame" x="112" y="399" width="96" height="32"/>
@@ -410,39 +410,11 @@
                         <outlet property="countLabel" destination="0pM-AR-fN5" id="uqW-Gw-k7S"/>
                         <outlet property="plusBtn" destination="nVu-ur-pEu" id="YNz-Yp-4Ae"/>
                         <outlet property="timeSince" destination="94V-DJ-VOE" id="aZV-lV-Jlg"/>
-                        <outlet property="todayDate" destination="nrk-wF-6Yj" id="72y-rt-ItI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bMT-kq-7G1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="322" y="-536"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="XoG-lF-nsf">
-            <objects>
-                <tableViewController id="MzN-xf-2uj" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kXR-ta-paa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tGw-Lx-FPu">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tGw-Lx-FPu" id="JOB-Jq-MwY">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="MzN-xf-2uj" id="Lf5-V6-g2y"/>
-                            <outlet property="delegate" destination="MzN-xf-2uj" id="Fns-Ww-SQm"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="9qC-m2-e0o"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eV9-yJ-ujA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="826" y="-536"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="wsx-PO-kdc">

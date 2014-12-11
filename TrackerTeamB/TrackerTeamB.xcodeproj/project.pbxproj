@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		5C247E121A0C823D008DA2BF /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E111A0C823D008DA2BF /* TodayViewController.swift */; };
 		5C247E141A0C8256008DA2BF /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E131A0C8256008DA2BF /* HistoryViewController.swift */; };
+		5C4F06941A3607550016477F /* cloudKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F06931A3607550016477F /* cloudKitData.swift */; };
+		5C4F06961A36416B0016477F /* sessionRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F06951A36416B0016477F /* sessionRec.swift */; };
+		5C4F06981A364BD70016477F /* dailyRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F06971A364BD70016477F /* dailyRec.swift */; };
+		5C4F069A1A364C290016477F /* monthlyRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F06991A364C290016477F /* monthlyRec.swift */; };
+		5C4F069C1A364C670016477F /* allRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F069B1A364C670016477F /* allRec.swift */; };
+		5C4F069E1A3693200016477F /* oldAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F069D1A3693200016477F /* oldAppDelegate.swift */; };
 		5C508C881A2E4127004A2B10 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C508C871A2E4127004A2B10 /* button.png */; };
 		5C508C8A1A2E7F31004A2B10 /* CigaretteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C508C891A2E7F31004A2B10 /* CigaretteData.swift */; };
 		5C508C8C1A2E7F4B004A2B10 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C508C8B1A2E7F4B004A2B10 /* SettingsData.swift */; };
@@ -37,6 +43,12 @@
 /* Begin PBXFileReference section */
 		5C247E111A0C823D008DA2BF /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5C247E131A0C8256008DA2BF /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		5C4F06931A3607550016477F /* cloudKitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloudKitData.swift; sourceTree = "<group>"; };
+		5C4F06951A36416B0016477F /* sessionRec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sessionRec.swift; sourceTree = "<group>"; };
+		5C4F06971A364BD70016477F /* dailyRec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dailyRec.swift; sourceTree = "<group>"; };
+		5C4F06991A364C290016477F /* monthlyRec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = monthlyRec.swift; sourceTree = "<group>"; };
+		5C4F069B1A364C670016477F /* allRec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allRec.swift; sourceTree = "<group>"; };
+		5C4F069D1A3693200016477F /* oldAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = oldAppDelegate.swift; sourceTree = "<group>"; };
 		5C508C871A2E4127004A2B10 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = ../button.png; sourceTree = "<group>"; };
 		5C508C891A2E7F31004A2B10 /* CigaretteData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CigaretteData.swift; sourceTree = "<group>"; };
 		5C508C8B1A2E7F4B004A2B10 /* SettingsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
@@ -106,8 +118,8 @@
 				5C247E131A0C8256008DA2BF /* HistoryViewController.swift */,
 				5CD279FC1A1EB9DF002D862F /* EditTableViewController.swift */,
 				5C89077F1A0C6B5000CAFECB /* AppDelegate.swift */,
-				5C8907861A0C6B5000CAFECB /* Images.xcassets */,
 				5C9C70951A31522F00778036 /* Main.storyboard */,
+				5C8907861A0C6B5000CAFECB /* Images.xcassets */,
 				5C8907881A0C6B5000CAFECB /* LaunchScreen.xib */,
 				5C89077D1A0C6B5000CAFECB /* Supporting Files */,
 			);
@@ -143,8 +155,11 @@
 		5C9C70941A31462B00778036 /* deprecated */ = {
 			isa = PBXGroup;
 			children = (
+				5C508C8B1A2E7F4B004A2B10 /* SettingsData.swift */,
+				5C508C891A2E7F31004A2B10 /* CigaretteData.swift */,
 				5CD27A021A1ECF86002D862F /* TrackerData.swift */,
 				5CBAAD8A1A1E7A5A00CDDBE9 /* TrackerDataX.swift */,
+				5C4F069D1A3693200016477F /* oldAppDelegate.swift */,
 			);
 			name = deprecated;
 			sourceTree = "<group>";
@@ -152,8 +167,11 @@
 		5CBAAD871A1E78A600CDDBE9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5C508C891A2E7F31004A2B10 /* CigaretteData.swift */,
-				5C508C8B1A2E7F4B004A2B10 /* SettingsData.swift */,
+				5C4F06931A3607550016477F /* cloudKitData.swift */,
+				5C4F06951A36416B0016477F /* sessionRec.swift */,
+				5C4F06971A364BD70016477F /* dailyRec.swift */,
+				5C4F06991A364C290016477F /* monthlyRec.swift */,
+				5C4F069B1A364C670016477F /* allRec.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -267,12 +285,18 @@
 			files = (
 				5C508C8A1A2E7F31004A2B10 /* CigaretteData.swift in Sources */,
 				5C8907801A0C6B5000CAFECB /* AppDelegate.swift in Sources */,
+				5C4F069A1A364C290016477F /* monthlyRec.swift in Sources */,
 				5CD279FD1A1EB9DF002D862F /* EditTableViewController.swift in Sources */,
+				5C4F069C1A364C670016477F /* allRec.swift in Sources */,
+				5C4F06961A36416B0016477F /* sessionRec.swift in Sources */,
 				5C247E121A0C823D008DA2BF /* TodayViewController.swift in Sources */,
+				5C4F06941A3607550016477F /* cloudKitData.swift in Sources */,
 				5C247E141A0C8256008DA2BF /* HistoryViewController.swift in Sources */,
 				5C508C8C1A2E7F4B004A2B10 /* SettingsData.swift in Sources */,
+				5C4F069E1A3693200016477F /* oldAppDelegate.swift in Sources */,
 				5C64EBCB1A130D8E00E123D0 /* SettingsViewController.swift in Sources */,
 				5CBAAD8B1A1E7A5A00CDDBE9 /* TrackerDataX.swift in Sources */,
+				5C4F06981A364BD70016477F /* dailyRec.swift in Sources */,
 				5CD27A031A1ECF86002D862F /* TrackerData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
