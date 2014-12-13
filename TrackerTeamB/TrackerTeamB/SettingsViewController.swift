@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SettingsViewController: UIViewController {
 
@@ -16,31 +17,32 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var yearlyEst: UILabel!
     @IBOutlet weak var monthlyEst: UILabel!
     
-    var appDelegate:AppDelegate!
+    var coreDataStack : CoreDataStack!
+    
+    var fetchRequest : NSFetchRequest!
+    var setVal: Settings!
+    
+//    var appDelegate:AppDelegate!
 //    var settings:SettingsData!
-    var model : cloudKitData!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        model = appDelegate.getCloudData()
+//        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         // get the mapdata
 //        settings = appDelegate.getSetData()
-
-        if(model.maxGoal > 0) {
+        fetchRequest = NSFetchRequest(entityName: "Settings")
+//        fetchRequest.fetchLimit = 1
         
-            maxSlider.value = Float(model.maxGoal)
-            maxNumber.text = "\(model.maxGoal)"
-            weeklyEst.text = "\(model.maxGoal * 7) cigarettes"
-            monthlyEst.text = "\(model.maxGoal * 30) cigarettes"
-            yearlyEst.text = "\(model.maxGoal * 365) cigarettes"
-        maxSlider.value = Float(model.maxGoal)
-//        maxNumber.text = "\(settings.getDailyMax())"
-//        weeklyEst.text = "\(settings.getWeeklyMax()) cigarettes"
-//        monthlyEst.text = "\(settings.getMonthlyMax()) cigarettes"
-//        yearlyEst.text = "\(settings.getYearlyMax()) cigarettes"
-        }
+        fetchAndReload()
+
+            maxSlider.value = Float(setVal.dailyMax)
+            maxNumber.text = "\(setVal.dailyMax)"
+            weeklyEst.text = "\(Int(setVal.dailyMax) * 7) cigarettes"
+            monthlyEst.text = "\(Int(setVal.dailyMax) * 30) cigarettes"
+            yearlyEst.text = "\(Int(setVal.dailyMax) * 365) cigarettes"
+        
+//        }
 //        settings.dailyMax = intValue
         // Do any additional setup after loading the view.
     }
@@ -65,9 +67,21 @@ class SettingsViewController: UIViewController {
 //         self.settings.dailyMax = intValue
     }
 
-   @IBAction func sliderStopped(sender: UISlider) {
-        model.saveGoal(Int(sender.value))
-   }
+    func fetchAndReload() {
+        var error:NSError?
+        let results = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [Settings]?
+//        results. ./setFetchLimit:1
+        if let fetchedResults = results {
+            setVal = fetchedResults[0]
+            
+            
+        } else {
+            println("Could not fetch \(error), \(error!.userInfo)")
+        }
+        
+//        maxSlider.value = Float(setVal)
+    }
+
     /*
     // MARK: - Navigation
 

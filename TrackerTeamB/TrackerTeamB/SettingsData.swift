@@ -7,28 +7,30 @@
 //
 
 import Foundation
-import UIKit
+import CoreData
 
-class SettingsData : NSObject {
-    var dailyMax:Int
+class SettingsData : NSManagedObject {
+    @NSManaged var dailyMax : Int
     
-    override init() {
-        self.dailyMax = 5
-    }
-    
-    func getDailyMax() -> Int {
-        return dailyMax
-    }
-    
-    func getWeeklyMax() ->Int {
-        return dailyMax * 7
-    }
-    
-    func getMonthlyMax() -> Int {
-        return dailyMax * 30
-    }
-    
-    func getYearlyMax() -> Int {
-        return dailyMax * 365
-    }
+//    var dailyMax:Int
+//    
+//    override init() {
+//        self.dailyMax = 5
+//    }
+//    
+//    func getDailyMax() -> Int {
+//        return dailyMax
+//    }
+//    
+//    func getWeeklyMax() ->Int {
+//        return dailyMax * 7
+//    }
+//    
+//    func getMonthlyMax() -> Int {
+//        return dailyMax * 30
+//    }
+//    
+//    func getYearlyMax() -> Int {
+//        return dailyMax * 365
+//    }
 }
