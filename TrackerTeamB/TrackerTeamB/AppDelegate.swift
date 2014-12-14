@@ -62,8 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             inHourCount = inHourCount/inHourCount
             hourCount.append(inHourCount)
-            endHour += beginHour
-            beginHour += beginHour
+            beginHour += endHour
+            endHour += endHour
         }
         
         average = Double(count)/Double(hourCount.count)
@@ -100,8 +100,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             inDayCount = inDayCount/inDayCount
             dayCount.append(inDayCount)
-            endDay += beginDay
-            beginDay += beginDay
+            beginDay += endDay
+            endDay += endDay
         }
         
         average = Double(count)/Double(dayCount.count)
@@ -138,8 +138,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             inWeekCount = inWeekCount/inWeekCount
             weekCount.append(inWeekCount)
-            endWeek += beginWeek
-            beginWeek += beginWeek
+            beginWeek += endWeek
+            endWeek += endWeek
         }
         
         average = Double(count)/Double(weekCount.count)
@@ -176,8 +176,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             inMonthCount = inMonthCount/inMonthCount
             monthCount.append(inMonthCount)
-            endMonth += beginMonth
-            beginMonth += beginMonth
+            beginMonth += endMonth
+            endMonth += endMonth
         }
         
         average = Double(count)/Double(monthCount.count)
@@ -194,7 +194,156 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getSetData() -> SettingsData {
         return settingsData
     }
-
+    
+    func getTodayMax() ->Int {
+        
+        var count:Int = cData.dailyRecords.count
+        var beginHour:NSTimeInterval = 0
+        var endHour:NSTimeInterval = 3600
+        var inHourCount:Int = 0
+        var max:Int = 0
+        while (endHour <= 86400) {
+            max = getMax(beginHour, end: endHour, count: count, maxCount: max)
+            beginHour += endHour
+            endHour += endHour
+        }
+        
+        return max
+    }
+    
+    func getTodayLow() ->Int {
+        var count:Int = cData.dailyRecords.count
+        var beginHour:NSTimeInterval = 0
+        var endHour:NSTimeInterval = 3600
+        var inHourCount:Int = 0
+        var low:Int = 0
+        while (endHour <= 86400) {
+            low = getLow(beginHour, end: endHour, count: count, lowCount: low)
+            beginHour += endHour
+            endHour += endHour
+        }
+        return low
+    }
+    
+    func getWeeklyMax() ->Int {
+        
+        var count:Int = cData.dailyRecords.count
+        var beginDay:NSTimeInterval = 0
+        var endDay:NSTimeInterval = 86400
+        var inDayCount:Int = 0
+        var max:Int = 0
+        while (endDay <= 604800) {
+            max = getMax(beginDay, end: endDay, count: count, maxCount: max)
+            beginDay += endDay
+            endDay += endDay
+        }
+        
+        return max
+    }
+    
+    func getWeeklyLow() ->Int {
+        var count:Int = cData.dailyRecords.count
+        var beginDay:NSTimeInterval = 0
+        var endDay:NSTimeInterval = 86400
+        var inDayCount:Int = 0
+        var low:Int = 0
+        while (endDay <= 604800) {
+            low = getLow(beginDay, end: endDay, count: count, lowCount: low)
+            beginDay += endDay
+            endDay += endDay
+        }
+        return low
+    }
+    
+    func getMonthlyMax() ->Int {
+        var count:Int = cData.monthlyRecords.count
+        var beginWeek:NSTimeInterval = 0
+        var endWeek:NSTimeInterval = 604800
+        var inWeekCount:Int = 0
+        var max:Int = 0
+        var newMax:Int = max
+        while (endWeek <= 2629740)  {
+            max = getMax(beginWeek, end: endWeek, count: count, maxCount: max)
+            beginWeek += endWeek
+            endWeek += endWeek
+        }
+        return max
+    }
+    
+    func getMonthlyLow() ->Int {
+        var count:Int = cData.dailyRecords.count
+        var beginWeek:NSTimeInterval = 0
+        var endWeek:NSTimeInterval = 604800
+        var inWeekCount:Int = 0
+        var low:Int = 0
+        while (endWeek <= 2629740) {
+            low = getLow(beginWeek, end: endWeek, count: count, lowCount: low)
+            beginWeek += endWeek
+            endWeek += endWeek
+        }
+        return low
+    }
+    
+    func getYearlyMax() ->Int {
+        var count:Int = cData.monthlyRecords.count
+        var beginMonth:NSTimeInterval = 0
+        var endMonth:NSTimeInterval = 2629740
+        var inMonthCount:Int = 0
+        var max:Int = 0
+        var newMax:Int = max
+        while (endMonth <= 31560000)  {
+            max = getMax(beginMonth, end: endMonth, count: count, maxCount: max)
+            beginMonth += endMonth
+            endMonth += endMonth
+        }
+        return max
+    }
+    
+    func getYearlyLow() ->Int {
+        var count:Int = cData.dailyRecords.count
+        var beginMonth:NSTimeInterval = 0
+        var endMonth:NSTimeInterval = 604800
+        var inWeekCount:Int = 0
+        var low:Int = 0
+        while (endMonth <= 31560000) {
+            low = getLow(beginMonth, end: endMonth, count: count, lowCount: low)
+            beginMonth += endMonth
+            endMonth += endMonth
+        }
+        return low
+    }
+    
+    func getMax(begin:NSTimeInterval, end:NSTimeInterval, count:Int, maxCount:Int) ->Int {
+        var i:Int = 0
+        var max:Int = maxCount
+        var timeFrameCount:Int = 0
+        
+        for (i=0;i<count;i++) {
+            if (cData.allRecords[i].date_NS.timeIntervalSinceNow > begin && cData.allRecords[i].date_NS.timeIntervalSinceNow < end) {
+                timeFrameCount++
+            }
+            if (timeFrameCount > max) {
+                max = timeFrameCount
+            }
+        }
+    return max
+    }
+    
+    func getLow(begin:NSTimeInterval, end:NSTimeInterval, count:Int, lowCount:Int) ->Int {
+        var i:Int = 0
+        var low:Int = lowCount
+        var timeFrameCount:Int = 0
+        
+        for (i=0;i<count;i++) {
+            if (cData.allRecords[i].date_NS.timeIntervalSinceNow > begin && cData.allRecords[i].date_NS.timeIntervalSinceNow < end) {
+                timeFrameCount++
+            }
+            if (timeFrameCount < low) {
+                low = timeFrameCount
+            }
+        }
+        return low
+    }
     
 //    var cigData:[CigaretteData] = []
 //    

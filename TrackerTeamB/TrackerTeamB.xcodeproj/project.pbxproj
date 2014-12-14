@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		100244431A3D0D6B0094B026 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100244421A3D0D6B0094B026 /* CoreData.framework */; };
 		5C247E121A0C823D008DA2BF /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E111A0C823D008DA2BF /* TodayViewController.swift */; };
 		5C247E141A0C8256008DA2BF /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E131A0C8256008DA2BF /* HistoryViewController.swift */; };
 		5C4F06941A3607550016477F /* cloudKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F06931A3607550016477F /* cloudKitData.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		100244421A3D0D6B0094B026 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5C247E111A0C823D008DA2BF /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5C247E131A0C8256008DA2BF /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		5C4F06931A3607550016477F /* cloudKitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloudKitData.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				100244431A3D0D6B0094B026 /* CoreData.framework in Frameworks */,
 				5C8907A11A0C6BC900CAFECB /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +94,7 @@
 		5C8907711A0C6B4F00CAFECB = {
 			isa = PBXGroup;
 			children = (
+				100244421A3D0D6B0094B026 /* CoreData.framework */,
 				5C8907A01A0C6BC900CAFECB /* CloudKit.framework */,
 				5C89077C1A0C6B5000CAFECB /* TrackerTeamB */,
 				5C8907921A0C6B5000CAFECB /* TrackerTeamBTests */,

@@ -58,7 +58,9 @@ class HistoryViewController: UIViewController {
             textLabel.text = "Today's Total"
             graphLabel.text = "Hourly"
             averageLabel.text = "Daily Average"
+            recordHigh.text = "\(appDelegate.getTodayMax())"
             avgAmtLabel.text = "\(appDelegate.getTodayAverage())"
+            recordLow.text = "\(appDelegate.getTodayLow())"
             maxLabel.text = "\(model.maxGoal)"
             histCount.text = "\(model.dailyRecords.count + model.sessionRecords.count)"
 
@@ -66,7 +68,9 @@ class HistoryViewController: UIViewController {
             textLabel.text = "This Week"
             graphLabel.text = "Daily"
             averageLabel.text = "Weekly Average"
+            recordHigh.text = "\(appDelegate.getWeeklyMax())"
             avgAmtLabel.text = "\(appDelegate.getWeeklyAverage())"
+            recordLow.text = "\(appDelegate.getWeeklyLow())"
             maxLabel.text = "\(model.maxGoal * 7)"
 
 
@@ -74,6 +78,9 @@ class HistoryViewController: UIViewController {
             textLabel.text = "This Month"
             graphLabel.text = "Weekly"
             averageLabel.text = "Monthly Average"
+            recordHigh.text = "\(appDelegate.getMonthlyMax())"
+            avgAmtLabel.text = "\(appDelegate.getMonthlyAverage())"
+            recordLow.text = "\(appDelegate.getMonthlyLow())"
             maxLabel.text = "\(model.maxGoal * 30)"
 
 
@@ -81,6 +88,9 @@ class HistoryViewController: UIViewController {
             textLabel.text = "This Year"
             graphLabel.text = "Monthly"
             averageLabel.text = "Yearly Average"
+            recordHigh.text = "\(appDelegate.getYearlyMax())"
+            avgAmtLabel.text = "\(appDelegate.getYearlyAverage())"
+            recordLow.text = "\(appDelegate.getYearlyLow())"
             maxLabel.text = "\(model.maxGoal * 365)"
 
 
