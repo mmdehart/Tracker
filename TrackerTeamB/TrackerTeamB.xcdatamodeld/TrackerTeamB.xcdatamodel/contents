@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CigaretteLog" representedClassName="TrackerTeamB.CigaretteLog" syncable="YES">
+        <attribute name="cigDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="day" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="month" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Settings" representedClassName="TrackerTeamB.Settings" syncable="YES">
+        <attribute name="dailyMax" attributeType="Integer 16" defaultValueString="5" syncable="YES"/>
+    </entity>
+    <fetchRequest name="FetchRequest" entity="Settings" predicateString="FALSEPREDICATE"/>
+    <elements>
+        <element name="CigaretteLog" positionX="-54" positionY="0" width="128" height="103"/>
+        <element name="Settings" positionX="-63" positionY="-18" width="128" height="60"/>
+    </elements>
+</model>

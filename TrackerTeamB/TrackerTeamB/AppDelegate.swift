@@ -7,374 +7,160 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+//    lazy var coreDataStack = CoreDataStack()
     
-    var cData:cloudKitData = cloudKitData()
     
-    func getCloudData() -> cloudKitData {
-        return cData
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+//        let tabController = window!.rootViewController as UITabBarController
+//        
+//        let todayViewControl = tabController.viewControllers![0] as TodayViewController
+//        todayViewControl.coreDataStack = coreDataStack
+//        
+//        let histViewControl = tabController.viewControllers![1] as HistoryViewController
+//        histViewControl.coreDataStack = coreDataStack
+//        
+//        let setViewControl = tabController.viewControllers![2] as SettingsViewController
+//        setViewControl.coreDataStack = coreDataStack
+        
+//        let viewController = navController.topViewController as TodayViewController
+        
+//        viewController.managedContext = coreDataStack.context
+        
+        // Override point for customization after application launch.
+        return true
     }
     
-    func getYearTimeSpent() -> Int {
-        var count = 0
-        return count
+    func applicationWillResignActive(application: UIApplication) {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
     
-    
-    
-    /*
-     *  CURRENT AVG TIME BTW
-     */
-    
-    
-    
-    /*
-     *  CURRENT AVERAGES
-     */
-    func getTodayAverage() -> Double {
-        
-        println("Start the Daily Average Function")
-        
-        //Need to get the count of cigs in a each hour and divide it by the amount of hours where cigarettes have been smoked (JK)
-        var count:Int = cData.dailyRecords.count
-        var average:Double = 0.0
-        var hourCount:Array = [Double]()
-        var inHourCount:Double = 0.0
-        var i:Int = 0
-        var endHour:NSTimeInterval = 3600
-        var beginHour:NSTimeInterval = 0
-        
-        if (count == 0) {
-            println("There are no data elements in the database")
-            return 0.0
-        }
-        
-        while (endHour <= 86400) {
-            for (i=0;i<=count;i++) {
-                //Get hour Count
-                if (cData.dailyRecords[i].date_NS.timeIntervalSinceNow > beginHour && cData.dailyRecords[i].date_NS.timeIntervalSinceNow < endHour) {
-                    inHourCount++
-                }
-            }
-            inHourCount = inHourCount/inHourCount
-            hourCount.append(inHourCount)
-            beginHour += endHour
-            endHour += endHour
-        }
-        
-        average = Double(count)/Double(hourCount.count)
-        
-        println("Ending the Daily Average Function")
-        
-        return average
+    func applicationDidEnterBackground(application: UIApplication) {
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//        coreDataStack.saveContext()
     }
     
-    func getWeeklyAverage() ->Double {
-        //Get the number cigs smoked within a week period, counting the number of days within the week that a cigg has been smoked.
-        
-        println("Starting the Weekly Average Function")
-        
-        var count:Int = cData.monthlyRecords.count
-        var average:Double = 0.0
-        var dayCount:Array = [Double]()
-        var inDayCount:Double = 0.0
-        var i:Int = 0
-        var endDay:NSTimeInterval = 86400
-        var beginDay:NSTimeInterval = 0
-        
-        if (count == 0) {
-            println("There are no data elements in the database")
-            return 0.0
-        }
-        
-        while (endDay <= 604800) {
-            for (i=0;i<=count;i++) {
-                //Get hour Count
-                if (cData.dailyRecords[i].date_NS.timeIntervalSinceNow > beginDay && cData.dailyRecords[i].date_NS.timeIntervalSinceNow < endDay) {
-                    inDayCount++
-                }
-            }
-            inDayCount = inDayCount/inDayCount
-            dayCount.append(inDayCount)
-            beginDay += endDay
-            endDay += endDay
-        }
-        
-        average = Double(count)/Double(dayCount.count)
-        
-        println("Ending the Weekly Average Function")
-        
+    func applicationWillEnterForeground(application: UIApplication) {
+        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    }
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    }
+    
+    func applicationWillTerminate(application: UIApplication) {
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        // Saves changes in the application's managed object context before the application terminates.
+//        self.saveContext()
+//        coreDataStack.saveContext()
+    }
+    
+    // MARK: - Core Data stack
+    
+//    lazy var applicationDocumentsDirectory: NSURL = {
+//        // The directory the application uses to store the Core Data store file. This code uses a directory named "edu.missouri.CoreDataTest" in the application's documents Application Support directory.
+//        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+//        return urls[urls.count-1] as NSURL
+//        }()
+//    
+//    lazy var managedObjectModel: NSManagedObjectModel = {
+//        // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
+//        let modelURL = NSBundle.mainBundle().URLForResource("TrackerTeamB", withExtension: "momd")!
+//        return NSManagedObjectModel(contentsOfURL: modelURL)!
+//        }()
+//    
+//    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+//        // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
+//        // Create the coordinator and store
+//        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+//        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("TrackerTeamB")
+//        var error: NSError? = nil
+//        var failureReason = "There was an error creating or loading the application's saved data."
+//        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+//            coordinator = nil
+//            // Report any error we got.
+//            let dict = NSMutableDictionary()
+//            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+//            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+//            dict[NSUnderlyingErrorKey] = error
+//            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+//            // Replace this with code to handle the error appropriately.
+//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            NSLog("Unresolved error \(error), \(error!.userInfo)")
+//            abort()
+//        }
+//        
+//        return coordinator
+//    }()
+//    
+//    lazy var managedObjectContext: NSManagedObjectContext? = {
+//        // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
+//        let coordinator = self.persistentStoreCoordinator
+//        if coordinator == nil {
+//            return nil
+//        }
+//        var managedObjectContext = NSManagedObjectContext()
+//        managedObjectContext.persistentStoreCoordinator = coordinator
+//        return managedObjectContext
+//    }()
+//    
+//    // MARK: - Core Data Saving support
+//    
+//    func saveContext () {
+//        if let moc = self.managedObjectContext {
+//            var error: NSError? = nil
+//            if moc.hasChanges && !moc.save(&error) {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                NSLog("Unresolved error \(error), \(error!.userInfo)")
+//                abort()
+//            }
+//        }
+//    }
 
-        return average
-    }
-  
-    func getMonthlyAverage() ->Double {
-        //Get the number cigs smoked within a month period, counting the number of weeks within the month that a cigg has been smoked.
-        println("Starting the Monthly Average Function")
-        
-        var count:Int = cData.monthlyRecords.count
-        var average:Double = 0.0
-        var weekCount:Array = [Double]()
-        var inWeekCount:Double = 0.0
-        var i:Int = 0
-        var endWeek:NSTimeInterval = 604800
-        var beginWeek:NSTimeInterval = 0
-        
-        if (count == 0) {
-            println("There are no data elements in the database")
-            return 0.0
-        }
-        
-        while (endWeek <= 2629740) {
-            for (i=0;i<=count;i++) {
-                //Get hour Count
-                if (cData.dailyRecords[i].date_NS.timeIntervalSinceNow > beginWeek && cData.dailyRecords[i].date_NS.timeIntervalSinceNow < endWeek) {
-                    inWeekCount++
-                }
-            }
-            inWeekCount = inWeekCount/inWeekCount
-            weekCount.append(inWeekCount)
-            beginWeek += endWeek
-            endWeek += endWeek
-        }
-        
-        average = Double(count)/Double(weekCount.count)
-        
-        println("Ending the Monthly Average Function")
-        
-        
-        return average
-    }
-    
-    func getYearlyAverage() ->Double {
-        //Need to grab the amount of months cigs have been smoked and the amount of cigs
-        println("Starting the Yearly Average Function")
-        //Need to get the dates from the data source.
-        var count:Int = cData.monthlyRecords.count
-        var average:Double = 0.0
-        var monthCount:Array = [Double]()
-        var inMonthCount:Double = 0.0
-        var i:Int = 0
-        var endMonth:NSTimeInterval = 2629740
-        var beginMonth:NSTimeInterval = 0
-        
-        if (count == 0) {
-            println("There are no data elements in the database")
-            return 0.0
-        }
-        
-        while (endMonth <= 31560000) {
-            for (i=0;i<=count;i++) {
-                //Get hour Count
-                if (cData.dailyRecords[i].date_NS.timeIntervalSinceNow > beginMonth && cData.dailyRecords[i].date_NS.timeIntervalSinceNow < endMonth) {
-                    inMonthCount++
-                }
-            }
-            inMonthCount = inMonthCount/inMonthCount
-            monthCount.append(inMonthCount)
-            beginMonth += endMonth
-            endMonth += endMonth
-        }
-        
-        average = Double(count)/Double(monthCount.count)
-        
-        println("Ending the Yearly Average Function")
-        
-        
-        return average
-    }
-    
-    
-    var settingsData:SettingsData = SettingsData()
-    
-    func getSetData() -> SettingsData {
-        return settingsData
-    }
-    
-    func getTodayMax() ->Int {
-        
-        var count:Int = cData.dailyRecords.count
-        var beginHour:NSTimeInterval = 0
-        var endHour:NSTimeInterval = 3600
-        var inHourCount:Int = 0
-        var max:Int = 0
-        while (endHour <= 86400) {
-            max = getMax(beginHour, end: endHour, count: count, maxCount: max)
-            beginHour += endHour
-            endHour += endHour
-        }
-        
-        return max
-    }
-    
-    func getTodayLow() ->Int {
-        var count:Int = cData.dailyRecords.count
-        var beginHour:NSTimeInterval = 0
-        var endHour:NSTimeInterval = 3600
-        var inHourCount:Int = 0
-        var low:Int = 0
-        while (endHour <= 86400) {
-            low = getLow(beginHour, end: endHour, count: count, lowCount: low)
-            beginHour += endHour
-            endHour += endHour
-        }
-        return low
-    }
-    
-    func getWeeklyMax() ->Int {
-        
-        var count:Int = cData.dailyRecords.count
-        var beginDay:NSTimeInterval = 0
-        var endDay:NSTimeInterval = 86400
-        var inDayCount:Int = 0
-        var max:Int = 0
-        while (endDay <= 604800) {
-            max = getMax(beginDay, end: endDay, count: count, maxCount: max)
-            beginDay += endDay
-            endDay += endDay
-        }
-        
-        return max
-    }
-    
-    func getWeeklyLow() ->Int {
-        var count:Int = cData.dailyRecords.count
-        var beginDay:NSTimeInterval = 0
-        var endDay:NSTimeInterval = 86400
-        var inDayCount:Int = 0
-        var low:Int = 0
-        while (endDay <= 604800) {
-            low = getLow(beginDay, end: endDay, count: count, lowCount: low)
-            beginDay += endDay
-            endDay += endDay
-        }
-        return low
-    }
-    
-    func getMonthlyMax() ->Int {
-        var count:Int = cData.monthlyRecords.count
-        var beginWeek:NSTimeInterval = 0
-        var endWeek:NSTimeInterval = 604800
-        var inWeekCount:Int = 0
-        var max:Int = 0
-        var newMax:Int = max
-        while (endWeek <= 2629740)  {
-            max = getMax(beginWeek, end: endWeek, count: count, maxCount: max)
-            beginWeek += endWeek
-            endWeek += endWeek
-        }
-        return max
-    }
-    
-    func getMonthlyLow() ->Int {
-        var count:Int = cData.dailyRecords.count
-        var beginWeek:NSTimeInterval = 0
-        var endWeek:NSTimeInterval = 604800
-        var inWeekCount:Int = 0
-        var low:Int = 0
-        while (endWeek <= 2629740) {
-            low = getLow(beginWeek, end: endWeek, count: count, lowCount: low)
-            beginWeek += endWeek
-            endWeek += endWeek
-        }
-        return low
-    }
-    
-    func getYearlyMax() ->Int {
-        var count:Int = cData.monthlyRecords.count
-        var beginMonth:NSTimeInterval = 0
-        var endMonth:NSTimeInterval = 2629740
-        var inMonthCount:Int = 0
-        var max:Int = 0
-        var newMax:Int = max
-        while (endMonth <= 31560000)  {
-            max = getMax(beginMonth, end: endMonth, count: count, maxCount: max)
-            beginMonth += endMonth
-            endMonth += endMonth
-        }
-        return max
-    }
-    
-    func getYearlyLow() ->Int {
-        var count:Int = cData.dailyRecords.count
-        var beginMonth:NSTimeInterval = 0
-        var endMonth:NSTimeInterval = 604800
-        var inWeekCount:Int = 0
-        var low:Int = 0
-        while (endMonth <= 31560000) {
-            low = getLow(beginMonth, end: endMonth, count: count, lowCount: low)
-            beginMonth += endMonth
-            endMonth += endMonth
-        }
-        return low
-    }
-    
-    func getMax(begin:NSTimeInterval, end:NSTimeInterval, count:Int, maxCount:Int) ->Int {
-        var i:Int = 0
-        var max:Int = maxCount
-        var timeFrameCount:Int = 0
-        
-        for (i=0;i<count;i++) {
-            if (cData.allRecords[i].date_NS.timeIntervalSinceNow > begin && cData.allRecords[i].date_NS.timeIntervalSinceNow < end) {
-                timeFrameCount++
-            }
-            if (timeFrameCount > max) {
-                max = timeFrameCount
-            }
-        }
-    return max
-    }
-    
-    func getLow(begin:NSTimeInterval, end:NSTimeInterval, count:Int, lowCount:Int) ->Int {
-        var i:Int = 0
-        var low:Int = lowCount
-        var timeFrameCount:Int = 0
-        
-        for (i=0;i<count;i++) {
-            if (cData.allRecords[i].date_NS.timeIntervalSinceNow > begin && cData.allRecords[i].date_NS.timeIntervalSinceNow < end) {
-                timeFrameCount++
-            }
-            if (timeFrameCount < low) {
-                low = timeFrameCount
-            }
-        }
-        return low
-    }
-    
+}
+
+
+
+
+
 //    var cigData:[CigaretteData] = []
-//    
-//    
+//
+//
 //    // created this method to return the mapdata
 //    func getCigData() ->[CigaretteData] {
 //        return cigData
 //    }
-//    
+//
 //    func getTotalCigCount() -> Int {
 //        return cigData.count
 //    }
-//    
+//
 //    func addCig() -> NSDate {
 //        cigData.append(CigaretteData(cig:NSDate()))
 //        return NSDate()
 //    }
-//    
+//
 //    func getTimeSinceLast() -> NSTimeInterval {
 //        var lastdate:NSDate! = cigData.last?.getCigDate()
 //        return NSDate().timeIntervalSinceDate(lastdate)
 //    }
-//    
-//    
-//    
+//
+//
+//
 //    /*
 //     *  CURRRENT COUNTS
 //     */
 //    func getTodayCount() -> Int {
 //        var count = 0
-//        
+//
 //        for var i = cigData.count - 1 ; i >= 0; i-- {
 //            var thisDate:NSDate = cigData[i].getCigDate()
 //            if(NSDate().timeIntervalSinceDate(thisDate) <= 86400) {
@@ -389,7 +175,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //    func getWeekCount() -> Int {
 //        var count = 0
-//        
+//
 //        for var i = cigData.count - 1 ; i >= 0; i-- {
 //            var thisDate:NSDate = cigData[i].getCigDate()
 //            if(NSDate().timeIntervalSinceDate(thisDate) <= 604800) {
@@ -401,10 +187,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 //        return count
 //    }
-//    
+//
 //    func getMonthCount() -> Int {
 //        var count = 0
-//    
+//
 //        for var i = cigData.count - 1 ; i >= 0; i-- {
 //            var thisDate:NSDate = cigData[i].getCigDate()
 //            if(NSDate().timeIntervalSinceDate(thisDate) <= 2629740) {
@@ -416,10 +202,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 //        return count
 //    }
-//    
+//
 //    func getYearCount() -> Int {
 //        var count = 0
-//        
+//
 //        for var i = cigData.count - 1 ; i >= 0; i-- {
 //            var thisDate:NSDate = cigData[i].getCigDate()
 //            if(NSDate().timeIntervalSinceDate(thisDate) <= 31556700) {
@@ -431,10 +217,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 //        return count
 //    }
-//    
-//  
-//    
-//    
+//
+//
+//
+//
 //    /*
 //     *  CURRENT TIME SPENT
 //     */
@@ -442,77 +228,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        var count = getTodayCount()
 //        return count * 5
 //    }
-//    
+//
 //    func getWeekTimeSpent() -> Int {
 //        var count = getWeekCount()
 //        return count * 5
 //    }
-//    
+//
 //    func getMonthTimeSpent() -> Int {
 //        var count = getMonthCount()
 //        return count * 5
 //    }
-//    
+//
 //    func getYearTimeSpent() -> Int {
 //        var count = getYearCount()
 //        return count * 5
 //    }
-//    
-//    
-//    
+//
+//
+//
 //    /*
 //     *  CURRENT AVG TIME BTW
 //     */
-//    
-//    
-//    
+//
+//
+//
 //    /*
 //     *  CURRENT AVERAGES
 //     */
 //    func getDailyAverage() {
-//        
+//
 //    }
-//    
-//    
-//    
+//
+//
+//
 //    var settingsData:SettingsData = SettingsData()
-//    
+//
 //    func getSetData() -> SettingsData {
 //        return settingsData
 //    }
-//    
-    
-    
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
-    }
 
-    func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-}
 
 //    func getTodayCount() -> Int {
 //        var count = 0

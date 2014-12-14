@@ -16,27 +16,26 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var yearlyEst: UILabel!
     @IBOutlet weak var monthlyEst: UILabel!
     
-    var appDelegate:AppDelegate!
-//    var settings:SettingsData!
-    var model : cloudKitData!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        model = appDelegate.getCloudData()
-        // get the mapdata
-//        settings = appDelegate.getSetData()
-
-        if(model.maxGoal > 0) {
-            maxSlider.value = Float(model.maxGoal)
-            maxNumber.text = "\(model.maxGoal)"
-            weeklyEst.text = "\(model.maxGoal * 7) cigarettes"
-            monthlyEst.text = "\(model.maxGoal * 30) cigarettes"
-            yearlyEst.text = "\(model.maxGoal * 365) cigarettes"
+        
+        var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let settings = defaults.integerForKey("dailyMax") as Int? {
+            let num = defaults.integerForKey("dailyMax")
+            self.maxNumber.text = "\(num)"
+            self.maxSlider.value = Float(num)
+            self.weeklyEst.text = "\(num * 7) cigarettes"
+            self.monthlyEst.text = "\(num * 30) cigarettes"
+            self.yearlyEst.text = "\(num * 365) cigarettes"
+        } else {
+            maxNumber.text = "5"
+            weeklyEst.text = "35 cigarettes"
+            monthlyEst.text = "150 cigarettes"
+            yearlyEst.text = "1825 cigarettes"
         }
-//        settings.dailyMax = intValue
-        // Do any additional setup after loading the view.
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,17 +50,18 @@ class SettingsViewController: UIViewController {
         monthlyEst.text = "\(intValue*30) cigarettes"
         yearlyEst.text = "\(intValue*365) cigarettes"
         
-        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
-        // get the mapdata
-//        settings = appDelegate.getSetData()
+        defaults.setInteger(intValue, forKey: "dailyMax")
         
-//        settings.dailyMax = intValue
+        defaults.synchronize()
+        
     }
 
-    @IBAction func sliderStopped(sender: UISlider) {
-        model.saveGoal(Int(sender.value))
-    }
+
+
+    
+    
     /*
     // MARK: - Navigation
 

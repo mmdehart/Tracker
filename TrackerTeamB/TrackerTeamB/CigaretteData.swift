@@ -6,20 +6,18 @@
 //  Copyright (c) 2014 Madison DeHart. All rights reserved.
 //
 
-import Foundation
-import UIKit
-
-class CigaretteData : NSObject {
-    var cigDate : NSDate?
-    
-    init(cig:NSDate) {
-        self.cigDate = cig
-    }
-    
-    
-    
-    func getCigDate() ->NSDate {
-        return cigDate!
-    }
-    
-}
+//import Foundation
+//import UIKit
+//
+//class CigaretteData : NSObject {
+//    var cigDate : NSDate?
+//    
+//    init(cig:NSDate) {
+//        self.cigDate = cig
+//    }
+//    
+//    func getCigDate() ->NSDate {
+//        return cigDate!
+//    }
+//    
+//}
