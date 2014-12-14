@@ -13,20 +13,20 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    lazy var coreDataStack = CoreDataStack()
+//    lazy var coreDataStack = CoreDataStack()
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let tabController = window!.rootViewController as UITabBarController
-        
-        let todayViewControl = tabController.viewControllers![0] as TodayViewController
-        todayViewControl.coreDataStack = coreDataStack
-        
-        let histViewControl = tabController.viewControllers![1] as HistoryViewController
-        histViewControl.coreDataStack = coreDataStack
-        
-        let setViewControl = tabController.viewControllers![2] as SettingsViewController
-        setViewControl.coreDataStack = coreDataStack
+//        let tabController = window!.rootViewController as UITabBarController
+//        
+//        let todayViewControl = tabController.viewControllers![0] as TodayViewController
+//        todayViewControl.coreDataStack = coreDataStack
+//        
+//        let histViewControl = tabController.viewControllers![1] as HistoryViewController
+//        histViewControl.coreDataStack = coreDataStack
+//        
+//        let setViewControl = tabController.viewControllers![2] as SettingsViewController
+//        setViewControl.coreDataStack = coreDataStack
         
 //        let viewController = navController.topViewController as TodayViewController
         
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        coreDataStack.saveContext()
+//        coreDataStack.saveContext()
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
 //        self.saveContext()
-        coreDataStack.saveContext()
+//        coreDataStack.saveContext()
     }
     
     // MARK: - Core Data stack

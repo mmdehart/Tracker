@@ -8,13 +8,8 @@
 
 import UIKit
 import Foundation
-import CoreData
 
 class TodayViewController: UIViewController {
-
-//    var managedContext : NSManagedObjectContext!
-    
-    var coreDataStack : CoreDataStack!
     
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var todayDate: UILabel!
@@ -24,42 +19,24 @@ class TodayViewController: UIViewController {
     var timer = NSTimer()
     var startDate = NSDate()
     
-    var fetchRequest : NSFetchRequest!
+    var data: [NSDate] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        var defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
-        let logEntity = NSEntityDescription.entityForName("CigaretteLog", inManagedObjectContext: coreDataStack.context)
-        let log = CigaretteLog(entity: logEntity!, insertIntoManagedObjectContext: coreDataStack.context)
-        
-        fetchRequest = NSFetchRequest(entityName: "CigaretteLog")
-        
-        var error: NSError?
-        let result = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [CigaretteLog]?
-        
-        if let logs = result {
-            if logs.count == 0 {
-                countLabel.text = "0"
-                
-//                cigs = CigaretteLog(entity: logEntity!, insertIntoManagedObjectContext: coreDataStack.context)
-//                
-//                
-//                if !coreDataStack.context.save(&error) {
-//                    println("Could not save: \(error)")
-//                }
-            } else {
-                countLabel.text = "\(logs.count)"
-            }
-        } else {
-            println("Could not fetch: \(error)")
+        if let cigs = defaults.arrayForKey("cigLog") as [NSDate]? {
+            data = defaults.arrayForKey("cigLog") as [NSDate]
         }
+        
+        countLabel.text = "\(data.count)"
 
-    
+        
     }
 
-    override func viewWillAppear(animated: Bool) {
 
-    }
     
     
     override func didReceiveMemoryWarning() {
@@ -70,23 +47,22 @@ class TodayViewController: UIViewController {
 
     @IBAction func plusButtonPressed(sender: UIButton) {
         
-
-//        var count: Int = NSString(string: countLabel.text!).integerValue
-//        count = count + 1
-//        countLabel.text = "\(count)"
-//        // start/reset timer
         self.startDate = NSDate()
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         
+        var defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
-//        if appDelegate.getTotalCigCount() != 0 {
-//            var timesince = appDelegate.getTimeSinceLast()
-//            timeSince.text = "\(timesince)"
-//        }
-//        appDelegate.addCig()
-//        
-//        countLabel.text = "\(appDelegate.getTodayCount())"
+        if let cigs = defaults.arrayForKey("cigLog") as [NSDate]? {
+            data = defaults.arrayForKey("cigLog") as [NSDate]
+        }
+        
+        data.append(NSDate())
+        
+        defaults.setObject(data, forKey: "cigLog")
+        defaults.synchronize()
+        
+        countLabel.text = "\(data.count)"
         
     }
     

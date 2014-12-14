@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class SettingsViewController: UIViewController {
 
@@ -17,44 +16,24 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var yearlyEst: UILabel!
     @IBOutlet weak var monthlyEst: UILabel!
     
-    var coreDataStack : CoreDataStack!
-    
-    var fetchRequest : NSFetchRequest!
-    var setVal: Settings!
-    
-//    var appDelegate:AppDelegate!
-//    var settings:SettingsData!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let settingEntity = NSEntityDescription.entityForName("Settings", inManagedObjectContext: coreDataStack.context)
-        let setting = Settings(entity: settingEntity!, insertIntoManagedObjectContext: coreDataStack.context)
         
-        fetchRequest = NSFetchRequest(entityName: "Settings")
+        var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
-        var error: NSError?
-        let result = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [Settings]?
-        
-        if let sets = result {
-            if sets.count == 0 {
-                setVal = Settings(entity: settingEntity!, insertIntoManagedObjectContext: coreDataStack.context)
-                setVal.dailyMax = 5
-                
-                if !coreDataStack.context.save(&error) {
-                    println("Could not save: \(error)")
-                }
-            } else {
-                setVal = sets[sets.count - 1]
-                maxSlider.value = Float(setVal.dailyMax)
-                maxNumber.text = "\(setVal.dailyMax)"
-                weeklyEst.text = "\(Int(setVal.dailyMax) * 7) cigarettes"
-                monthlyEst.text = "\(Int(setVal.dailyMax) * 30) cigarettes"
-                yearlyEst.text = "\(Int(setVal.dailyMax) * 365) cigarettes"
-            }
+        if let settings = defaults.integerForKey("dailyMax") as Int? {
+            let num = defaults.integerForKey("dailyMax")
+            self.maxNumber.text = "\(num)"
+            self.maxSlider.value = Float(num)
+            self.weeklyEst.text = "\(num * 7) cigarettes"
+            self.monthlyEst.text = "\(num * 30) cigarettes"
+            self.yearlyEst.text = "\(num * 365) cigarettes"
         } else {
-            println("Could not fetch: \(error)")
+            maxNumber.text = "5"
+            weeklyEst.text = "35 cigarettes"
+            monthlyEst.text = "150 cigarettes"
+            yearlyEst.text = "1825 cigarettes"
         }
 
     }
@@ -71,27 +50,16 @@ class SettingsViewController: UIViewController {
         monthlyEst.text = "\(intValue*30) cigarettes"
         yearlyEst.text = "\(intValue*365) cigarettes"
         
-    }
-
-//    func fetchAndReload() {
-//        var error:NSError?
-//        var sets: [Settings]!
-//        let results = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [Settings]?
-////        results. ./setFetchLimit:1
-//        if let fetchedResults = results {
-//            sets = fetchedResults
-//            
-//        } else {
-//            println("Could not fetch \(error), \(error!.userInfo)")
-//        }
-//        
-//    }
-
-    @IBAction func setValue(sender: UISlider) {
-        coreDataStack.saveContext()
-        println("save")
+        var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        defaults.setInteger(intValue, forKey: "dailyMax")
+        
+        defaults.synchronize()
         
     }
+
+
+
     
     
     /*
