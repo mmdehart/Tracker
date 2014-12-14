@@ -45,11 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var hourCount:Array = [Double]()
         var inHourCount:Double = 0.0
         var i:Int = 0
-        var endHour:NSTimeInterval = 7200
-        var beginHour:NSTimeInterval = 3600
+        var endHour:NSTimeInterval = 3600
+        var beginHour:NSTimeInterval = 0
         
         if (count == 0) {
             println("There are no data elements in the database")
+            return 0.0
         }
         
         while (endHour <= 86400) {
@@ -74,152 +75,117 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getWeeklyAverage() ->Double {
         //Get the number cigs smoked within a week period, counting the number of days within the week that a cigg has been smoked.
-   /*     var count:Int = 0
+        
+        println("Starting the Weekly Average Function")
+        
+        var count:Int = cData.monthlyRecords.count
         var average:Double = 0.0
-        var dayCount:Double = 0.0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .HourCalendarUnit | .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
-        var dayLimit:Int = 0
+        var dayCount:Array = [Double]()
+        var inDayCount:Double = 0.0
+        var i:Int = 0
+        var endDay:NSTimeInterval = 86400
+        var beginDay:NSTimeInterval = 0
         
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
-        
-        for var i = cigData.count - 1 ; i >= 0; i-- {
-            var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            if(NSDate().timeIntervalSinceDate(thisDate) <= 604800) {
-                    count++
-                    //if this day has been indexed, wait to index until the  next day. (JK)
-                    if (todayComp.day == otherComp.day) {
-                        dayCount++
-                        println(dayCount)
-                        dayLimit++
-                        //This will reset the weekly average when we go past a single week
-                        if (dayLimit > 7) {
-                            dayLimit = 0
-                        }
-                    }
-                
-                //This is the count per hour? Need to see data from more than one hour span. (JK)
-        //        println(dayCount)
-                
-            }
-            else {
-                return dayCount
-            }
+        if (count == 0) {
+            println("There are no data elements in the database")
+            return 0.0
         }
         
-        if (count != 0) {
-            var average = (Double(count)/(dayCount))
-            
-            return average
+        while (endDay <= 604800) {
+            for (i=0;i<=count;i++) {
+                //Get hour Count
+                if (cData.dailyRecords[i].date_NS.timeIntervalSinceNow > beginDay && cData.dailyRecords[i].date_NS.timeIntervalSinceNow < endDay) {
+                    inDayCount++
+                }
+            }
+            inDayCount = inDayCount/inDayCount
+            dayCount.append(inDayCount)
+            endDay += beginDay
+            beginDay += beginDay
         }
-        return average */
-        return 0.0
+        
+        average = Double(count)/Double(dayCount.count)
+        
+        println("Ending the Weekly Average Function")
+        
+
+        return average
     }
   
     func getMonthlyAverage() ->Double {
         //Get the number cigs smoked within a month period, counting the number of weeks within the month that a cigg has been smoked.
-    /*    var count:Int = 0
+        println("Starting the Monthly Average Function")
+        
+        var count:Int = cData.monthlyRecords.count
         var average:Double = 0.0
-        var weekCount:Double = 0.0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .MonthCalendarUnit | .YearCalendarUnit
-        var weekLimit:Int = 0
+        var weekCount:Array = [Double]()
+        var inWeekCount:Double = 0.0
+        var i:Int = 0
+        var endWeek:NSTimeInterval = 604800
+        var beginWeek:NSTimeInterval = 0
         
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+        if (count == 0) {
+            println("There are no data elements in the database")
+            return 0.0
+        }
         
-        for var i = cigData.count - 1 ; i >= 0; i-- {
-            var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            if(todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
-                count++
-                var endWeek = otherComp.day + 7
-                var beginWeek = otherComp
-                
-                //if this week has been indexed, wait to index until the  next week. (JK)
-                if (beginWeek != endWeek) {
-                    weekCount++
-                    weekLimit++
-                    beginWeek.day + 1
-                    //This will reset the monthly average when we go past a single month
-                    if (weekLimit > 30) {
-                        weekLimit = 0
-                    }
+        while (endWeek <= 2629740) {
+            for (i=0;i<=count;i++) {
+                //Get hour Count
+                if (cData.dailyRecords[i].date_NS.timeIntervalSinceNow > beginWeek && cData.dailyRecords[i].date_NS.timeIntervalSinceNow < endWeek) {
+                    inWeekCount++
                 }
-                
-                //This is the count per week Need to see data from more than one week span. (JK)
-       //         println(weekCount)
-                
             }
-            else {
-                return weekCount
-            }
+            inWeekCount = inWeekCount/inWeekCount
+            weekCount.append(inWeekCount)
+            endWeek += beginWeek
+            beginWeek += beginWeek
         }
         
-        if (count != 0) {
-            var average = (Double(count)/(weekCount))
-            
-            return average
-        }
-        return average*/
-        return 0.0
+        average = Double(count)/Double(weekCount.count)
+        
+        println("Ending the Monthly Average Function")
+        
+        
+        return average
     }
     
     func getYearlyAverage() ->Double {
         //Need to grab the amount of months cigs have been smoked and the amount of cigs
-     /*   var count:Int = 0
+        println("Starting the Yearly Average Function")
+        //Need to get the dates from the data source.
+        var count:Int = cData.monthlyRecords.count
         var average:Double = 0.0
-        var monthCount:Double = 0.0
-        let today = NSDate()
-        var calendar = NSCalendar.currentCalendar()
-        let flags:NSCalendarUnit = .YearCalendarUnit
-        var monthLimit:Int = 1
+        var monthCount:Array = [Double]()
+        var inMonthCount:Double = 0.0
+        var i:Int = 0
+        var endMonth:NSTimeInterval = 2629740
+        var beginMonth:NSTimeInterval = 0
         
-        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+        if (count == 0) {
+            println("There are no data elements in the database")
+            return 0.0
+        }
         
-        for var i = cigData.count - 1 ; i >= 0; i-- {
-            var thisDate:NSDate = cigData[i].getCigDate()
-            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
-            if(todayComp.year == otherComp.year) {
-                if (todayComp.month == otherComp.month) {
-                    count++
-                    println("The Count is:")
-                    println(count)
-                    //if this hour has been indexed, wait to index until the  next hour. (JK)
-                    if (monthCount < Double(monthLimit)) {
-                        monthCount++
-                        println("The month Count is:")
-                        println(monthCount)
-                        
-                    }
-                    if (monthLimit != Int(monthCount)) {
-                        monthLimit++
-                        println("The month Limit is:")
-                        println(monthLimit)
-                    }
-                    //This will reset the hour counter when we go past a single day
-                    if (monthLimit > 24) {
-                        monthLimit = 0
-                    }
+        while (endMonth <= 31560000) {
+            for (i=0;i<=count;i++) {
+                //Get hour Count
+                if (cData.dailyRecords[i].date_NS.timeIntervalSinceNow > beginMonth && cData.dailyRecords[i].date_NS.timeIntervalSinceNow < endMonth) {
+                    inMonthCount++
                 }
-                //This is the count per month Need to see data from more than one month span. (JK)
-                println(monthCount)
-                
             }
-            else {
-                return monthCount
-            }
+            inMonthCount = inMonthCount/inMonthCount
+            monthCount.append(inMonthCount)
+            endMonth += beginMonth
+            beginMonth += beginMonth
         }
         
-        if (count != 0) {
-            var average = (Double(count)/(monthCount))
-            
-            return average
-        }
-        return average */
-        return 0.0
+        average = Double(count)/Double(monthCount.count)
+        
+        println("Ending the Yearly Average Function")
+        
+        
+        return average
     }
     
     

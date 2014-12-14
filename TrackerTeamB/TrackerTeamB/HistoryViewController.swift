@@ -66,6 +66,7 @@ class HistoryViewController: UIViewController {
             textLabel.text = "This Week"
             graphLabel.text = "Daily"
             averageLabel.text = "Weekly Average"
+            avgAmtLabel.text = "\(appDelegate.getWeeklyAverage())"
             maxLabel.text = "\(model.maxGoal * 7)"
 
 
