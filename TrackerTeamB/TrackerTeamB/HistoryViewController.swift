@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class HistoryViewController: UIViewController {
 
@@ -24,30 +25,75 @@ class HistoryViewController: UIViewController {
     
     var coreDataStack : CoreDataStack!
     
-    
-//    var appDelegate:AppDelegate!
-//    var cigarettes:[CigaretteData]!
-//    var settings:SettingsData!
+    var setVal : Settings!
+    var fetchRequest : NSFetchRequest!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+
+        let settingEntity = NSEntityDescription.entityForName("Settings", inManagedObjectContext : coreDataStack.context)
+        let setting = Settings(entity: settingEntity!, insertIntoManagedObjectContext: coreDataStack.context)
         
-//        settings = appDelegate.getSetData()
-//        cigarettes = appDelegate.getCigData()
+        fetchRequest = NSFetchRequest(entityName : "Settings")
+        
+        var error: NSError?
+        let result = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [Settings]?
+        
+        if let sets = result {
+            if sets.count == 0 {
+                setVal = Settings(entity: settingEntity!, insertIntoManagedObjectContext: coreDataStack.context)
+                setVal.dailyMax = 5
+                
+                if !coreDataStack.context.save(&error) {
+                    println("Could not save: \(error)")
+                }
+            } else {
+                setVal = sets[sets.count - 1]
+                maxLabel.text = "\(setVal.dailyMax)"
+            }
+        } else {
+            println("Could not fetch: \(error)")
+        }
+        
         textLabel.text = "Today's Total"
         graphLabel.text = "Hourly"
-        averageLabel.text = "Daily Average"
-//        maxLabel.text = "\(settings.getDailyMax())"
-//        histCount.text = "\(appDelegate.getTodayCount())"
-        // the above line should eventually be changed to the next line
-        // histCount = "\(appDelegate.getTodayCount())"
-        
-        //  FIX THE TIME SPENT SHIT!!!
-        
-        // Do any additional setup after loading the view.
+        averageLabel.text = "Hourly Average"
+
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let settingEntity = NSEntityDescription.entityForName("Settings", inManagedObjectContext : coreDataStack.context)
+        let setting = Settings(entity: settingEntity!, insertIntoManagedObjectContext: coreDataStack.context)
+        
+        fetchRequest = NSFetchRequest(entityName : "Settings")
+        
+        var error: NSError?
+        let result = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [Settings]?
+        
+        if let sets = result {
+            if sets.count == 0 {
+                setVal = Settings(entity: settingEntity!, insertIntoManagedObjectContext: coreDataStack.context)
+                setVal.dailyMax = 5
+                
+                if !coreDataStack.context.save(&error) {
+                    println("Could not save: \(error)")
+                }
+            } else {
+                setVal = sets[sets.count - 1]
+                maxLabel.text = "\(setVal.dailyMax)"
+            }
+        } else {
+            println("Could not fetch: \(error)")
+        }
+        
+        textLabel.text = "Today's Total"
+        graphLabel.text = "Hourly"
+        averageLabel.text = "Hourly Average"
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -55,15 +101,14 @@ class HistoryViewController: UIViewController {
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
-//        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-//        settings = appDelegate.getSetData()
-//        cigarettes = appDelegate.getCigData()
+
         
         switch segControl.selectedSegmentIndex {
         case 0:
             textLabel.text = "Today's Total"
             graphLabel.text = "Hourly"
-            averageLabel.text = "Daily Average"
+            averageLabel.text = "Hourly Average"
+            maxLabel.text = "\(setVal.dailyMax)"
 //            maxLabel.text = "\(settings.getDailyMax())"
 //            histCount.text = "\(appDelegate.getTodayCount())"
 //            timeSpentLabel.text = "\(appDelegate.getDayTimeSpent()) minutes"
@@ -75,7 +120,8 @@ class HistoryViewController: UIViewController {
         case 1:
             textLabel.text = "This Week"
             graphLabel.text = "Daily"
-            averageLabel.text = "Weekly Average"
+            averageLabel.text = "Daily Average"
+            maxLabel.text = "\(Int(setVal.dailyMax) * 7)"
 //            maxLabel.text = "\(settings.getWeeklyMax())"
 //            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
@@ -89,7 +135,8 @@ class HistoryViewController: UIViewController {
         case 2:
             textLabel.text = "This Month"
             graphLabel.text = "Weekly"
-            averageLabel.text = "Monthly Average"
+            averageLabel.text = "Weekly Average"
+            maxLabel.text = "\(Int(setVal.dailyMax) * 30)"
 //            maxLabel.text = "\(settings.getMonthlyMax())"
 //            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line
@@ -102,7 +149,8 @@ class HistoryViewController: UIViewController {
         case 3:
             textLabel.text = "This Year"
             graphLabel.text = "Monthly"
-            averageLabel.text = "Yearly Average"
+            averageLabel.text = "Monthly Average"
+            maxLabel.text = "\(Int(setVal.dailyMax) * 365)"
 //            maxLabel.text = "\(settings.getYearlyMax())"
 //            histCount.text = "\(appDelegate.getTotalCigCount())"
             // the above line should eventually be changed to the next line

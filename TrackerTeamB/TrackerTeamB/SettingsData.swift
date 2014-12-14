@@ -5,13 +5,13 @@
 //  Created by Madison DeHart on 12/2/14.
 //  Copyright (c) 2014 Madison DeHart. All rights reserved.
 //
+//
+//import Foundation
+//import CoreData
+//
+//class SettingsData : NSManagedObject {
+//    @NSManaged var dailyMax : Int
 
-import Foundation
-import CoreData
-
-class SettingsData : NSManagedObject {
-    @NSManaged var dailyMax : Int
-    
 //    var dailyMax:Int
 //    
 //    override init() {
@@ -33,4 +33,4 @@ class SettingsData : NSManagedObject {
 //    func getYearlyMax() -> Int {
 //        return dailyMax * 365
 //    }
-}
+//}

@@ -28,23 +28,35 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        // get the mapdata
-//        settings = appDelegate.getSetData()
-        fetchRequest = NSFetchRequest(entityName: "Settings")
-//        fetchRequest.fetchLimit = 1
-        
-        fetchAndReload()
 
-            maxSlider.value = Float(setVal.dailyMax)
-            maxNumber.text = "\(setVal.dailyMax)"
-            weeklyEst.text = "\(Int(setVal.dailyMax) * 7) cigarettes"
-            monthlyEst.text = "\(Int(setVal.dailyMax) * 30) cigarettes"
-            yearlyEst.text = "\(Int(setVal.dailyMax) * 365) cigarettes"
+        let settingEntity = NSEntityDescription.entityForName("Settings", inManagedObjectContext: coreDataStack.context)
+        let setting = Settings(entity: settingEntity!, insertIntoManagedObjectContext: coreDataStack.context)
         
-//        }
-//        settings.dailyMax = intValue
-        // Do any additional setup after loading the view.
+        fetchRequest = NSFetchRequest(entityName: "Settings")
+        
+        var error: NSError?
+        let result = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [Settings]?
+        
+        if let sets = result {
+            if sets.count == 0 {
+                setVal = Settings(entity: settingEntity!, insertIntoManagedObjectContext: coreDataStack.context)
+                setVal.dailyMax = 5
+                
+                if !coreDataStack.context.save(&error) {
+                    println("Could not save: \(error)")
+                }
+            } else {
+                setVal = sets[sets.count - 1]
+                maxSlider.value = Float(setVal.dailyMax)
+                maxNumber.text = "\(setVal.dailyMax)"
+                weeklyEst.text = "\(Int(setVal.dailyMax) * 7) cigarettes"
+                monthlyEst.text = "\(Int(setVal.dailyMax) * 30) cigarettes"
+                yearlyEst.text = "\(Int(setVal.dailyMax) * 365) cigarettes"
+            }
+        } else {
+            println("Could not fetch: \(error)")
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,29 +71,29 @@ class SettingsViewController: UIViewController {
         monthlyEst.text = "\(intValue*30) cigarettes"
         yearlyEst.text = "\(intValue*365) cigarettes"
         
-        // appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        
-        // get the mapdata
-//         self.settings = appDelegate.getSetData()
-        
-//         self.settings.dailyMax = intValue
     }
 
-    func fetchAndReload() {
-        var error:NSError?
-        let results = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [Settings]?
-//        results. ./setFetchLimit:1
-        if let fetchedResults = results {
-            setVal = fetchedResults[0]
-            
-            
-        } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
-        }
-        
-//        maxSlider.value = Float(setVal)
-    }
+//    func fetchAndReload() {
+//        var error:NSError?
+//        var sets: [Settings]!
+//        let results = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [Settings]?
+////        results. ./setFetchLimit:1
+//        if let fetchedResults = results {
+//            sets = fetchedResults
+//            
+//        } else {
+//            println("Could not fetch \(error), \(error!.userInfo)")
+//        }
+//        
+//    }
 
+    @IBAction func setValue(sender: UISlider) {
+        coreDataStack.saveContext()
+        println("save")
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 

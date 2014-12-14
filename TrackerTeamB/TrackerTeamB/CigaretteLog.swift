@@ -13,11 +13,11 @@ class CigaretteLog: NSManagedObject {
 
     @NSManaged var cigDate: NSDate
  
-    class func createInManagedObjectContext(moc: NSManagedObjectContext, date: NSDate) -> CigaretteLog {
-        let newItem = NSEntityDescription.insertNewObjectForEntityForName("CigaretteLog", inManagedObjectContext: moc) as CigaretteLog
-        newItem.cigDate = date
-        
-        return newItem
-    }
+//    class func createInManagedObjectContext(moc: NSManagedObjectContext, date: NSDate) -> CigaretteLog {
+//        let newItem = NSEntityDescription.insertNewObjectForEntityForName("CigaretteLog", inManagedObjectContext: moc) as CigaretteLog
+//        newItem.cigDate = date
+//        
+//        return newItem
+//    }
 
 }

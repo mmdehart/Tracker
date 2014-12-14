@@ -24,42 +24,36 @@ class TodayViewController: UIViewController {
     var timer = NSTimer()
     var startDate = NSDate()
     
-//    
-//    lazy var managedObjectContext : NSManagedObjectContext? = {
-//        let appDeletgate = UIApplication.sharedApplication().delegate as AppDelegate
-//        if let managedObjectContext = appDeletgate.managedObjectContext {
-//            return managedObjectContext
-//        }
-//        else {
-//            return nil
-//        }
-//    }()
-//    
-    
+    var fetchRequest : NSFetchRequest!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let today = NSDate()
+        let logEntity = NSEntityDescription.entityForName("CigaretteLog", inManagedObjectContext: coreDataStack.context)
+        let log = CigaretteLog(entity: logEntity!, insertIntoManagedObjectContext: coreDataStack.context)
         
-//        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-
+        fetchRequest = NSFetchRequest(entityName: "CigaretteLog")
         
-    
-//        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-//        todayDate.text = dateFormatter.stringFromDate(today)
-
-//        countLabel.text = "\(appDelegate.getTodayCount())"
+        var error: NSError?
+        let result = coreDataStack.context.executeFetchRequest(fetchRequest, error: &error) as [CigaretteLog]?
         
-//        if appDelegate.getTotalCigCount() != 0 {
+        if let logs = result {
+            if logs.count == 0 {
+                countLabel.text = "0"
+                
+//                cigs = CigaretteLog(entity: logEntity!, insertIntoManagedObjectContext: coreDataStack.context)
+//                
+//                
+//                if !coreDataStack.context.save(&error) {
+//                    println("Could not save: \(error)")
+//                }
+            } else {
+                countLabel.text = "\(logs.count)"
+            }
+        } else {
+            println("Could not fetch: \(error)")
+        }
 
-//            var timesince = appDelegate.getTimeSinceLast()
-//            timeSince.text = "\(timesince)"
-//        }
-//        else {
-//            timeSince.text = "0"
-
-//        }
     
     }
 

@@ -25,9 +25,9 @@ class CoreDataStack {
         context = NSManagedObjectContext()
         context.persistentStoreCoordinator = psc
 
-        let settingEntity = NSEntityDescription.entityForName("Settings", inManagedObjectContext : context)
+//        let settingEntity = NSEntityDescription.entityForName("Settings", inManagedObjectContext : context)
         
-        var settings = Settings(entity: settingEntity!, insertIntoManagedObjectContext: context)
+//        var settings = Settings(entity: settingEntity!, insertIntoManagedObjectContext: context)
 
         
         let documentsURL = applicationDocumentsDirectory()
@@ -40,7 +40,7 @@ class CoreDataStack {
         
         if store == nil {
             println("Error adding persistent store: \(error)")
-            abort()
+//            abort()
         }
     }
     

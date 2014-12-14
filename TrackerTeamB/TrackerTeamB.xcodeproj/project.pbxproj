@@ -13,6 +13,7 @@
 		5C508C8A1A2E7F31004A2B10 /* CigaretteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C508C891A2E7F31004A2B10 /* CigaretteData.swift */; };
 		5C508C8C1A2E7F4B004A2B10 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C508C8B1A2E7F4B004A2B10 /* SettingsData.swift */; };
 		5C64EBCB1A130D8E00E123D0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */; };
+		5C79F8F91A3D86DE00CCC3B7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C79F8F81A3D86DE00CCC3B7 /* CoreData.framework */; };
 		5C8907801A0C6B5000CAFECB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89077F1A0C6B5000CAFECB /* AppDelegate.swift */; };
 		5C8907871A0C6B5000CAFECB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C8907861A0C6B5000CAFECB /* Images.xcassets */; };
 		5C89078A1A0C6B5000CAFECB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C8907881A0C6B5000CAFECB /* LaunchScreen.xib */; };
@@ -53,6 +54,7 @@
 		5C508C891A2E7F31004A2B10 /* CigaretteData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CigaretteData.swift; sourceTree = "<group>"; };
 		5C508C8B1A2E7F4B004A2B10 /* SettingsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5C79F8F81A3D86DE00CCC3B7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5C89077A1A0C6B5000CAFECB /* TrackerTeamB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackerTeamB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C89077E1A0C6B5000CAFECB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C89077F1A0C6B5000CAFECB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C79F8F91A3D86DE00CCC3B7 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +121,7 @@
 		5C8907711A0C6B4F00CAFECB = {
 			isa = PBXGroup;
 			children = (
+				5C79F8F81A3D86DE00CCC3B7 /* CoreData.framework */,
 				5C89077C1A0C6B5000CAFECB /* TrackerTeamB */,
 				5C8907921A0C6B5000CAFECB /* TrackerTeamBTests */,
 				5C89077B1A0C6B5000CAFECB /* Products */,
@@ -141,6 +145,8 @@
 				5CBAAD871A1E78A600CDDBE9 /* Model */,
 				5C89079F1A0C6BC700CAFECB /* TrackerTeamB.entitlements */,
 				5CCC16881A3B692800C43164 /* TrackerTeamB.xcdatamodeld */,
+				5CCC16BE1A3B757100C43164 /* CigaretteLog.swift */,
+				5CCC16BC1A3B751A00C43164 /* Settings.swift */,
 				5CCC16F11A3BABD500C43164 /* CoreDataStack.swift */,
 				5C247E111A0C823D008DA2BF /* TodayViewController.swift */,
 				5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */,
@@ -195,8 +201,6 @@
 		5CBAAD871A1E78A600CDDBE9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5CCC16BC1A3B751A00C43164 /* Settings.swift */,
-				5CCC16BE1A3B757100C43164 /* CigaretteLog.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";

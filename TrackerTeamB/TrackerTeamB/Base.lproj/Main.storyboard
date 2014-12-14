@@ -241,6 +241,10 @@
                                 <rect key="frame" x="40" y="105" width="219" height="31"/>
                                 <connections>
                                     <action selector="numberChanged:" destination="GAt-Jt-HT5" eventType="valueChanged" id="jZj-Pl-hfy"/>
+                                    <action selector="setValue:" destination="GAt-Jt-HT5" eventType="editingDidEndOnExit" id="EiD-Hz-6pw"/>
+                                    <action selector="setValue:" destination="GAt-Jt-HT5" eventType="touchDragEnter" id="NAk-aP-Dfe"/>
+                                    <action selector="setValue:" destination="GAt-Jt-HT5" eventType="touchDragExit" id="U5q-yx-8sa"/>
+                                    <action selector="setValue:" destination="GAt-Jt-HT5" eventType="editingDidEnd" id="sEx-1Q-T37"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icn-1u-bQa">
