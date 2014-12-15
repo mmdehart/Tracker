@@ -12,7 +12,6 @@ import Foundation
 class TodayViewController: UIViewController {
     
     @IBOutlet weak var countLabel: UILabel!
-    @IBOutlet weak var todayDate: UILabel!
     @IBOutlet weak var plusBtn: UIButton!
     @IBOutlet weak var timeSince: UILabel!
     
@@ -35,13 +34,35 @@ class TodayViewController: UIViewController {
             data = defaults.arrayForKey("cigLog") as [NSDate]
         }
         
+        data.sort({ $0.compare($1) == NSComparisonResult.OrderedDescending })
+        
         countLabel.text = "\(getTodayCount())"
 
-        if getTodayCount() != 0 {
-            self.startDate = data[data.count - 1]
+            self.startDate = data[0]
             let aSelector:Selector = "updateTime"
             self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        var defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let cigs = defaults.arrayForKey("cigLog") as [NSDate]? {
+            data = defaults.arrayForKey("cigLog") as [NSDate]
         }
+        
+        data.sort({ $0.compare($1) == NSComparisonResult.OrderedDescending })
+        
+        countLabel.text = "\(getTodayCount())"
+        
+        
+        
+            self.startDate = data[0]
+            let aSelector:Selector = "updateTime"
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         
     }
 
@@ -51,10 +72,6 @@ class TodayViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func returnToToday(sender: UIButton)
-    {
-        
-    }
 
     @IBAction func plusButtonPressed(sender: UIButton) {
         
@@ -84,26 +101,16 @@ class TodayViewController: UIViewController {
     This function displays an error if the user is not connected to the internet */
     
     func updateTime(){
-        // get timestamp for right now
         var now = NSDate()
-        // set time interval (in seconds) between now and last cigarette
         var elapsedTime:NSTimeInterval = now.timeIntervalSinceDate(self.startDate)
-        // calculate number of days (60s/min*60min/hr*24hr) from elapsedTime (which is in seconds)
-//        let days = UInt8(elapsedTime / (60.0*60.0*24.0))
-        // subtract that amount from the time
-//        elapsedTime -= (NSTimeInterval(days) * 60 * 60 * 24.0)
-        // Repeat for hours and minutes
         let hours = UInt8(elapsedTime / (60.0*60.0))
         elapsedTime -= (NSTimeInterval(hours) * 60 * 60)
         
         let minutes = UInt8(elapsedTime / 60.0)
         elapsedTime -= (NSTimeInterval(minutes) * 60)
         
-        // using Ternary Operator, create String variables: for values 1-9, display a leading zero
-//        let strDays:String = days > 9 ? String(days):"0\(String(days))"
         let strHours:String = hours > 9 ? String(hours):"0\(String(hours))"
         let strMinutes:String = minutes > 9 ? String(minutes):"0\(String(minutes))"
-        // build the label
         if (UInt8(elapsedTime) % 2 == 0){
             timeSince.text = "\(strHours):\(strMinutes)"
         }
@@ -125,9 +132,6 @@ class TodayViewController: UIViewController {
             let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
             if(todayComp.day == otherComp.day && todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
                 count++
-            }
-            else {
-                return count
             }
         }
         return count

@@ -52,7 +52,6 @@
 		5C508C891A2E7F31004A2B10 /* CigaretteData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CigaretteData.swift; sourceTree = "<group>"; };
 		5C508C8B1A2E7F4B004A2B10 /* SettingsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		5C79F8F81A3D86DE00CCC3B7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5C89077A1A0C6B5000CAFECB /* TrackerTeamB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackerTeamB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C89077E1A0C6B5000CAFECB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C89077F1A0C6B5000CAFECB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,7 +117,6 @@
 		5C8907711A0C6B4F00CAFECB = {
 			isa = PBXGroup;
 			children = (
-				5C79F8F81A3D86DE00CCC3B7 /* CoreData.framework */,
 				5C89077C1A0C6B5000CAFECB /* TrackerTeamB */,
 				5C8907921A0C6B5000CAFECB /* TrackerTeamBTests */,
 				5C89077B1A0C6B5000CAFECB /* Products */,
@@ -139,7 +137,6 @@
 			children = (
 				5C6BB3D71A3A2A9100399B31 /* icons */,
 				5C9C70941A31462B00778036 /* deprecated */,
-				5CBAAD871A1E78A600CDDBE9 /* Model */,
 				5C89079F1A0C6BC700CAFECB /* TrackerTeamB.entitlements */,
 				5C247E111A0C823D008DA2BF /* TodayViewController.swift */,
 				5C64EBCA1A130D8E00E123D0 /* SettingsViewController.swift */,
@@ -186,18 +183,11 @@
 				5CD27A021A1ECF86002D862F /* TrackerData.swift */,
 				5CBAAD8A1A1E7A5A00CDDBE9 /* TrackerDataX.swift */,
 				5C508C8B1A2E7F4B004A2B10 /* SettingsData.swift */,
+				5CCC16BE1A3B757100C43164 /* CigaretteLog.swift */,
+				5CCC16BC1A3B751A00C43164 /* Settings.swift */,
 				5C508C891A2E7F31004A2B10 /* CigaretteData.swift */,
 			);
 			name = deprecated;
-			sourceTree = "<group>";
-		};
-		5CBAAD871A1E78A600CDDBE9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5CCC16BE1A3B757100C43164 /* CigaretteLog.swift */,
-				5CCC16BC1A3B751A00C43164 /* Settings.swift */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

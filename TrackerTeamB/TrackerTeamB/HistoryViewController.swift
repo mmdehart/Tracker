@@ -23,9 +23,14 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var averageLabel: UILabel!
     @IBOutlet weak var graphLabel: UILabel!
     
-    let nf = NSNumberFormatter()
+//    let nf = NSNumberFormatter()
 
     var data: [NSDate] = []
+    
+    @IBOutlet weak var barChart: UIWebView!
+    
+    var chartHTML: String!
+    var max:Int = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,15 +45,19 @@ class HistoryViewController: UIViewController {
             data = defaults.arrayForKey("cigLog") as [NSDate]
         }
         
-        nf.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        nf.maximumFractionDigits = 1
+        webViewConfiguration()
+        chartHTML = buildDayChartHTML()
+        
+        drawChart(chartHTML)
+     
         
         
         maxLabel.text = "\(max)"
         histCount.text = "\(getTodayCount())"
 //        recordHigh.text = "Record High: \(getTodayMax())"
 //        recordLow.text = "Record Low: \(getTodayLow())"
-        avgAmtLabel.text = nf.stringFromNumber(getTodayAverage())
+        var average:Double = getTodayAverage()
+        avgAmtLabel.text = String(format: "%.1f",average)
         timeSpentLabel.text = "\(getDayTimeSpent()) minutes"
         textLabel.text = "Today's Total"
         graphLabel.text = "Hourly"
@@ -70,11 +79,14 @@ class HistoryViewController: UIViewController {
         }
         
         segControl.selectedSegmentIndex = 0
+        chartHTML = buildDayChartHTML()
+        drawChart(chartHTML)
         maxLabel.text = "\(max)"
         histCount.text = "\(getTodayCount())"
 //        recordHigh.text = "Record High: \(getTodayMax())"
 //        recordLow.text = "Record Low: \(getTodayLow())"
-        avgAmtLabel.text = nf.stringFromNumber(getTodayAverage())
+        var average:Double = getTodayAverage()
+        avgAmtLabel.text = String(format: "%.1f",average)
         timeSpentLabel.text = "\(getDayTimeSpent()) minutes"
         textLabel.text = "Today's Total"
         graphLabel.text = "Hourly"
@@ -99,6 +111,10 @@ class HistoryViewController: UIViewController {
         
         switch segControl.selectedSegmentIndex {
         case 0:
+            
+            chartHTML = buildDayChartHTML()
+            drawChart(chartHTML)
+            
             textLabel.text = "Today's Total"
             graphLabel.text = "Hourly"
             averageLabel.text = "Hourly Average"
@@ -106,11 +122,16 @@ class HistoryViewController: UIViewController {
             histCount.text = "\(getTodayCount())"
 //            recordHigh.text = "Record High: \(getTodayMax())"
 //            recordLow.text = "Record Low: \(getTodayLow())"
-            avgAmtLabel.text = nf.stringFromNumber(getTodayAverage())
+            var average:Double = getTodayAverage()
+            avgAmtLabel.text = String(format: "%.1f",average)
             timeSpentLabel.text = "\(getDayTimeSpent()) minutes"
             
 
         case 1:
+            
+            chartHTML = buildWeekChartHTML()
+            drawChart(chartHTML)
+            
             textLabel.text = "This Week"
             graphLabel.text = "Daily"
             averageLabel.text = "Daily Average"
@@ -118,12 +139,17 @@ class HistoryViewController: UIViewController {
             histCount.text = "\(getWeekCount())"
 //            recordHigh.text = "Record High: \(getWeeklyMax())"
 //            recordLow.text = "Record Low: \(getWeeklyLow())"
-            avgAmtLabel.text = nf.stringFromNumber(getWeeklyAverage())
+            var average:Double = getWeeklyAverage()
+            avgAmtLabel.text = String(format: "%.1f",average)
             timeSpentLabel.text = "\(getWeekTimeSpent()) minutes"
 
             
             
         case 2:
+            
+            chartHTML = buildMonthChartHTML()
+            drawChart(chartHTML)
+            
             textLabel.text = "This Month"
             graphLabel.text = "Weekly"
             averageLabel.text = "Weekly Average"
@@ -131,11 +157,16 @@ class HistoryViewController: UIViewController {
             histCount.text = "\(getMonthCount())"
 //            recordHigh.text = "Record High: \(getMonthlyMax())"
 //            recordLow.text = "Record Low: \(getMonthlyLow())"
-            avgAmtLabel.text = nf.stringFromNumber(getMonthlyAverage())
+            var average:Double = getMonthlyAverage()
+            avgAmtLabel.text = String(format: "%.1f",average)
             timeSpentLabel.text = "\(getMonthTimeSpent()) minutes"
 
             
         case 3:
+            
+            chartHTML = buildYearChartHTML()
+            drawChart(chartHTML)
+            
             textLabel.text = "This Year"
             graphLabel.text = "Monthly"
             averageLabel.text = "Monthly Average"
@@ -143,7 +174,8 @@ class HistoryViewController: UIViewController {
             histCount.text = "\(getYearCount())"
 //            recordHigh.text = "Record High: \(getYearlyMax())"
 //            recordLow.text = "Record Low: \(getYearlyLow())"
-            avgAmtLabel.text = nf.stringFromNumber(getYearlyAverage())
+            var average:Double = getYearlyAverage()
+            avgAmtLabel.text = String(format: "%.1f",average)
             timeSpentLabel.text = "\(getYearTimeSpent()) minutes"
 
             
@@ -154,6 +186,304 @@ class HistoryViewController: UIViewController {
     }
     
 
+    func drawChart(chartHTML: String) {
+        barChart.loadHTMLString(chartHTML, baseURL: nil)
+    }
+    
+    func webViewConfiguration() {
+        barChart.scrollView.scrollEnabled = false
+        barChart.scrollView.bounces = false
+        barChart.opaque = false
+    }
+    
+    func buildDayChartHTML() ->NSString {
+        var dataArray: [Int] = [0,0,0,0,0,0]
+        var i:Int = 0
+        
+        var hourFormatter: NSDateFormatter = NSDateFormatter()
+        hourFormatter.dateFormat = "HH"
+        
+        var formatter: NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        
+        var today: NSDate = NSDate()
+        var date: String = formatter.stringFromDate(today)
+        
+        var count:Int = 0
+        
+        for (i=0;i < data.count; i++) {
+            var hourString: String = hourFormatter.stringFromDate(data[i])
+            var dateString: String = formatter.stringFromDate(data[i])
+            
+            var hour:Int = hourString.toInt()!
+            
+            if (dateString == date) {
+                count++
+                
+                switch hour {
+                case 0..<4:
+                    dataArray[0]++
+                case 4..<8:
+                    dataArray[1]++
+                case 8..<12:
+                    dataArray[2]++
+                case 12..<16:
+                    dataArray[3]++
+                case 16..<20:
+                    dataArray[4]++
+                case 20..<24:
+                    dataArray[5]++
+                default:
+                    break
+                }
+            }
+        }
+        
+        var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Hour', 'Cigs', { role: 'style' } ], ['12am - 4am', \(dataArray[0]), 'color: white; opacity: 0.75'], ['4am - 8am', \(dataArray[1]), 'color: white; opacity: 0.75'], ['8am - 12pm', \(dataArray[2]), 'color: white; opacity: 0.75'], ['12pm - 4pm', \(dataArray[3]), 'color: white; opacity: 0.75'], ['4pm - 8pm', \(dataArray[4]), 'color: white; opacity: 0.75'], ['8pm - 12am', \(dataArray[5]), 'color: white; opacity: 0.75'] ]); var options = { width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#1a1a1a', backgroundColor: { strokeWidth: 0, fill: '#1a1a1a' }, chartArea: { left: 20, top: 10, width:'95%', height:'85%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ColumnChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style> #chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; color: white; }</style></head><body> <div id='chart_div'></div></body></html>"
+        
+        return stringHTML
+        
+    }
+    
+    func buildWeekChartHTML() ->NSString {
+        var dataArray: [Int] = [0,0,0,0,0,0,0]
+        var i:Int = 0
+        
+        var formatter: NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        var yearFormatter: NSDateFormatter = NSDateFormatter()
+        yearFormatter.dateFormat = "yyyy"
+        var today: NSDate = NSDate()
+        var currentYearString: String = yearFormatter.stringFromDate(today)
+        var todayDate: String = formatter.stringFromDate(today)
+        var todayDayNum: Int! = getDayOfWeek(todayDate)
+        
+        
+        for (i=0;i < data.count; i++) {
+            var dateString: String = formatter.stringFromDate(data[i])
+            var yearString: String = yearFormatter.stringFromDate(data[i])
+            
+            var day:Int! = getDayOfWeek(dateString)
+            
+            for (var j = 0;j < todayDayNum; j++) {
+                let calendar = NSCalendar.currentCalendar()
+                let components = NSDateComponents()
+                components.day = -j
+                
+                let dateToInclude = calendar.dateByAddingComponents(components, toDate: today, options: nil)
+                var dateToGraph:String = formatter.stringFromDate(dateToInclude!)
+                
+                if (yearString == currentYearString && dateToGraph == dateString) {
+                    
+                    switch day {
+                    case 1:
+                        dataArray[0]++
+                    case 2:
+                        dataArray[1]++
+                    case 3:
+                        dataArray[2]++
+                    case 4:
+                        dataArray[3]++
+                    case 5:
+                        dataArray[4]++
+                    case 6:
+                        dataArray[5]++
+                    case 7:
+                        dataArray[6]++
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+        
+        var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Day', 'Cigs', { role: 'style' }, 'Maximum' ], ['SUN', \(dataArray[0]), 'color: white; opacity: 0.75', \(max)], ['MON', \(dataArray[1]), 'color: white; opacity: 0.75', \(max)], ['TUE', \(dataArray[2]), 'color: white; opacity: 0.75', \(max)], ['WED', \(dataArray[3]), 'color: white; opacity: 0.75', \(max)], ['THU', \(dataArray[4]), 'color: white; opacity: 0.75', \(max)], ['FRI', \(dataArray[5]), 'color: white; opacity: 0.75', \(max)], ['SAT', \(dataArray[6]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#1a1a1a', backgroundColor: { strokeWidth: 0, fill: '#1a1a1a' }, chartArea: { left: 20, top: 10, width:'95%', height:'85%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
+        
+        return stringHTML
+    }
+    
+    func buildMonthChartHTML() -> NSString {
+        // This array stories the count of cigs for each month ([0] = Week 1 (1st-7th), [1] = Week 2 (8th-15th), etc.)
+        var dataArray: [Int] = [0, 0, 0, 0, 0]
+        
+        // Formatter to get day from record
+        var dayFormatter: NSDateFormatter = NSDateFormatter()
+        dayFormatter.dateFormat = "dd"
+        // Formatter to get month from records
+        var monthFormatter: NSDateFormatter = NSDateFormatter()
+        monthFormatter.dateFormat = "MM"
+        // Formatter to get year from records
+        var yearFormatter: NSDateFormatter = NSDateFormatter()
+        yearFormatter.dateFormat = "yyyy"
+        
+        // Get the year from today's date
+        var today: NSDate = NSDate()
+        var CurrentYearString: String = yearFormatter.stringFromDate(today)
+        var CurrentMonthString: String = monthFormatter.stringFromDate(today)
+        
+        // Get string for last day of the current month
+        var lastDayOfMonth: String = getLastDayOfMonth()
+        
+        
+        // Add data stored in cloud
+        for (var i = 0; i < data.count; i++) {
+            
+            // Get month and year strings from record's timestamp
+            var DayString: String = dayFormatter.stringFromDate(data[i])
+            var MonthString: String = monthFormatter.stringFromDate(data[i])
+            var YearString: String = yearFormatter.stringFromDate(data[i])
+            // Convert month string to int
+            var day: Int = DayString.toInt()!
+            
+            // Check if record occurred in the current year
+            if( YearString == CurrentYearString && MonthString == CurrentMonthString ) {
+                
+                // Increment index based upon day of the month
+                switch day {
+                case 1...7:
+                    dataArray[0]++
+                case 8...14:
+                    dataArray[1]++
+                case 15...21:
+                    dataArray[2]++
+                case 22...28:
+                    dataArray[3]++
+                default:
+                    dataArray[4]++
+                    break
+                }
+            }
+        }
+        
+        var stringHTML: String = String()
+        stringHTML = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Week', 'Cigs', { role: 'style' }, 'Maximum' ], ['1st - 7th', \(dataArray[0]), 'color: white; opacity: 0.75', \(max)], ['8th - 14th', \(dataArray[1]), 'color: white; opacity: 0.75', \(max)], ['15th - 21st', \(dataArray[2]), 'color: white; opacity: 0.75', \(max)], ['22nd - 28th', \(dataArray[3]), 'color: white; opacity: 0.75', \(max)], ['29th - \(lastDayOfMonth)', \(dataArray[4]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#1a1a1a', backgroundColor: { strokeWidth: 0, fill: '#1a1a1a' }, chartArea: { left: 20, top: 10, width:'95%', height:'85%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
+        
+        // Return HTML string
+        return stringHTML
+    }
+    
+    func buildYearChartHTML() -> NSString {
+        
+        // This array stories the count of cigs for each month ([0] = January, [1] = February, etc.)
+        var dataArray: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        
+        // Formatter to get month from record
+        var monthFormatter: NSDateFormatter = NSDateFormatter()
+        monthFormatter.dateFormat = "MM"
+        // Formatter to get year from records
+        var yearFormatter: NSDateFormatter = NSDateFormatter()
+        yearFormatter.dateFormat = "yyyy"
+        
+        // Get the year from today's date
+        var today: NSDate = NSDate()
+        var CurrentYearString: String = yearFormatter.stringFromDate(today)
+        
+        // Add data stored in cloud
+        for (var i=0;i<data.count;i++) {
+            
+            // Get month and year strings from record's timestamp
+            var MonthString: String = monthFormatter.stringFromDate(data[i])
+            var YearString: String = yearFormatter.stringFromDate(data[i])
+            // Convert month string to int
+            var month: Int = MonthString.toInt()!
+            
+            // Check if record occurred in the current year
+            if( YearString == CurrentYearString ) {
+                
+                // Increment index based upon month of the year
+                switch month {
+                case 1:
+                    dataArray[0]++
+                case 2:
+                    dataArray[1]++
+                case 3:
+                    dataArray[2]++
+                case 4:
+                    dataArray[3]++
+                case 5:
+                    dataArray[4]++
+                case 6:
+                    dataArray[5]++
+                case 7:
+                    dataArray[6]++
+                case 8:
+                    dataArray[7]++
+                case 9:
+                    dataArray[8]++
+                case 10:
+                    dataArray[9]++
+                case 11:
+                    dataArray[10]++
+                case 12:
+                    dataArray[11]++
+                default:
+                    break
+                }
+            }
+        }
+        var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Month', 'Cigs', { role: 'style' }, 'Maximum' ], ['JAN', \(dataArray[0]), 'color: white; opacity: 0.75', \(max)], ['FEB', \(dataArray[1]), 'color: white; opacity: 0.75', \(max)], ['MAR', \(dataArray[2]), 'color: white; opacity: 0.75', \(max)], ['APR', \(dataArray[3]), 'color: white; opacity: 0.75', \(max)], ['MAY', \(dataArray[4]), 'color: white; opacity: 0.75', \(max)],"
+        stringHTML += "['JUN', \(dataArray[5]), 'color: white; opacity: 0.75', \(max)], ['JUL', \(dataArray[6]), 'color: white; opacity: 0.75', \(max)], ['AUG', \(dataArray[7]), 'color: white; opacity: 0.75', \(max)], ['SEP', \(dataArray[8]), 'color: white; opacity: 0.75', \(max)], ['OCT', \(dataArray[9]), 'color: white; opacity: 0.75', \(max)], ['NOV', \(dataArray[10]), 'color: white; opacity: 0.75', \(max)], ['DEC', \(dataArray[11]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#1a1a1a', backgroundColor: { strokeWidth: 0, fill: '#1a1a1a' }, chartArea: { left: 20, top: 10, width:'95%', height:'85%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
+        return stringHTML
+    }
+    
+
+    func getDayOfWeek(today:String)->Int? {
+        
+        let formatter: NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        if let todayDate = formatter.dateFromString(today) {
+            let myCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+            let myComponents = myCalendar.components(.WeekdayCalendarUnit, fromDate: todayDate)
+            let weekDay = myComponents.weekday
+            return weekDay
+        } else {
+            return nil
+        }
+    }
+    
+    func getLastDayOfMonth() -> NSString {
+        
+        // Formatter to get month from record
+        var monthFormatter: NSDateFormatter = NSDateFormatter()
+        monthFormatter.dateFormat = "MM"
+        // Formatter to get year from records
+        var yearFormatter: NSDateFormatter = NSDateFormatter()
+        yearFormatter.dateFormat = "yyyy"
+        
+        var today: NSDate = NSDate()
+        var thisYear: String = yearFormatter.stringFromDate(today)
+        var thisMonth: String = monthFormatter.stringFromDate(today)
+        var month: Int = thisMonth.toInt()!
+        var year: Int = thisYear.toInt()!
+        var lastDayOfMonth: String = String()
+        
+        switch month {
+        case 2:
+            // Caculate if leap year for February
+            if (year % 400 == 0) {
+                lastDayOfMonth = "29th"
+            } else if (year % 100 == 0) {
+                lastDayOfMonth = "28th"
+            } else if (year % 4 == 0) {
+                lastDayOfMonth = "29th"
+            } else {
+                lastDayOfMonth = "28th"
+            }
+        case 1, 3, 5, 7, 8, 10, 12:
+            lastDayOfMonth = "31st"
+        case 4, 6, 9, 11:
+            lastDayOfMonth = "30th"
+            // ? for
+        default:
+            lastDayOfMonth = "?"
+            break
+        }
+        return lastDayOfMonth
+    }
+
+    
     
     func getTodayCount() -> Int {
         var count = 0
@@ -169,9 +499,7 @@ class HistoryViewController: UIViewController {
             if(todayComp.day == otherComp.day && todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
                 count++
             }
-            else {
-                return count
-            }
+
         }
         return count
     }
@@ -185,9 +513,7 @@ class HistoryViewController: UIViewController {
             if(NSDate().timeIntervalSinceDate(thisDate) <= 604800) {
                 count++
             }
-            else {
-                return count
-            }
+
         }
         return count
     }
@@ -206,9 +532,7 @@ class HistoryViewController: UIViewController {
             if(todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
                 count++
             }
-            else {
-                return count
-            }
+
         }
         return count
     }
@@ -227,9 +551,7 @@ class HistoryViewController: UIViewController {
             if(todayComp.year == otherComp.year) {
                 count++
             }
-            else {
-                return count
-            }
+
         }
         return count
     }

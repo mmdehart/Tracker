@@ -22,7 +22,8 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
         if let cigs = defaults.arrayForKey("cigLog") as [NSDate]? {
             data = defaults.arrayForKey("cigLog") as [NSDate]
         }
-
+        
+        data.sort({ $0.compare($1) == NSComparisonResult.OrderedDescending })
         
         // Do any additional setup after loading the view.
     }
@@ -69,7 +70,7 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
         var recordToRemove = anItem
         
         data.removeAtIndex(indexPath.row)
-        
+        data.sort({ $0.compare($1) == NSComparisonResult.OrderedDescending })
         var defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(data, forKey: "cigLog")
         defaults.synchronize()
