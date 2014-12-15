@@ -9,15 +9,20 @@
 import UIKit
 import Foundation
 
+<<<<<<< HEAD
 class TodayViewController: UIViewController, CloudKitDelegate {
 
     var model : cloudKitData!
+=======
+class TodayViewController: UIViewController {
+>>>>>>> maybe
     
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var plusBtn: UIButton!
     @IBOutlet weak var timeSince: UILabel!
 //    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     
+<<<<<<< HEAD
     var appDelegate:AppDelegate!
 
     // Timer items
@@ -55,8 +60,60 @@ class TodayViewController: UIViewController, CloudKitDelegate {
         self.airplaneDate = nil
         sharedDefaults.setObject(nil, forKey: "record")
         sharedDefaults.synchronize()
+=======
+    var timer = NSTimer()
+    var startDate = NSDate()
+    
+    var data: [NSDate] = []
+
+    
+    @IBAction func unwindBack(sender:UIStoryboardSegue) {
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        var defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let cigs = defaults.arrayForKey("cigLog") as [NSDate]? {
+            data = defaults.arrayForKey("cigLog") as [NSDate]
+        }
+        
+        data.sort({ $0.compare($1) == NSComparisonResult.OrderedDescending })
+        
+        countLabel.text = "\(getTodayCount())"
+
+            self.startDate = data[0]
+            let aSelector:Selector = "updateTime"
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        var defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let cigs = defaults.arrayForKey("cigLog") as [NSDate]? {
+            data = defaults.arrayForKey("cigLog") as [NSDate]
+        }
+        
+        data.sort({ $0.compare($1) == NSComparisonResult.OrderedDescending })
+        
+        countLabel.text = "\(getTodayCount())"
+        
+        
+        
+            self.startDate = data[0]
+            let aSelector:Selector = "updateTime"
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        
+>>>>>>> maybe
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -64,6 +121,7 @@ class TodayViewController: UIViewController, CloudKitDelegate {
     
 
     @IBAction func plusButtonPressed(sender: UIButton) {
+<<<<<<< HEAD
         // If airplane mode is enabled
 //        if (self.airplaneMode)
 //        {
@@ -88,6 +146,26 @@ class TodayViewController: UIViewController, CloudKitDelegate {
         self.startDate = NSDate()
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+=======
+        
+        self.startDate = NSDate()
+        let aSelector:Selector = "updateTime"
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        
+        var defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let cigs = defaults.arrayForKey("cigLog") as [NSDate]? {
+            data = defaults.arrayForKey("cigLog") as [NSDate]
+        }
+        
+        data.append(NSDate())
+        
+        defaults.setObject(data, forKey: "cigLog")
+        defaults.synchronize()
+        
+        countLabel.text = "\(getTodayCount())"
+        
+>>>>>>> maybe
     }
     
 
@@ -95,24 +173,33 @@ class TodayViewController: UIViewController, CloudKitDelegate {
     
     /* Delegate function is defined here but is actually a part of cloudData.swift
     This function displays an error if the user is not connected to the internet */
-    func errorUpdating(error: NSError) {
-        // Error Code 4 is Network Failure
-        if error.code == 4
-        {
-            let message = "You do not have internet access. Now Entering AirPlane Mode."
-            let alert = UIAlertView(title: "Error Loading Cloud Data.",
-                message: message, delegate: nil, cancelButtonTitle: "OK")
-            alert.show()
-        }
-            // Error Code 9 is iCloud Not Setup
-        else if error.code == 9
-        {
-            let message = "Please go to iPhone Settings->iCloud and sign in."
-            let alert = UIAlertView(title: "This App Requires iCloud",
-                message: message, delegate: nil, cancelButtonTitle: "OK")
-            alert.show()
-        }
+    
+    func updateTime(){
+        var now = NSDate()
+        var elapsedTime:NSTimeInterval = now.timeIntervalSinceDate(self.startDate)
+        let hours = UInt8(elapsedTime / (60.0*60.0))
+        elapsedTime -= (NSTimeInterval(hours) * 60 * 60)
         
+        let minutes = UInt8(elapsedTime / 60.0)
+        elapsedTime -= (NSTimeInterval(minutes) * 60)
+        
+        let strHours:String = hours > 9 ? String(hours):"0\(String(hours))"
+        let strMinutes:String = minutes > 9 ? String(minutes):"0\(String(minutes))"
+        if (UInt8(elapsedTime) % 2 == 0){
+            timeSince.text = "\(strHours):\(strMinutes)"
+        }
+        else {
+            timeSince.text = "\(strHours) \(strMinutes)"
+        }
+    }
+
+    func getTodayCount() -> Int {
+        var count = 0
+        let today = NSDate()
+        var calendar = NSCalendar.currentCalendar()
+        let flags:NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
+        
+<<<<<<< HEAD
         // Display Airplane Mode
 //        activitySpinner.stopAnimating()
 //        countLabel.text = "0"
@@ -147,6 +234,21 @@ class TodayViewController: UIViewController, CloudKitDelegate {
         sharedDefaults.setObject(model.dailyRecords.count, forKey: "count")
         sharedDefaults.synchronize()
     }
+=======
+        let todayComp:NSDateComponents = calendar.components(flags, fromDate: NSDate())
+        
+        for var i = data.count - 1 ; i >= 0; i-- {
+            var thisDate:NSDate = data[i]
+            let otherComp:NSDateComponents = calendar.components(flags, fromDate: thisDate)
+            if(todayComp.day == otherComp.day && todayComp.month == otherComp.month && todayComp.year == otherComp.year) {
+                count++
+            }
+        }
+        return count
+    }
+    
+
+>>>>>>> maybe
     
     func grabLastCig()
     {

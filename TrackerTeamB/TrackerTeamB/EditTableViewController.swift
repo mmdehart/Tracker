@@ -8,76 +8,87 @@
 
 import UIKit
 
-class EditTableViewController: UITableViewController {
+class EditTableViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet var tableThing: UITableView!
-    //@IBOutlet weak var tableCell: UITableViewCell!
+
+    var data : [NSDate]!
     
-    //let tableData = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"]
-    
-    var detailItems: AnyObject? {
-        didSet {
-            self.configureView()
-        }
-    }
-    
-    func configureView() {
-        if let objs: NSMutableArray = self.detailItems as? NSMutableArray {
-            for var i = 0; i < objs.count; i++ {
-                let indexPath = NSIndexPath(forRow: i, inSection: 0)
-                self.tableThing.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureView()
-//        tableThing.delegate = self
-//        tableThing.dataSource = self
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        var defaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        if let cigs = defaults.arrayForKey("cigLog") as [NSDate]? {
+            data = defaults.arrayForKey("cigLog") as [NSDate]
+        }
+        
+        data.sort({ $0.compare($1) == NSComparisonResult.OrderedDescending })
+        
+        // Do any additional setup after loading the view.
     }
+    
+    
+     func tableView(tableThing: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    
+    
+    
+     func tableView(tableThing: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableThing.dequeueReusableCellWithIdentifier("cell", forIndexPath:indexPath) as UITableViewCell
+        
+        
+        var timeFormatter: NSDateFormatter = NSDateFormatter()
+        timeFormatter.dateFormat = "hh:mm a"
+        
+        var dateFormatter: NSDateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        let anItem = data[indexPath.row] as NSDate
+        
+        
+        var TimeString:String = timeFormatter.stringFromDate(anItem)
+        var date:String = dateFormatter.stringFromDate(anItem)
+        
+        cell.textLabel?.text = "Cigarette"
+        cell.detailTextLabel?.text = "Smoked at \(TimeString) on \(date)"
+        
+        return cell
+    }
+    
+     func tableView(tableThing: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    
+     func tableView(tableThing: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let anItem = data[indexPath.row] as NSDate
+        
+        var recordToRemove = anItem
+        
+        data.removeAtIndex(indexPath.row)
+        data.sort({ $0.compare($1) == NSComparisonResult.OrderedDescending })
+        var defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(data, forKey: "cigLog")
+        defaults.synchronize()
+        
+        tableThing.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+    
+    }
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return detailItems.count
-//    }
-//    
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableThing.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-//        
-//        let object = detailItems[indexPath.row] as NSDate
-//        cell.textLabel.text = object.description
-//        return cell
-//    }
-//    
-//    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        // Return false if you do not want the specified item to be editable.
-//        return true
-//    }
-//
-//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if editingStyle == .Delete {
-//            objects.removeObjectAtIndex(indexPath.row)
-//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-//        } else if editingStyle == .Insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-//        }
-//    }
 
     
-    
-    
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return 1
-//    }
+
+
 }
