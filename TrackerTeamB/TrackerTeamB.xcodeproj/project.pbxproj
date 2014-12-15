@@ -18,6 +18,7 @@
 		5C89078A1A0C6B5000CAFECB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C8907881A0C6B5000CAFECB /* LaunchScreen.xib */; };
 		5C8907961A0C6B5000CAFECB /* TrackerTeamBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8907951A0C6B5000CAFECB /* TrackerTeamBTests.swift */; };
 		5C9C70971A31522F00778036 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C9C70951A31522F00778036 /* Main.storyboard */; };
+		5CAE3D691A3E67AB0049BC6E /* TrackerLOGO copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CAE3D681A3E67AB0049BC6E /* TrackerLOGO copy.png */; };
 		5CBAAD8B1A1E7A5A00CDDBE9 /* TrackerDataX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAAD8A1A1E7A5A00CDDBE9 /* TrackerDataX.swift */; };
 		5CCC16BD1A3B751A00C43164 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCC16BC1A3B751A00C43164 /* Settings.swift */; };
 		5CCC16BF1A3B757100C43164 /* CigaretteLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCC16BE1A3B757100C43164 /* CigaretteLog.swift */; };
@@ -62,6 +63,7 @@
 		5C8907951A0C6B5000CAFECB /* TrackerTeamBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTeamBTests.swift; sourceTree = "<group>"; };
 		5C89079F1A0C6BC700CAFECB /* TrackerTeamB.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TrackerTeamB.entitlements; sourceTree = "<group>"; };
 		5C9C70961A31522F00778036 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5CAE3D681A3E67AB0049BC6E /* TrackerLOGO copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TrackerLOGO copy.png"; path = "../../../TrackerLOGO copy.png"; sourceTree = "<group>"; };
 		5CBAAD8A1A1E7A5A00CDDBE9 /* TrackerDataX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackerDataX.swift; sourceTree = "<group>"; };
 		5CCC16BC1A3B751A00C43164 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		5CCC16BE1A3B757100C43164 /* CigaretteLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CigaretteLog.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		5C6BB3D71A3A2A9100399B31 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				5CAE3D681A3E67AB0049BC6E /* TrackerLOGO copy.png */,
 				5CCC16F31A3BFA6000C43164 /* Time Since Last Smoke Blue.png */,
 				5CCC16F41A3BFA6000C43164 /* Time Since Last Smoke Red.png */,
 				5CCC16F51A3BFA6000C43164 /* Tracker Arrow Down.png */,
@@ -292,6 +295,7 @@
 				5CCC16FE1A3BFA6000C43164 /* Tracker Arrow Down.png in Resources */,
 				5CCC17011A3BFA6000C43164 /* Tracker History Icon.png in Resources */,
 				5C8907871A0C6B5000CAFECB /* Images.xcassets in Resources */,
+				5CAE3D691A3E67AB0049BC6E /* TrackerLOGO copy.png in Resources */,
 				5CCC17031A3BFA6000C43164 /* Tracker Today Icon.png in Resources */,
 				5CCC16FF1A3BFA6000C43164 /* Tracker Arrow Up.png in Resources */,
 				5C9C70971A31522F00778036 /* Main.storyboard in Resources */,
@@ -445,7 +449,7 @@
 		5C89079A1A0C6B5000CAFECB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -459,7 +463,7 @@
 		5C89079B1A0C6B5000CAFECB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

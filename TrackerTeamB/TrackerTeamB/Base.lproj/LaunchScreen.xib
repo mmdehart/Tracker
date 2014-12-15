@@ -11,34 +11,34 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracker" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="285" width="441" height="37"/>
+                    <rect key="frame" x="20" y="275" width="441" height="37"/>
                     <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="37"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jX-jR-Dd0">
-                    <rect key="frame" x="25" y="332" width="430" height="17"/>
+                    <rect key="frame" x="25" y="322" width="430" height="17"/>
                     <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Madison DeHart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aP-DX-7Ng">
-                    <rect key="frame" x="25" y="379" width="430" height="19"/>
+                    <rect key="frame" x="25" y="369" width="430" height="19"/>
                     <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="19"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jonathan Kendrick" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6W-g8-BPH">
-                    <rect key="frame" x="25" y="403" width="430" height="19"/>
+                    <rect key="frame" x="25" y="393" width="430" height="19"/>
                     <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="19"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TrackerLOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="pae-u3-Afu">
-                    <rect key="frame" x="149" y="30" width="182" height="235"/>
+                    <rect key="frame" x="150" y="75" width="180" height="180"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="235" id="Xky-KE-ubl"/>
-                        <constraint firstAttribute="width" constant="182" id="psl-19-RXE"/>
+                        <constraint firstAttribute="height" constant="180" id="Xky-KE-ubl"/>
+                        <constraint firstAttribute="width" constant="180" id="psl-19-RXE"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c). All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
@@ -52,7 +52,7 @@
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="5jX-jR-Dd0" secondAttribute="centerX" id="1zh-qv-8rR"/>
                 <constraint firstAttribute="centerX" secondItem="pae-u3-Afu" secondAttribute="centerX" id="5ju-SI-p8d"/>
-                <constraint firstItem="pae-u3-Afu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="GP6-ya-1a0"/>
+                <constraint firstItem="pae-u3-Afu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="75" id="GP6-ya-1a0"/>
                 <constraint firstItem="5jX-jR-Dd0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="HUJ-y3-L6b"/>
                 <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="Koa-jz-hwk"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
@@ -76,6 +76,6 @@
         </view>
     </objects>
     <resources>
-        <image name="TrackerLOGO.png" width="2550" height="3300"/>
+        <image name="TrackerLOGO.png" width="120" height="120"/>
     </resources>
 </document>

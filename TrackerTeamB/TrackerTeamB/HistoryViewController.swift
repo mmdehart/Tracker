@@ -23,6 +23,7 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var averageLabel: UILabel!
     @IBOutlet weak var graphLabel: UILabel!
     
+    let nf = NSNumberFormatter()
 
     var data: [NSDate] = []
     
@@ -39,12 +40,16 @@ class HistoryViewController: UIViewController {
             data = defaults.arrayForKey("cigLog") as [NSDate]
         }
         
+        nf.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        nf.maximumFractionDigits = 1
+        
+        
         maxLabel.text = "\(max)"
         histCount.text = "\(getTodayCount())"
-        recordHigh.text = "Record High: \(getTodayMax())"
-        recordLow.text = "Record Low: \(getTodayLow())"
-        avgAmtLabel.text = "\(getTodayAverage())"
-        timeSpentLabel.text = "\(getDayTimeSpent())"
+//        recordHigh.text = "Record High: \(getTodayMax())"
+//        recordLow.text = "Record Low: \(getTodayLow())"
+        avgAmtLabel.text = nf.stringFromNumber(getTodayAverage())
+        timeSpentLabel.text = "\(getDayTimeSpent()) minutes"
         textLabel.text = "Today's Total"
         graphLabel.text = "Hourly"
         averageLabel.text = "Hourly Average"
@@ -67,10 +72,10 @@ class HistoryViewController: UIViewController {
         segControl.selectedSegmentIndex = 0
         maxLabel.text = "\(max)"
         histCount.text = "\(getTodayCount())"
-        recordHigh.text = "Record High: \(getTodayMax())"
-        recordLow.text = "Record Low: \(getTodayLow())"
-        avgAmtLabel.text = "\(getTodayAverage())"
-        timeSpentLabel.text = "\(getTodayCount()) cigarettes | \(getDayTimeSpent()) minutes"
+//        recordHigh.text = "Record High: \(getTodayMax())"
+//        recordLow.text = "Record Low: \(getTodayLow())"
+        avgAmtLabel.text = nf.stringFromNumber(getTodayAverage())
+        timeSpentLabel.text = "\(getDayTimeSpent()) minutes"
         textLabel.text = "Today's Total"
         graphLabel.text = "Hourly"
         averageLabel.text = "Hourly Average"
@@ -99,10 +104,10 @@ class HistoryViewController: UIViewController {
             averageLabel.text = "Hourly Average"
             maxLabel.text = "\(tempMax)"
             histCount.text = "\(getTodayCount())"
-            recordHigh.text = "Record High: \(getTodayMax())"
-            recordLow.text = "Record Low: \(getTodayLow())"
-            avgAmtLabel.text = "\(getTodayAverage())"
-            timeSpentLabel.text = "\(getTodayCount()) cigarettes | \(getDayTimeSpent()) minutes"
+//            recordHigh.text = "Record High: \(getTodayMax())"
+//            recordLow.text = "Record Low: \(getTodayLow())"
+            avgAmtLabel.text = nf.stringFromNumber(getTodayAverage())
+            timeSpentLabel.text = "\(getDayTimeSpent()) minutes"
             
 
         case 1:
@@ -111,10 +116,10 @@ class HistoryViewController: UIViewController {
             averageLabel.text = "Daily Average"
             maxLabel.text = "\(tempMax * 7)"
             histCount.text = "\(getWeekCount())"
-            recordHigh.text = "Record High: \(getWeeklyMax())"
-            recordLow.text = "Record Low: \(getWeeklyLow())"
-            avgAmtLabel.text = "\(getWeeklyAverage())"
-            timeSpentLabel.text = "\(getWeekCount()) cigarettes | \(getWeekTimeSpent()) minutes"
+//            recordHigh.text = "Record High: \(getWeeklyMax())"
+//            recordLow.text = "Record Low: \(getWeeklyLow())"
+            avgAmtLabel.text = nf.stringFromNumber(getWeeklyAverage())
+            timeSpentLabel.text = "\(getWeekTimeSpent()) minutes"
 
             
             
@@ -124,10 +129,10 @@ class HistoryViewController: UIViewController {
             averageLabel.text = "Weekly Average"
             maxLabel.text = "\(tempMax * 30)"
             histCount.text = "\(getMonthCount())"
-            recordHigh.text = "Record High: \(getMonthlyMax())"
-            recordLow.text = "Record Low: \(getMonthlyLow())"
-            avgAmtLabel.text = "\(getMonthlyAverage())"
-            timeSpentLabel.text = "\(getMonthCount()) cigarettes | \(getMonthTimeSpent()) minutes"
+//            recordHigh.text = "Record High: \(getMonthlyMax())"
+//            recordLow.text = "Record Low: \(getMonthlyLow())"
+            avgAmtLabel.text = nf.stringFromNumber(getMonthlyAverage())
+            timeSpentLabel.text = "\(getMonthTimeSpent()) minutes"
 
             
         case 3:
@@ -136,10 +141,10 @@ class HistoryViewController: UIViewController {
             averageLabel.text = "Monthly Average"
             maxLabel.text = "\(tempMax * 365)"
             histCount.text = "\(getYearCount())"
-            recordHigh.text = "Record High: \(getYearlyMax())"
-            recordLow.text = "Record Low: \(getYearlyLow())"
-            avgAmtLabel.text = "\(getYearlyAverage())"
-            timeSpentLabel.text = "\(getYearCount()) cigarettes | \(getYearTimeSpent()) minutes"
+//            recordHigh.text = "Record High: \(getYearlyMax())"
+//            recordLow.text = "Record Low: \(getYearlyLow())"
+            avgAmtLabel.text = nf.stringFromNumber(getYearlyAverage())
+            timeSpentLabel.text = "\(getYearTimeSpent()) minutes"
 
             
         default:
@@ -383,124 +388,124 @@ class HistoryViewController: UIViewController {
         return average
     }
     
-    
-    func getTodayMax() ->Int {
-        
-        var count:Int = data.count
-        var beginHour:NSTimeInterval = 0
-        var endHour:NSTimeInterval = 3600
-        var inHourCount:Int = 0
-        var max:Int = 0
-        while (endHour <= 86400) {
-            max = getMax(beginHour, end: endHour, count: count, maxCount: max)
-            beginHour += endHour
-            endHour += endHour
-        }
-        
-        return max
-    }
-    
-    func getTodayLow() ->Int {
-        var count:Int = data.count
-        var beginHour:NSTimeInterval = 0
-        var endHour:NSTimeInterval = 3600
-        var inHourCount:Int = 0
-        var low:Int = 0
-        while (endHour <= 86400) {
-            low = getLow(beginHour, end: endHour, count: count, lowCount: low)
-            beginHour += endHour
-            endHour += endHour
-        }
-        return low
-    }
-    
-    func getWeeklyMax() ->Int {
-        
-        var count:Int = data.count
-        var beginDay:NSTimeInterval = 0
-        var endDay:NSTimeInterval = 86400
-        var inDayCount:Int = 0
-        var max:Int = 0
-        while (endDay <= 604800) {
-            max = getMax(beginDay, end: endDay, count: count, maxCount: max)
-            beginDay += endDay
-            endDay += endDay
-        }
-        
-        return max
-    }
-    
-    func getWeeklyLow() ->Int {
-        var count:Int = data.count
-        var beginDay:NSTimeInterval = 0
-        var endDay:NSTimeInterval = 86400
-        var inDayCount:Int = 0
-        var low:Int = 0
-        while (endDay <= 604800) {
-            low = getLow(beginDay, end: endDay, count: count, lowCount: low)
-            beginDay += endDay
-            endDay += endDay
-        }
-        return low
-    }
-    
-    func getMonthlyMax() ->Int {
-        var count:Int = data.count
-        var beginWeek:NSTimeInterval = 0
-        var endWeek:NSTimeInterval = 604800
-        var inWeekCount:Int = 0
-        var max:Int = 0
-        var newMax:Int = max
-        while (endWeek <= 2629740)  {
-            max = getMax(beginWeek, end: endWeek, count: count, maxCount: max)
-            beginWeek += endWeek
-            endWeek += endWeek
-        }
-        return max
-    }
-    
-    func getMonthlyLow() ->Int {
-        var count:Int = data.count
-        var beginWeek:NSTimeInterval = 0
-        var endWeek:NSTimeInterval = 604800
-        var inWeekCount:Int = 0
-        var low:Int = 0
-        while (endWeek <= 2629740) {
-            low = getLow(beginWeek, end: endWeek, count: count, lowCount: low)
-            beginWeek += endWeek
-            endWeek += endWeek
-        }
-        return low
-    }
-    
-    func getYearlyMax() ->Int {
-        var count:Int = data.count
-        var beginMonth:NSTimeInterval = 0
-        var endMonth:NSTimeInterval = 2629740
-        var inMonthCount:Int = 0
-        var max:Int = 0
-        var newMax:Int = max
-        while (endMonth <= 31560000)  {
-            max = getMax(beginMonth, end: endMonth, count: count, maxCount: max)
-            beginMonth += endMonth
-            endMonth += endMonth
-        }
-        return max
-    }
-    
-    func getYearlyLow() ->Int {
-        var count:Int = data.count
-        var beginMonth:NSTimeInterval = 0
-        var endMonth:NSTimeInterval = 604800
-        var inWeekCount:Int = 0
-        var low:Int = 0
-        while (endMonth <= 31560000) {
-            low = getLow(beginMonth, end: endMonth, count: count, lowCount: low)
-            beginMonth += endMonth
-            endMonth += endMonth
-        }
-        return low
-    }
+//    
+//    func getTodayMax() ->Int {
+//        
+//        var count:Int = data.count
+//        var beginHour:NSTimeInterval = 0
+//        var endHour:NSTimeInterval = 3600
+//        var inHourCount:Int = 0
+//        var max:Int = 0
+//        while (endHour <= 86400) {
+//            max = getMax(beginHour, end: endHour, count: count, maxCount: max)
+//            beginHour += endHour
+//            endHour += endHour
+//        }
+//        
+//        return max
+//    }
+//    
+//    func getTodayLow() ->Int {
+//        var count:Int = data.count
+//        var beginHour:NSTimeInterval = 0
+//        var endHour:NSTimeInterval = 3600
+//        var inHourCount:Int = 0
+//        var low:Int = 0
+//        while (endHour <= 86400) {
+//            low = getLow(beginHour, end: endHour, count: count, lowCount: low)
+//            beginHour += endHour
+//            endHour += endHour
+//        }
+//        return low
+//    }
+//    
+//    func getWeeklyMax() ->Int {
+//        
+//        var count:Int = data.count
+//        var beginDay:NSTimeInterval = 0
+//        var endDay:NSTimeInterval = 86400
+//        var inDayCount:Int = 0
+//        var max:Int = 0
+//        while (endDay <= 604800) {
+//            max = getMax(beginDay, end: endDay, count: count, maxCount: max)
+//            beginDay += endDay
+//            endDay += endDay
+//        }
+//        
+//        return max
+//    }
+//    
+//    func getWeeklyLow() ->Int {
+//        var count:Int = data.count
+//        var beginDay:NSTimeInterval = 0
+//        var endDay:NSTimeInterval = 86400
+//        var inDayCount:Int = 0
+//        var low:Int = 0
+//        while (endDay <= 604800) {
+//            low = getLow(beginDay, end: endDay, count: count, lowCount: low)
+//            beginDay += endDay
+//            endDay += endDay
+//        }
+//        return low
+//    }
+//    
+//    func getMonthlyMax() ->Int {
+//        var count:Int = data.count
+//        var beginWeek:NSTimeInterval = 0
+//        var endWeek:NSTimeInterval = 604800
+//        var inWeekCount:Int = 0
+//        var max:Int = 0
+//        var newMax:Int = max
+//        while (endWeek <= 2629740)  {
+//            max = getMax(beginWeek, end: endWeek, count: count, maxCount: max)
+//            beginWeek += endWeek
+//            endWeek += endWeek
+//        }
+//        return max
+//    }
+//    
+//    func getMonthlyLow() ->Int {
+//        var count:Int = data.count
+//        var beginWeek:NSTimeInterval = 0
+//        var endWeek:NSTimeInterval = 604800
+//        var inWeekCount:Int = 0
+//        var low:Int = 0
+//        while (endWeek <= 2629740) {
+//            low = getLow(beginWeek, end: endWeek, count: count, lowCount: low)
+//            beginWeek += endWeek
+//            endWeek += endWeek
+//        }
+//        return low
+//    }
+//    
+//    func getYearlyMax() ->Int {
+//        var count:Int = data.count
+//        var beginMonth:NSTimeInterval = 0
+//        var endMonth:NSTimeInterval = 2629740
+//        var inMonthCount:Int = 0
+//        var max:Int = 0
+//        var newMax:Int = max
+//        while (endMonth <= 31560000)  {
+//            max = getMax(beginMonth, end: endMonth, count: count, maxCount: max)
+//            beginMonth += endMonth
+//            endMonth += endMonth
+//        }
+//        return max
+//    }
+//    
+//    func getYearlyLow() ->Int {
+//        var count:Int = data.count
+//        var beginMonth:NSTimeInterval = 0
+//        var endMonth:NSTimeInterval = 604800
+//        var inWeekCount:Int = 0
+//        var low:Int = 0
+//        while (endMonth <= 31560000) {
+//            low = getLow(beginMonth, end: endMonth, count: count, lowCount: low)
+//            beginMonth += endMonth
+//            endMonth += endMonth
+//        }
+//        return low
+//    }
     
     func getMax(begin:NSTimeInterval, end:NSTimeInterval, count:Int, maxCount: Int) ->Int {
         var i:Int = 0
