@@ -13,7 +13,7 @@
 		10E950681A3E1F0D00C92C8B /* Tracker Arrow Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E950601A3E1F0D00C92C8B /* Tracker Arrow Up.png */; };
 		10E950691A3E1F0D00C92C8B /* Tracker Goals Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E950611A3E1F0D00C92C8B /* Tracker Goals Icon.png */; };
 		10E9506A1A3E1F0D00C92C8B /* Tracker History Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E950621A3E1F0D00C92C8B /* Tracker History Icon.png */; };
-		10E9506B1A3E1F0D00C92C8B /* Tracker Logo 120 x 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E950631A3E1F0D00C92C8B /* Tracker Logo 120 x 120.png */; };
+		10E9506B1A3E1F0D00C92C8B /* TrackerLOGO.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E950631A3E1F0D00C92C8B /* TrackerLOGO.png */; };
 		10E9506C1A3E1F0D00C92C8B /* Tracker Plus Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E950641A3E1F0D00C92C8B /* Tracker Plus Button.png */; };
 		10E9506D1A3E1F0D00C92C8B /* Tracker Today Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E950651A3E1F0D00C92C8B /* Tracker Today Icon.png */; };
 		5C247E121A0C823D008DA2BF /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E111A0C823D008DA2BF /* TodayViewController.swift */; };
@@ -51,7 +51,7 @@
 		10E950601A3E1F0D00C92C8B /* Tracker Arrow Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tracker Arrow Up.png"; path = "../../../../Downloads/documents-export-2014-12-14/Tracker Arrow Up.png"; sourceTree = "<group>"; };
 		10E950611A3E1F0D00C92C8B /* Tracker Goals Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tracker Goals Icon.png"; path = "../../../../Downloads/documents-export-2014-12-14/Tracker Goals Icon.png"; sourceTree = "<group>"; };
 		10E950621A3E1F0D00C92C8B /* Tracker History Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tracker History Icon.png"; path = "../../../../Downloads/documents-export-2014-12-14/Tracker History Icon.png"; sourceTree = "<group>"; };
-		10E950631A3E1F0D00C92C8B /* Tracker Logo 120 x 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tracker Logo 120 x 120.png"; path = "../../../../Downloads/documents-export-2014-12-14/Tracker Logo 120 x 120.png"; sourceTree = "<group>"; };
+		10E950631A3E1F0D00C92C8B /* TrackerLOGO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TrackerLOGO.png; path = "../../../../Downloads/documents-export-2014-12-14/TrackerLOGO.png"; sourceTree = "<group>"; };
 		10E950641A3E1F0D00C92C8B /* Tracker Plus Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tracker Plus Button.png"; path = "../../../../Downloads/documents-export-2014-12-14/Tracker Plus Button.png"; sourceTree = "<group>"; };
 		10E950651A3E1F0D00C92C8B /* Tracker Today Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tracker Today Icon.png"; path = "../../../../Downloads/documents-export-2014-12-14/Tracker Today Icon.png"; sourceTree = "<group>"; };
 		5C247E111A0C823D008DA2BF /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 				10E950601A3E1F0D00C92C8B /* Tracker Arrow Up.png */,
 				10E950611A3E1F0D00C92C8B /* Tracker Goals Icon.png */,
 				10E950621A3E1F0D00C92C8B /* Tracker History Icon.png */,
-				10E950631A3E1F0D00C92C8B /* Tracker Logo 120 x 120.png */,
+				10E950631A3E1F0D00C92C8B /* TrackerLOGO.png */,
 				10E950641A3E1F0D00C92C8B /* Tracker Plus Button.png */,
 				10E950651A3E1F0D00C92C8B /* Tracker Today Icon.png */,
 			);
@@ -287,7 +287,7 @@
 				10E950681A3E1F0D00C92C8B /* Tracker Arrow Up.png in Resources */,
 				10E9505D1A3E1ED600C92C8B /* Time Since Last Smoke Blue.png in Resources */,
 				10E9506A1A3E1F0D00C92C8B /* Tracker History Icon.png in Resources */,
-				10E9506B1A3E1F0D00C92C8B /* Tracker Logo 120 x 120.png in Resources */,
+				10E9506B1A3E1F0D00C92C8B /* TrackerLOGO.png in Resources */,
 				10E950661A3E1F0D00C92C8B /* Time Since Last Smoke Red.png in Resources */,
 				10E950671A3E1F0D00C92C8B /* Tracker Arrow Down.png in Resources */,
 				10E950691A3E1F0D00C92C8B /* Tracker Goals Icon.png in Resources */,
